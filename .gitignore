@@ -1,0 +1,5 @@
+# build intermediates
+card_*.png
+filter.txt
+inter/
+*.raw
