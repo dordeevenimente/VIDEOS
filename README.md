@@ -5,8 +5,11 @@ peste materialul live original, fără nicio modificare structurală a imaginii 
 
 ## Livrabil
 
-`out/bogdan_dlp_bribon_9oct_1080x1920.mp4` — 1080 × 1920 (9:16), 29.97 fps, H.264 High, yuv420p,
-audio AAC copiat bit-cu-bit din sursă.
+`out/bogdan_dlp_bribon_9oct_1080x1920.mp4` — master, 1080 × 1920 (9:16), 29.97 fps,
+H.264 High, yuv420p, ~10.8 Mbps, audio AAC copiat bit-cu-bit din sursă (48 MB).
+
+`out/bogdan_dlp_bribon_9oct_1080x1920_light.mp4` — aceeași montare, ~5 Mbps (22 MB),
+pentru trimis prin WhatsApp / e-mail sau upload rapid. Meta re-encodează oricum la upload.
 
 ## Ce s-a păstrat intact
 
