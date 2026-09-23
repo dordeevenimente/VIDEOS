@@ -77,7 +77,7 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
   halation pe lumini, vignetă, light leak cald, grain de film, praf și zgârieturi fine,
   ramă subțire crem ca la o fotografie developată; logo DOR discret, jos.
 - **Tipografie**: o singură familie, Inter (OFL, `assets/fonts/Inter.ttf`) — titlul
-  îmbină „DOR DE” Light cu obiectul dorului ExtraBold; subtitluri Medium, majuscule,
+  are „DOR” (brandul) ExtraBold, restul Light; subtitluri Medium, majuscule,
   tracking larg; linie aurie `#C9A048` sub text; culoare crem cald `#F6EAD4`.
 
 ```sh

@@ -16,17 +16,17 @@ CREAM = (246, 234, 212)
 GOLD = (201, 160, 72)
 os.makedirs(OUT, exist_ok=True)
 
-# titles: one list of (text, weight) runs per line - "DOR DE" light, the object of the longing bold
+# titles: one list of (text, weight) runs per line - "DOR" (the brand) bold, everything else light
 L, B = 250, 800
 POSTS = {
-    1: ([[("DOR DE ", L), ("CE?", B)]],
+    1: ([[("DOR", B), (" DE CE?", L)]],
         ["De muzică? De oameni?", "De o seară ca acasă?"]),
-    2: ([[("DOR DE ", L), ("O SEARĂ", B)], [("CA ACASĂ?", B)]],
+    2: ([[("DOR", B), (" DE O SEARĂ", L)], [("CA ACASĂ?", L)]],
         ["De muzica noastră. De energia noastră.",
          "De oamenii cu care simți", "că ești între ai tăi."]),
-    3: ([[("DOR DE ", L), ("MUZICA", B)], [("NOASTRĂ?", B)]],
+    3: ([[("DOR", B), (" DE MUZICA", L)], [("NOASTRĂ?", L)]],
         ["De piesele pe care le știi", "de la primul vers."]),
-    4: ([[("DOR DE ", L), ("RÂS?", B)]],
+    4: ([[("DOR", B), (" DE RÂS?", L)]],
         ["Poate că uneori nu ne e dor doar", "de muzică. Ci și de momentele",
          "care ne aduc împreună."]),
 }
