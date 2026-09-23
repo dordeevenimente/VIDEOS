@@ -29,6 +29,11 @@ POSTS = {
     4: ([[("DOR", B), (" DE RÂS?", L)]],
         ["Poate că uneori nu ne e dor doar", "de muzică. Ci și de momentele",
          "care ne aduc împreună."]),
+    5: ([[("ȚIE DE CE", L)], [("ARTIST ȚI-E ", L), ("DOR", B), ("?", L)]],
+        ["Scrie-ne în comentarii.", "Poate îl aducem mai aproape."]),
+    6: ([[("DOR", B), (" E PENTRU NOI.", L)], [("ȘI DESPRE NOI.", L)]],
+        ["Muzică. Oameni. Seri împreună. În Spania."],
+        "Follow @dor.evenimente"),
 }
 
 _cache = {}
@@ -44,7 +49,7 @@ rng = np.random.default_rng(7)
 
 # ---------------------------------------------------------------- grade
 # per-visual reframing: (zoom, x anchor 0..1, y anchor 0..1) - keeps props clear of the type
-FRAMING = {4: (1.32, 0.0, 0.55)}
+FRAMING = {4: (1.32, 0.0, 0.55), 5: (1.45, 0.30, 0.0)}
 
 def reframe(img, i):
     z, ax, ay = FRAMING.get(i, (1.0, 0.5, 0.5))
@@ -106,7 +111,9 @@ def film(a):
         c = (250, 238, 215, int(rng.uniform(40, 120))) if rng.random() < .6 else (10, 6, 4, int(rng.uniform(60, 140)))
         d.ellipse([x - s, y - s, x + s, y + s], fill=c)
     for _ in range(3):
-        x = rng.uniform(60, W - 60); y0 = rng.uniform(0, H * .6)
+        # hairlines stay in the side margins so they never read as accents on the type
+        x = rng.uniform(60, 190) if rng.random() < .5 else rng.uniform(W - 190, W - 60)
+        y0 = rng.uniform(0, H * .6)
         d.line([(x, y0), (x + rng.uniform(-6, 6), y0 + rng.uniform(120, 420))],
                fill=(245, 232, 210, 34), width=1)
     return img
@@ -128,13 +135,15 @@ def put_runs(d, runs, size, y, fill):
             d.text((x, y), ch, font=f, fill=fill)
             x += d.textlength(ch, font=f) + size * TTR
 
-def typeset(titles, lines):
+def typeset(titles, lines, footer=None):
     Lr = Image.new("RGBA", (W * SS, H * SS), (0, 0, 0, 0))
     d = ImageDraw.Draw(Lr)
     size = 132 * SS
     while max(runs_w(d, r, size) for r in titles) > 900 * SS:
         size -= 2
-    t_lh = int(size * 1.04)
+    # extra leading when a comma-below (Ț, Ș) would drop onto the next line
+    lead = 1.18 if any(c in "ȚȘ" for r in titles[:-1] for t, _ in r for c in t) else 1.04
+    t_lh = int(size * lead)
     bs = 34 * SS
     lines = [s.upper() for s in lines]
     while max(tw(d, s, inter(bs, 500), bs * BTR) for s in lines) > 860 * SS:
@@ -148,7 +157,10 @@ def typeset(titles, lines):
     title_h = t_lh * (len(titles) - 1) + cap_h
     body_h = b_lh * (len(lines) - 1) + (bcap[3] - bcap[1])
     rule_gap, rule_h = 46 * SS, 3 * SS
-    total = title_h + gap1 + body_h + rule_gap + rule_h
+    ff = inter(int(bs * 0.92), 400)
+    fcap = ff.getbbox("H"); f_gap = 44 * SS
+    foot_h = (f_gap + fcap[3] - fcap[1]) if footer else 0
+    total = title_h + gap1 + body_h + rule_gap + rule_h + foot_h
     y = (H * SS - total) / 2
     for r in titles:
         put_runs(d, r, size, y - cap_top, CREAM + (255,)); y += t_lh
@@ -162,6 +174,10 @@ def typeset(titles, lines):
     y = y - b_lh + (bcap[3] - bcap[1]) + rule_gap
     cx = W * SS / 2
     d.rectangle([cx - 40 * SS, y, cx + 40 * SS, y + rule_h], fill=GOLD + (235,))
+    if footer:                     # handle / CTA under the rule, no tracking, lowercase kept
+        y += rule_h + f_gap
+        d.text(((W * SS - d.textlength(footer, font=ff)) / 2, y - fcap[1]), footer,
+               font=ff, fill=CREAM + (215,))
     Lr = Lr.resize((W, H), Image.LANCZOS)
     sh = Lr.split()[3].filter(ImageFilter.GaussianBlur(10))
     shadow = Image.new("RGBA", (W, H), (20, 10, 4, 0)); shadow.putalpha(sh.point(lambda v: int(v * .55)))
@@ -180,11 +196,11 @@ def frame_and_logo(img):
     img.alpha_composite(tinted, ((W - lw) // 2, H - 34 - 40 - lh))
     return img
 
-for i, (titles, lines) in POSTS.items():
+for i, (titles, lines, *foot) in POSTS.items():
     a = grade(reframe(Image.open(f"{CLEAN}/{i}.png").convert("RGB"), i))
     a = light_leak(a, i % 2 == 1)
     img = film(a).convert("RGBA")
-    shadow, glow, text = typeset(titles, lines)
+    shadow, glow, text = typeset(titles, lines, *foot)
     for layer in (shadow, glow, text):
         img.alpha_composite(layer)
     img = frame_and_logo(img).convert("RGB")

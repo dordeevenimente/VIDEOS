@@ -70,7 +70,7 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 
 # DOR · Carusel Instagram „Dor de…” (feed 1080 × 1350)
 
-`out/ig_dor/dor_ig_{1..4}_1080x1350.jpg` — cele 4 vizualuri, mesajele originale neschimbate.
+`out/ig_dor/dor_ig_{1..6}_1080x1350.jpg` — cele 6 vizualuri, mesajele originale neschimbate.
 
 - **Text** centrat pe ambele axe (bloc titlu + ornament + subtitlu, centrat optic pe y = 675).
 - **Look nostalgic**: negru „mat” ridicat (print decolorat), split-tone chihlimbar/sepia,

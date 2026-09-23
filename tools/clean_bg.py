@@ -6,7 +6,8 @@ SRC = os.environ.get("IG_SRC", "assets/ig_dor_src")
 OUT = os.environ.get("IG_CLEAN", "build/ig_clean")
 os.makedirs(OUT, exist_ok=True)
 # text band (y0, y1) in source pixels, per visual
-BANDS = {1: (360, 690), 2: (230, 630), 3: (300, 710), 4: (240, 610)}
+BANDS = {1: (360, 690), 2: (230, 630), 3: (300, 710), 4: (240, 610),
+         5: (250, 625), 6: (270, 655)}
 SPOTS = {4: [(780, 226, 34, 26)]}
 for i, (y0, y1) in BANDS.items():
     im = cv2.imread(f"{SRC}/{i}.webp")
