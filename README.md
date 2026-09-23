@@ -84,3 +84,13 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 python3 tools/clean_bg.py            # șterge textul vechi din imaginile sursă (assets/ig_dor_src)
 python3 tools/make_ig_nostalgic.py   # grade + tipografie → out/ig_dor
 ```
+
+## Varianta „fresh / premium” (fundaluri desenate integral din cod)
+
+`out/ig_dor_fresh/dor_ig_fresh_{1..6}_1080x1350.jpg` — `python3 tools/make_ig_fresh.py`
+
+Fără imagini generate de AI: fiecare slide are un câmp de culoare intensă (gradient soft
++ zgomot foarte fin) și un motiv desenat vectorial — glob disco (navy), două inele care se
+întâlnesc (vișiniu), waveform audio (terracotta), spot + microfon crom (smarald), permis
+VIP cu auriu (antracit), confetti aurii (cobalt). Tipografie Inter: „DOR” ExtraBold,
+restul ExtraLight, subtitluri Medium cu majuscule; linie aurie; logo DOR jos.
