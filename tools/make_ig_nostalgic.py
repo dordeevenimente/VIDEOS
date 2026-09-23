@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """DOR · IG feed carousel, 1080x1350, nostalgic treatment.
 Grade: matte blacks, amber/sepia split-tone, halation, vignette, film grain, dust.
-Type: Fraunces (soft, wonky) for titles + Cormorant Garamond Italic for lines.
+Type: Inter only - titles mix Light and ExtraBold, lines in uppercase Medium with tracking.
 Every text block is centred on both axes of the canvas."""
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import numpy as np, os
@@ -13,30 +13,32 @@ CLEAN = os.environ.get("IG_CLEAN", "build/ig_clean")
 OUT = os.environ.get("IG_OUT", "out/ig_dor")
 LOGO = "assets/dor_logo.png"
 CREAM = (246, 234, 212)
+GOLD = (201, 160, 72)
 os.makedirs(OUT, exist_ok=True)
 
+# titles: one list of (text, weight) runs per line - "DOR DE" light, the object of the longing bold
+L, B = 250, 800
 POSTS = {
-    1: (["DOR DE CE?"],
+    1: ([[("DOR DE ", L), ("CE?", B)]],
         ["De muzică? De oameni?", "De o seară ca acasă?"]),
-    2: (["DOR DE O SEARĂ", "CA ACASĂ?"],
+    2: ([[("DOR DE ", L), ("O SEARĂ", B)], [("CA ACASĂ?", B)]],
         ["De muzica noastră. De energia noastră.",
          "De oamenii cu care simți", "că ești între ai tăi."]),
-    3: (["DOR DE MUZICA", "NOASTRĂ?"],
+    3: ([[("DOR DE ", L), ("MUZICA", B)], [("NOASTRĂ?", B)]],
         ["De piesele pe care le știi", "de la primul vers."]),
-    4: (["DOR DE RÂS?"],
+    4: ([[("DOR DE ", L), ("RÂS?", B)]],
         ["Poate că uneori nu ne e dor doar", "de muzică. Ci și de momentele",
          "care ne aduc împreună."]),
 }
 
-def title_font(size):
-    f = ImageFont.truetype(f"{FONTS}/Fraunces.ttf", size)
-    f.set_variation_by_axes([144, 560, 100, 1])      # opsz, wght, SOFT, WONK
-    return f
-
-def body_font(size):
-    f = ImageFont.truetype(f"{FONTS}/CormorantGaramond-Italic.ttf", size)
-    f.set_variation_by_axes([600])
-    return f
+_cache = {}
+def inter(size, weight):
+    k = (size, weight)
+    if k not in _cache:
+        f = ImageFont.truetype(f"{FONTS}/Inter.ttf", size)
+        f.set_variation_by_axes([32, weight])       # opsz (display), wght
+        _cache[k] = f
+    return _cache[k]
 
 rng = np.random.default_rng(7)
 
@@ -110,56 +112,61 @@ def film(a):
     return img
 
 # ---------------------------------------------------------------- type
+TTR = -0.01      # title tracking (em)
+BTR = 0.06       # body tracking (em), uppercase
+
 def tw(d, s, f, tr): return d.textlength(s, font=f) + tr * (len(s) - 1)
 
-def put(d, s, f, tr, y, fill):
-    x = (W * SS - tw(d, s, f, tr)) / 2
-    for ch in s:
-        d.text((x, y), ch, font=f, fill=fill)
-        x += d.textlength(ch, font=f) + tr
+def runs_w(d, runs, size):
+    return sum(tw(d, t, inter(size, w), size * TTR) + size * TTR for t, w in runs) - size * TTR
+
+def put_runs(d, runs, size, y, fill):
+    x = (W * SS - runs_w(d, runs, size)) / 2
+    for t, w in runs:
+        f = inter(size, w)
+        for ch in t:
+            d.text((x, y), ch, font=f, fill=fill)
+            x += d.textlength(ch, font=f) + size * TTR
 
 def typeset(titles, lines):
-    L = Image.new("RGBA", (W * SS, H * SS), (0, 0, 0, 0))
-    d = ImageDraw.Draw(L)
-    maxw = 900 * SS
-    size = 150 * SS
-    tf = title_font(size)
-    while max(tw(d, t, tf, size * .02) for t in titles) > maxw:
-        size -= 2; tf = title_font(size)
-    ttr = size * .02
-    t_lh = int(size * 0.98)
-    bs = 56 * SS
-    bf = body_font(bs)
-    while max(tw(d, s, bf, 0) for s in lines) > 860 * SS:
-        bs -= 2; bf = body_font(bs)
-    b_lh = int(bs * 1.22)
-    cap = tf.getbbox("H")          # (x0, top, x1, bottom) of a cap
+    Lr = Image.new("RGBA", (W * SS, H * SS), (0, 0, 0, 0))
+    d = ImageDraw.Draw(Lr)
+    size = 132 * SS
+    while max(runs_w(d, r, size) for r in titles) > 900 * SS:
+        size -= 2
+    t_lh = int(size * 1.04)
+    bs = 34 * SS
+    lines = [s.upper() for s in lines]
+    while max(tw(d, s, inter(bs, 500), bs * BTR) for s in lines) > 860 * SS:
+        bs -= 1
+    bf = inter(bs, 500)
+    b_lh = int(bs * 1.55)
+    cap = inter(size, B).getbbox("H")
     cap_top, cap_h = cap[1], cap[3] - cap[1]
-    gap1, orn, gap2 = 46 * SS, 14 * SS, 40 * SS
+    bcap = bf.getbbox("H")
+    gap1, orn, gap2 = 58 * SS, 0, 0
     title_h = t_lh * (len(titles) - 1) + cap_h
-    xb = bf.getbbox("x")
-    body_h = b_lh * (len(lines) - 1) + (bf.getbbox("dg")[3] - bf.getbbox("dl")[1])
-    total = title_h + gap1 + orn + gap2 + body_h
+    body_h = b_lh * (len(lines) - 1) + (bcap[3] - bcap[1])
+    rule_gap, rule_h = 46 * SS, 3 * SS
+    total = title_h + gap1 + body_h + rule_gap + rule_h
     y = (H * SS - total) / 2
-    for t in titles:
-        put(d, t, tf, ttr, y - cap_top, CREAM + (255,)); y += t_lh
+    for r in titles:
+        put_runs(d, r, size, y - cap_top, CREAM + (255,)); y += t_lh
     y = y - t_lh + cap_h + gap1
-    # ornament: rule · diamond · rule
-    cx, cy = W * SS / 2, y + orn / 2
-    c = CREAM + (200,)
-    d.line([(cx - 92 * SS, cy), (cx - 20 * SS, cy)], fill=c, width=2 * SS)
-    d.line([(cx + 20 * SS, cy), (cx + 92 * SS, cy)], fill=c, width=2 * SS)
-    r = 7 * SS
-    d.polygon([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill=c)
-    y += orn + gap2
-    top = bf.getbbox("dl")[1]
     for s in lines:
-        put(d, s, bf, 0, y - top, CREAM + (238,)); y += b_lh
-    L = L.resize((W, H), Image.LANCZOS)
-    sh = L.split()[3].filter(ImageFilter.GaussianBlur(10))
+        f = bf; x = (W * SS - tw(d, s, f, bs * BTR)) / 2
+        for ch in s:
+            d.text((x, y - bcap[1]), ch, font=f, fill=CREAM + (240,))
+            x += d.textlength(ch, font=f) + bs * BTR
+        y += b_lh
+    y = y - b_lh + (bcap[3] - bcap[1]) + rule_gap
+    cx = W * SS / 2
+    d.rectangle([cx - 40 * SS, y, cx + 40 * SS, y + rule_h], fill=GOLD + (235,))
+    Lr = Lr.resize((W, H), Image.LANCZOS)
+    sh = Lr.split()[3].filter(ImageFilter.GaussianBlur(10))
     shadow = Image.new("RGBA", (W, H), (20, 10, 4, 0)); shadow.putalpha(sh.point(lambda v: int(v * .55)))
-    glow = L.filter(ImageFilter.GaussianBlur(3)); glow.putalpha(glow.split()[3].point(lambda v: int(v * .25)))
-    return shadow, glow, L
+    glow = Lr.filter(ImageFilter.GaussianBlur(3)); glow.putalpha(glow.split()[3].point(lambda v: int(v * .18)))
+    return shadow, glow, Lr
 
 def frame_and_logo(img):
     d = ImageDraw.Draw(img, "RGBA")

@@ -76,8 +76,9 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 - **Look nostalgic**: negru „mat” ridicat (print decolorat), split-tone chihlimbar/sepia,
   halation pe lumini, vignetă, light leak cald, grain de film, praf și zgârieturi fine,
   ramă subțire crem ca la o fotografie developată; logo DOR discret, jos.
-- **Tipografie**: Fraunces (Soft, Wonky) pentru titluri + Cormorant Garamond Italic pentru
-  subtitluri (ambele OFL, în `assets/fonts`), culoare crem cald `#F6EAD4`.
+- **Tipografie**: o singură familie, Inter (OFL, `assets/fonts/Inter.ttf`) — titlul
+  îmbină „DOR DE” Light cu obiectul dorului ExtraBold; subtitluri Medium, majuscule,
+  tracking larg; linie aurie `#C9A048` sub text; culoare crem cald `#F6EAD4`.
 
 ```sh
 python3 tools/clean_bg.py            # șterge textul vechi din imaginile sursă (assets/ig_dor_src)
