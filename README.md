@@ -94,3 +94,12 @@ Fără imagini generate de AI: fiecare slide are un câmp de culoare intensă (g
 întâlnesc (vișiniu), waveform audio (terracotta), spot + microfon crom (smarald), permis
 VIP cu auriu (antracit), confetti aurii (cobalt). Tipografie Inter: „DOR” ExtraBold,
 restul ExtraLight, subtitluri Medium cu majuscule; linie aurie; logo DOR jos.
+
+## Varianta foto (stilul de referință)
+
+`out/ig_dor_photo/dor_ig_photo_{1..6}_1080x1350.jpg` — `python3 tools/clean_bg.py && PYTHONPATH=tools python3 tools/make_ig_photo.py`
+
+Fiecare mesaj are o fotografie potrivită (mulțime + scenă · prieteni îmbrățișați · mâini
+ridicate · public care râde la stand-up · scenă goală care își așteaptă artistul · prieteni
+împreună). Culori naturale și calde, bandă întunecată discretă în spatele textului,
+vignetă ușoară, fără efecte de film. Tipografia și logo-ul vin din `make_ig_fresh.py`.

@@ -15,7 +15,6 @@ OUT = os.environ.get("IG_OUT", "out/ig_dor_fresh")
 LOGO = "assets/dor_logo.png"
 CREAM = (255, 248, 238)
 GOLD = (227, 189, 110)
-os.makedirs(OUT, exist_ok=True)
 rng = np.random.default_rng(11)
 
 L, B = 200, 800
@@ -337,7 +336,9 @@ def logo(img):
     lg = lg.resize((lw, lh), Image.LANCZOS)
     img.alpha_composite(lg, ((W2 - lw) // 2, H2 - 58 * SS - lh))
 
-for i, (titles, lines, footer) in POSTS.items():
+if __name__ == "__main__":
+  os.makedirs(OUT, exist_ok=True)
+  for i, (titles, lines, footer) in POSTS.items():
     img = BGS[i]()
     sh, tx = typeset(titles, lines, footer, TEXT_CY[i])
     img.alpha_composite(sh); img.alpha_composite(tx); logo(img)
