@@ -3,3 +3,4 @@ card_*.png
 filter.txt
 inter/
 *.raw
+build/

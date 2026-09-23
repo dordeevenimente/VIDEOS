@@ -65,3 +65,21 @@ python3 tools/render.py        # grade + compoziție + export
 ```
 
 Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi Inter Display.
+
+---
+
+# DOR · Carusel Instagram „Dor de…” (feed 1080 × 1350)
+
+`out/ig_dor/dor_ig_{1..4}_1080x1350.jpg` — cele 4 vizualuri, mesajele originale neschimbate.
+
+- **Text** centrat pe ambele axe (bloc titlu + ornament + subtitlu, centrat optic pe y = 675).
+- **Look nostalgic**: negru „mat” ridicat (print decolorat), split-tone chihlimbar/sepia,
+  halation pe lumini, vignetă, light leak cald, grain de film, praf și zgârieturi fine,
+  ramă subțire crem ca la o fotografie developată; logo DOR discret, jos.
+- **Tipografie**: Fraunces (Soft, Wonky) pentru titluri + Cormorant Garamond Italic pentru
+  subtitluri (ambele OFL, în `assets/fonts`), culoare crem cald `#F6EAD4`.
+
+```sh
+python3 tools/clean_bg.py            # șterge textul vechi din imaginile sursă (assets/ig_dor_src)
+python3 tools/make_ig_nostalgic.py   # grade + tipografie → out/ig_dor
+```
