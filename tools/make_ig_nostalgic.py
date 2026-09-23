@@ -184,10 +184,9 @@ def typeset(titles, lines, footer=None):
     glow = Lr.filter(ImageFilter.GaussianBlur(3)); glow.putalpha(glow.split()[3].point(lambda v: int(v * .18)))
     return shadow, glow, Lr
 
-def frame_and_logo(img):
+def add_logo(img):
     d = ImageDraw.Draw(img, "RGBA")
-    m = 34
-    d.rectangle([m, m, W - m - 1, H - m - 1], outline=CREAM + (70,), width=2)
+
     logo = Image.open(LOGO).convert("RGBA")
     lw = 112; lh = round(lw * logo.height / logo.width)
     logo = logo.resize((lw, lh), Image.LANCZOS)
@@ -203,7 +202,7 @@ for i, (titles, lines, *foot) in POSTS.items():
     shadow, glow, text = typeset(titles, lines, *foot)
     for layer in (shadow, glow, text):
         img.alpha_composite(layer)
-    img = frame_and_logo(img).convert("RGB")
+    img = add_logo(img).convert("RGB")
     # a touch of grain over the type too, so it sits in the print
     n = rng.normal(0, 5, (H, W, 1))
     img = Image.fromarray(np.clip(np.asarray(img).astype(np.float32) + n, 0, 255).astype(np.uint8))

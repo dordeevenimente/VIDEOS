@@ -75,7 +75,7 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 - **Text** centrat pe ambele axe (bloc titlu + ornament + subtitlu, centrat optic pe y = 675).
 - **Look nostalgic**: negru „mat” ridicat (print decolorat), split-tone chihlimbar/sepia,
   halation pe lumini, vignetă, light leak cald, grain de film, praf și zgârieturi fine,
-  ramă subțire crem ca la o fotografie developată; logo DOR discret, jos.
+  logo DOR discret, jos (fără ramă).
 - **Tipografie**: o singură familie, Inter (OFL, `assets/fonts/Inter.ttf`) — titlul
   are „DOR” (brandul) ExtraBold, restul Light; subtitluri Medium, majuscule,
   tracking larg; linie aurie `#C9A048` sub text; culoare crem cald `#F6EAD4`.
