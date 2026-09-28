@@ -11,7 +11,7 @@ def fbm(oct=5,base=3):
         out+=amp*np.asarray(im,np.float32)/255; tot+=amp; amp*=0.5
     return out/tot
 yy,xx=np.mgrid[0:H,0:W].astype(np.float32)
-cx,cy=540,430
+cx,cy=540,600
 dx=(xx-cx)/W; dy=(yy-cy)/H*1.05
 d=np.sqrt(dx**2+dy**2)
 n1=fbm(5,2); n2=fbm(4,3)
