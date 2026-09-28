@@ -94,3 +94,11 @@ Feedback: the layout had no logic and was not centred, the WARM logo should be w
   5. 18.90–22.67 poster: WARM (white, 230 px), JUST2 logo, support acts, date · time, **Bribón lettering (only here)**, AGUADULCE.
 - Removed: scrolling marquees, permanent top/bottom stamps.
 - The WARM logo is shown in white (the client asked for it); shape and proportions are untouched.
+
+---
+
+## v4: WARM × UNDER THE SUN, light ending (client feedback 28.09.2026)
+
+- Organisers: **WARM × UNDER THE SUN**. The intro is one centred row: WARM (white) · × · Under The Sun lettering (white, lifted from `assets/source/under_the_sun_source.jpg`, a 150 px source, upscaled), then `PRESENTAN`.
+- The ending no longer repeats all the information: it shows only the **Bribón del Puerto lettering** + `AGUADULCE`.
+- The intro and build play over the violet-beams clip (dark centre), so no stage light sits behind the logos.

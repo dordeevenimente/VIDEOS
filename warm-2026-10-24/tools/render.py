@@ -32,7 +32,7 @@ HAZE = np.array([206, 204, 200], np.float32)
 
 SUPPORT = ["SALVI FERNANDEZ", "CORAL", "BITCH"]  # given order, all caps as requested
 # on-screen copy in Spanish
-PRESENTS = "PRESENTA"
+PRESENTS = "PRESENTAN"  # WARM × UNDER THE SUN
 DATE = "24 OCTUBRE 2026"
 TIME = "23:00 – 07:00"
 TOWN = "AGUADULCE"
@@ -186,9 +186,13 @@ def flicker(t, t0, frames=(0.35, 1, 0.45, 1, 0.6, 1)):
 # Every scene is centred on the frame; blocks stay inside Meta's zone (y 270-1250).
 WHITE_RGB = (246, 244, 240)
 
-# 1 — WARM PRESENTA
-intro_org = Logo("warm_logo.png", 300, 925, fill=WHITE_RGB)
-intro_presents = Line(PRESENTS, "Regular", 32, 1030, tracking=0.6, color=WHITE)
+# 1 — WARM × UNDER THE SUN / PRESENTAN (one centred row)
+_wr, _gap, _xw, _uw = 280, 34, 30, 150
+_x0 = W / 2 - (_wr + 2 * _gap + _xw + _uw) / 2
+intro_org = Logo("warm_logo.png", _wr, 930, cx=_x0 + _wr / 2, fill=WHITE_RGB)
+intro_x = Line("×", "Light", 52, 930, cx=_x0 + _wr + _gap + _xw / 2, color=WHITE)
+intro_uts = Logo("under_the_sun_lettering.png", _uw, 930, cx=_x0 + _wr + 2 * _gap + _xw + _uw / 2)
+intro_presents = Line(PRESENTS, "Regular", 32, 1062, tracking=0.6, color=WHITE)
 
 # 2 — JUST2 (headliner, alone)
 head = Logo("just2_logo.png", 620, 960)
@@ -204,15 +208,9 @@ info_date = Line(DATE, "Black", 92, 900)
 info_time = Line(TIME, "Black", 92, 1015)
 info_town = Line(TOWN, "SemiBold", 42, 1125, tracking=0.5, color=WHITE)
 
-# 5 — poster
-end_org = Logo("warm_logo.png", 230, 530, fill=WHITE_RGB)
-end_head = Logo("just2_logo.png", 500, 668)
-es = fit_size(SUPPORT, "Black", 620, 58)
-end_support = [Line(n, "Black", es, 800 + k * es * 1.3, color=WHITE, seed=11 + k)
-               for k, n in enumerate(SUPPORT)]
-end_when = Line(f"{DATE}  ·  {TIME}", "SemiBold", 38, 1040, tracking=0.04)
-end_venue = Logo("bribon_lettering.png", 230, 1138)
-end_town = Line(TOWN, "SemiBold", 28, 1226, tracking=0.5, color=WHITE)
+# 5 — venue only
+end_venue = Logo("bribon_lettering.png", 380, 925)
+end_town = Line(TOWN, "SemiBold", 34, 1075, tracking=0.5, color=WHITE)
 
 DECODE = BEAT  # letters switch on over one beat
 
@@ -255,7 +253,9 @@ def render_frame(bg, i):
         if t >= BUILD + BEAT:
             a *= 1.0 if int((t - BUILD) / (BEAT / 2)) % 2 == 0 else 0.45
         intro_org.comp(f, a)
-        comp(f, intro_presents, a, ramp(t, BEAT, DECODE))
+        comp(f, intro_x, a, ramp(t, BEAT, DECODE / 2))
+        intro_uts.comp(f, a * ramp(t, BEAT, DECODE / 2))
+        comp(f, intro_presents, a, ramp(t, 2 * BEAT, DECODE))
 
     # 2 — JUST2 alone on the drop
     if DROP <= t < NAME3:
@@ -273,15 +273,10 @@ def render_frame(bg, i):
         comp(f, info_time, 1.0, ramp(t, INFO2, DECODE))
         comp(f, info_town, 1.0, ramp(t, INFO3, DECODE))
 
-    # 5 — poster (last frame)
+    # 5 — Bribón del Puerto, AGUADULCE
     if t >= RIFF2:
-        end_org.comp(f, ramp(t, RIFF2 + 0.05, DECODE / 2))
-        end_head.comp(f, ramp(t, RIFF2 + BEAT, DECODE / 2) * flicker(t, LAYER))
-        for k, ln in enumerate(end_support):
-            comp(f, ln, 1.0, ramp(t, RIFF2 + 1.5 * BEAT + k * BEAT / 2, DECODE))
-        comp(f, end_when, 1.0, ramp(t, RIFF2 + 3 * BEAT, DECODE))
-        end_venue.comp(f, ramp(t, RIFF2 + 3.5 * BEAT, DECODE / 2))
-        comp(f, end_town, 1.0, ramp(t, RIFF2 + 4 * BEAT, DECODE))
+        end_venue.comp(f, ramp(t, RIFF2 + 0.05, DECODE / 2) * flicker(t, LAYER))
+        comp(f, end_town, 1.0, ramp(t, RIFF2 + BEAT, DECODE))
 
     f *= VIGNETTE
     f += GRAIN[(i // 2) % len(GRAIN)]

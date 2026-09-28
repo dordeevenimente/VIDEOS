@@ -5,7 +5,10 @@
 - Bribón del Puerto: only the white lettering ("BRIBÓN / del puerto") is used, as requested;
   the emblem and the patterned background are left out.
 
-env: WARM_SRC, BRIBON_SRC, OUT_DIR
+- Under The Sun: white lettering lifted out of its brown box (the source is only 150 px, so it is
+  upscaled 4x and re-thresholded for clean edges).
+
+env: WARM_SRC, BRIBON_SRC, UTS_SRC, OUT_DIR
 """
 import os
 
@@ -61,7 +64,29 @@ def bribon(src):
     return out.shape
 
 
+def under_the_sun(src, scale=4):
+    from scipy import ndimage
+    im = Image.open(src).convert("RGB")
+    rgb = np.asarray(im, np.float32)
+    dark = rgb.max(axis=2) < 120
+    box = ndimage.binary_fill_holes(ndimage.binary_closing(dark, iterations=3))
+    box = ndimage.binary_erosion(box, iterations=2)  # stay off the box edge
+    lum = rgb.mean(axis=2)
+    a = np.clip((lum - 120.0) / (220.0 - 120.0), 0, 1) * box
+    big = Image.fromarray((a * 255).astype(np.uint8)).resize(
+        (im.width * scale, im.height * scale), Image.LANCZOS)
+    b = np.asarray(big, np.float32) / 255.0
+    b = np.clip((b - 0.35) / 0.3, 0, 1)  # crisp edge after upscaling
+    rgba = np.zeros(b.shape + (4,), np.uint8)
+    rgba[..., :3] = 255
+    rgba[..., 3] = (b * 255).astype(np.uint8)
+    out = crop_alpha(rgba, thr=40)
+    Image.fromarray(out).save(os.path.join(OUT, "under_the_sun_lettering.png"))
+    return out.shape
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     print("warm", warm(os.environ["WARM_SRC"]))
     print("bribon", bribon(os.environ["BRIBON_SRC"]))
+    print("under the sun", under_the_sun(os.environ["UTS_SRC"]))
