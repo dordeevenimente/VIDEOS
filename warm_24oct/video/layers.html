@@ -4,8 +4,6 @@
 :root{--cream:#FFFFFF;--ember:#FF5A1F}
 *{margin:0;padding:0;box-sizing:border-box}
 body{width:1080px;height:1920px;background:transparent;overflow:hidden}
-.noscrim .p::before{display:none}
-.hid{visibility:hidden!important}
 .stage{position:absolute;left:0;top:180px;width:1080px;height:1350px;transform:scale(1.08);transform-origin:50% 0}
 .p{position:relative;width:1080px;height:1350px;background:none;color:var(--cream);font-family:'Archivo';
   display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:110px 120px}
@@ -17,7 +15,7 @@ body{width:1080px;height:1920px;background:transparent;overflow:hidden}
   -webkit-mask-composite:source-in;mask-composite:intersect;filter:contrast(1.06) saturate(.95)}
 .p>.halo{position:absolute;z-index:1;inset:0;background:radial-gradient(ellipse 44% 36% at 50% 36%,rgba(0,0,0,.9) 40%,rgba(0,0,0,0) 100%)}
 .p>.head{position:absolute;top:110px;left:0;right:0;display:flex;justify-content:center}
-.p>.mid{position:absolute;left:0;right:0;top:752px;transform:translateY(-50%)}
+.p>.mid{position:absolute;left:0;right:0;top:742px;transform:translateY(-50%)}
 .p>.foot{position:absolute;bottom:96px;left:50%;transform:translateX(-50%)}
 .guide{position:absolute;inset:110px 120px;border:1px dashed #0f0;display:none}
 .mono{font-family:'Space Mono';font-size:17px;letter-spacing:.14em;text-transform:uppercase}
@@ -54,12 +52,17 @@ body{width:1080px;height:1920px;background:transparent;overflow:hidden}
 .finfo .l1{font-stretch:125%;font-weight:600;font-size:24px;letter-spacing:.06em;margin-bottom:6px}
 .finfo .l2,.finfo .l3{font-weight:500;font-size:19px;letter-spacing:.08em}
 .finfo .l3{opacity:.85}
+.lineup .label{font-weight:600;font-size:19px;letter-spacing:.42em;padding-left:.42em;text-transform:uppercase;opacity:.9;margin:-8px 0 14px;display:flex;align-items:center;gap:16px}
+.lineup .label::before,.lineup .label::after{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.noscrim .p::before{display:none}
+.hid{visibility:hidden!important}
 </style></head><body><div class="stage"><div class="p"><div class="guide"></div>
 <div class="halo"></div>
 <div class="photo"></div>
 <div class="head"><img class="wlogo" src="../logos/warm_white.png" alt="WARM"></div>
 <div class="mid"><div class="lineup">
 <img class="j2" src="../logos/just2_white.png" alt="JUST2">
+<div class="label">Solid Grooves</div>
 <div class="n">Salvi Fernandez</div>
 <div class="n">Dani Corral</div>
 <div class="n">Lady Sasha</div>

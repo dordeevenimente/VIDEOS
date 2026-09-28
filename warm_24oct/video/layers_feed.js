@@ -1,7 +1,7 @@
 const {chromium}=require('/opt/node22/lib/node_modules/playwright');
 const L={
- photo:['.halo','.photo'], warm:['.head'], j2:['.lineup .j2'],
- n1:['.lineup .n:nth-of-type(1)'], n2:['.lineup .n:nth-of-type(2)'], n3:['.lineup .n:nth-of-type(3)'],
+ photo:['.halo','.photo'], warm:['.head'], j2:['.lineup .j2'], label:['.lineup .label'],
+ n1:['.lineup .n:nth-of-type(2)'], n2:['.lineup .n:nth-of-type(3)'], n3:['.lineup .n:nth-of-type(4)'],
  venue:['.fvenue'], date:['.fdate'], l1:['.finfo .l1'], l2:['.finfo .l2'], l3:['.finfo .l3']};
 const ALL=Object.values(L).flat();
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1080,height:1350}});

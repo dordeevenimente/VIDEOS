@@ -44,10 +44,10 @@ def load(k):
     bb=Image.open(f'layer_{k}.png').getchannel('A').getbbox()
     x0,y0,x1,y1=bb; y0=max(y0-24,0); y1=min(y1+4,H)
     c=a[y0:y1,x0:x1]; return dict(rgb=c[...,:3]*c[...,3:],a=c[...,3:],box=(x0,y0,x1,y1))
-L={k:load(k) for k in ['photo','warm','j2','n1','n2','n3','venue','date','l1','l2','l3']}
+L={k:load(k) for k in ['photo','warm','j2','label','n1','n2','n3','venue','date','l1','l2','l3']}
 photo_full=Image.open('layer_photo.png').convert('RGBA')
 def ease(x): x=min(max(x,0),1); return 1-(1-x)**3
-T={'warm':(0.45,0.9),'j2':(DROP,0.55),'n1':(DROP+BAR/2,0.6),'n2':(DROP+BAR,0.6),'n3':(DROP+1.5*BAR,0.6),
+T={'warm':(0.45,0.9),'j2':(DROP,0.55),'label':(DROP+BEAT,0.55),'n1':(DROP+BAR/2,0.6),'n2':(DROP+BAR,0.6),'n3':(DROP+1.5*BAR,0.6),
    'venue':(DROP+2*BAR,0.7),'date':(DROP+2*BAR+BEAT,0.7),'l1':(DROP+2*BAR+2*BEAT,0.6),'l2':(DROP+2*BAR+3*BEAT,0.6),'l3':(DROP+3*BAR,0.6)}
 def over(img,lay,alpha,dy=0):
     if alpha<=0: return
