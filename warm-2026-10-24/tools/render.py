@@ -185,7 +185,7 @@ def flicker(t, t0, frames=(0.35, 1, 0.45, 1, 0.6, 1)):
 # Every scene is centred on the frame; blocks stay inside Meta's zone (y 270-1250).
 WHITE_RGB = (246, 244, 240)
 
-# 1 — WARM × UNDER THE SUN (one centred row); a small copy becomes the top stamp
+# 1 — WARM × UNDER THE SUN (one centred row)
 def org_row(scale, cy):
     wr, gap, xw, uw = 280 * scale, 34 * scale, 30 * scale, 150 * scale
     x0 = W / 2 - (wr + 2 * gap + xw + uw) / 2
@@ -195,12 +195,11 @@ def org_row(scale, cy):
 
 
 intro_org, intro_x, intro_uts = org_row(1.0, 960)
-stamp = org_row(0.42, 330)
 
-# reference grammar: two large lines scrolling in opposite directions behind the headline
-MQ = f"{DATE}  ·  {TOWN}  ·  "
-mq_top = Marquee(MQ, 120, 735, 240, +1)
-mq_bot = Marquee(MQ, 120, 1185, 240, -1)
+# reference grammar: the date travels as two large lines scrolling in opposite directions
+MQ = f"{DATE}  ·  "
+mq_top = Marquee(MQ, 150, 800, 260, +1)
+mq_bot = Marquee(MQ, 150, 1120, 260, -1)
 
 # 2 — JUST2 (headliner, alone)
 head = Logo("just2_logo.png", 620, 960)
@@ -212,8 +211,7 @@ support = [Line(n, "Black", ss, 960 + (k - 1) * ss * 1.2, seed=3 + k)
 support_t = [NAME3, NAME3 + 2 * BEAT, RIFF1]
 
 # 4 — date, time, town
-info_date = Line(DATE, "Black", 92, 905)
-info_time = Line(TIME, "Black", 92, 1018)
+info_time = Line(TIME, "Black", 104, 960)
 
 # 5 — venue only
 end_venue = Logo("bribon_lettering.png", 380, 925)
@@ -254,15 +252,6 @@ def render_frame(bg, i):
     if t >= DROP:
         f *= SCRIM
 
-    # scrolling lines: whole piece until the end card (off during the suck-out)
-    if t < RIFF2 and not (SUCK <= t < DROP):
-        a = 0.75 if t < DROP else 0.42
-        if BUILD + BEAT <= t < SUCK:  # 1/8-note strobe through the riser
-            a *= 1.0 if int((t - BUILD) / (BEAT / 2)) % 2 == 0 else 0.5
-        a *= ramp(t, INTRO, 0.25) * (1 - ramp(t, RIFF2 - 0.1, 0.1))
-        mq_top.comp(f, t, a)
-        mq_bot.comp(f, t, a)
-
     # 1 — WARM × UNDER THE SUN, strobing through the riser, gone on the suck-out
     if t < SUCK:
         a = ramp(t, 0.1, 0.5)
@@ -271,13 +260,6 @@ def render_frame(bg, i):
         intro_org.comp(f, a)
         comp(f, intro_x, a, ramp(t, BEAT, DECODE / 2))
         intro_uts.comp(f, a * ramp(t, BEAT, DECODE / 2))
-
-    # organisers as the small top stamp, from the drop to the end card
-    if DROP <= t < RIFF2:
-        sa = 0.9 * ramp(t, DROP, 0.3) * (1 - ramp(t, RIFF2 - 0.1, 0.1))
-        stamp[0].comp(f, sa)
-        comp(f, stamp[1], sa)
-        stamp[2].comp(f, sa)
 
     # 2 — JUST2 alone on the drop
     if DROP <= t < NAME3:
@@ -289,10 +271,12 @@ def render_frame(bg, i):
         for ln, t0 in zip(support, support_t):
             comp(f, ln, out, ramp(t, t0, DECODE))
 
-    # 4 — date, time, town — one per bar
+    # 4 — the date scrolls in two opposite lines, the time decodes alone in the centre
     if INFO1 <= t < RIFF2:
-        comp(f, info_date, 1.0, ramp(t, INFO1, DECODE))
-        comp(f, info_time, 1.0, ramp(t, INFO2, DECODE))
+        a = ramp(t, INFO1, 0.15) * (1 - ramp(t, RIFF2 - 0.1, 0.1))
+        mq_top.comp(f, t, 0.9 * a)
+        mq_bot.comp(f, t, 0.9 * a)
+        comp(f, info_time, flicker(t, INFO3), ramp(t, INFO1 + 2 * BEAT, DECODE))
 
     # 5 — Bribón del Puerto, AGUADULCE
     if t >= RIFF2:

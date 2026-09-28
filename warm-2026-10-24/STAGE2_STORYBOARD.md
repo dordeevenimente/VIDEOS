@@ -113,3 +113,19 @@ Feedback: the layout had no logic and was not centred, the WARM logo should be w
   - support acts and date/time in heavy mint type with the random-letter reveal, and a flicker on the riff;
   - a small organisers stamp at the top (WARM × UNDER THE SUN, white), in the role KOKUN plays in the reference;
   - the ending: the venue logo alone, white and centred (Bribón lettering + AGUADULCE), as the KOKUN® end card does.
+
+---
+
+## v6: every piece of text once (client feedback 28.09.2026)
+
+The same text was repeating (the date/town in the scrolling lines and again in the centre; the organisers in the intro and again as a stamp). Now each item appears exactly once:
+
+| Video | Text |
+|---|---|
+| 0.00–4.72 | WARM × UNDER THE SUN |
+| 5.67–9.45 | JUST2 logo |
+| 9.45–13.23 | SALVI FERNANDEZ · CORAL · BITCH |
+| 13.23–18.90 | `24 OCTUBRE 2026` only as the two opposite scrolling lines (reference grammar); `23:00 – 07:00` alone in the centre |
+| 18.90–22.67 | Bribón del Puerto + AGUADULCE |
+
+The top stamp and the always-on scrolling lines are removed.
