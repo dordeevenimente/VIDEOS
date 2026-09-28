@@ -102,3 +102,14 @@ Feedback: the layout had no logic and was not centred, the WARM logo should be w
 - Organisers: **WARM × UNDER THE SUN**. The intro is one centred row: WARM (white) · × · Under The Sun lettering (white, lifted from `assets/source/under_the_sun_source.jpg`, a 150 px source, upscaled), then `PRESENTAN`.
 - The ending no longer repeats all the information: it shows only the **Bribón del Puerto lettering** + `AGUADULCE`.
 - The intro and build play over the violet-beams clip (dark centre), so no stage light sits behind the logos.
+
+---
+
+## v5: back to the reference grammar (client feedback 28.09.2026)
+
+- `PRESENTAN` removed.
+- Restored from the reference reel, kept centred and inside the Meta zone:
+  - two large regular-weight lines, `24 OCTUBRE 2026 · AGUADULCE`, scrolling in opposite directions behind the headline (y 735 / 1185; 75 % in the intro, 42 % behind the names), off during the suck-out and before the ending;
+  - support acts and date/time in heavy mint type with the random-letter reveal, and a flicker on the riff;
+  - a small organisers stamp at the top (WARM × UNDER THE SUN, white), in the role KOKUN plays in the reference;
+  - the ending: the venue logo alone, white and centred (Bribón lettering + AGUADULCE), as the KOKUN® end card does.
