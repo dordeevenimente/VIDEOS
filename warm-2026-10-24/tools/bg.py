@@ -29,12 +29,12 @@ def main():
     for i, (t0, t1, sid, src_in) in enumerate(SHOTS):
         n = round(t1 * FPS) - round(t0 * FPS)
         vf = ",".join([f"fps={FPS}", f"scale={W}:{H}:flags=lanczos",
-                       *GRADE, f"trim=end_frame={n}", "setpts=PTS-STARTPTS"])
+                       *GRADE])
         vf = vf.format(br=-0.02 + BRIGHT.get(sid, 0.0))
         out = os.path.join(OUT, f"shot{i}.mp4")
         subprocess.run([FFMPEG, "-hide_banner", "-loglevel", "error", "-y",
                         "-ss", str(src_in), "-i", os.path.join(STOCK, f"{sid}.mov"),
-                        "-vf", vf, "-an", "-c:v", "libx264", "-preset", "veryfast",
+                        "-vf", vf, "-frames:v", str(n), "-an", "-c:v", "libx264", "-preset", "veryfast",
                         "-crf", "8", "-pix_fmt", "yuv420p", out], check=True)
         parts.append(out)
     lst = os.path.join(OUT, "shots.txt")
