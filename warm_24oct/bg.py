@@ -24,7 +24,7 @@ L=np.clip((L-0.38)/0.62,0,1)
 g=np.stack([np.interp(L**1.6,xs,stops[:,c]) for c in range(3)],-1)
 # heat concentration: bright core top-right, cooling toward bottom
 yy,xx=np.mgrid[0:1350,0:1080]/np.array([1350,1080])[:,None,None]
-heat=np.exp(-(((xx-0.6)/0.36)**2+((yy-0.2)/0.3)**2))
+heat=np.exp(-(((xx-0.5)/0.38)**2+((yy-0.2)/0.3)**2))
 g=g*(0.06+1.1*heat[...,None])
 # cold residue bottom-left from original colors (cyan) -> dawn
 cold=img*np.array([0.15,0.55,0.75])*np.clip((yy-0.55)/0.45,0,1)[...,None]*np.clip(1-xx*1.3,0,1)[...,None]*0.55
@@ -32,7 +32,7 @@ cl=(cold.mean(-1,keepdims=True)>0.12)
 #g=g+cold*cl
 # horizontal glitch slices with RGB split
 for _ in range(3):
-    y0=int(rng.integers(180,700)); h=int(rng.integers(2,9)); sh=int(rng.integers(-90,90))
+    y0=int(rng.choice([rng.integers(880,925),rng.integers(1262,1300),rng.integers(30,80)])); h=int(rng.integers(2,9)); sh=int(rng.integers(-90,90))
     band=g[y0:y0+h].copy()
     g[y0:y0+h,:,0]=np.roll(band[...,0],sh+6,1); g[y0:y0+h,:,1]=np.roll(band[...,1],sh,1); g[y0:y0+h,:,2]=np.roll(band[...,2],sh-6,1)
 # vignette + grain
