@@ -129,3 +129,22 @@ The same text was repeating (the date/town in the scrolling lines and again in t
 | 18.90–22.67 | Bribón del Puerto + AGUADULCE |
 
 The top stamp and the always-on scrolling lines are removed.
+
+---
+
+## v7: built on the final poster (client, 28.09.2026)
+
+The client supplied the final poster (`assets/source/final_poster.png`). The video now uses its copy and its identity.
+
+- **Copy (from the poster, each item once):** WARM · JUST2 / SOLID GROOVES · SALVI FERNANDEZ, DANI CORRAL, LADY SASHA (the lineup changed from CORAL/BITCH) · SÁB 24 OCTUBRE · 23:00H — 07:00H · BRIBÓN del puerto · PENÍNSULA DE CONTRADIQUE, 04720 / AGUADULCE (ALMERÍA) · INFO & RESERVAS · 679 743 114. Under The Sun is not on the poster, so it is not in the video.
+- **Look:** black ground; the poster's orange-to-red topographic rings, generated procedurally, drifting outward and pulsing on every kick after the drop (1/8-note pulse on the riser, near-dark on the suck-out). JUST2's footage is monochrome warmed to orange, shown in a soft central window like the poster's portrait. White type.
+- **Type:** Barlow Condensed ExtraBold for the names (poster's condensed bold); Montserrat Light/Bold for `SÁB 24 OCTUBRE`; Montserrat SemiBold/Medium for the hours, address and bookings (fonts from Fontsource via npm).
+- **Motion kept from the reference:** random-letter decode, flicker on accents, cuts on the kick.
+
+| Video | Picture | Text |
+|---|---|---|
+| 0.00–4.72 | rings | WARM (white) |
+| 5.67–9.45 | JUST2 front view ×2 | JUST2 logo, `— SOLID GROOVES —` |
+| 9.45–13.23 | haze, lasers | SALVI FERNANDEZ → DANI CORRAL → LADY SASHA |
+| 13.23–17.01 | rings | SÁB **24 OCTUBRE**, then 23:00H — 07:00H |
+| 17.01–22.67 | rings | Bribón del Puerto; at 18.90 the address, then INFO & RESERVAS · 679 743 114 |
