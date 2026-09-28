@@ -79,3 +79,18 @@ BG=build/bg.mp4 TRACK=…/JUST2_Close_Your_Eyes.wav OUT=out.mp4 POSTER=poster.pn
 | 18.90–22.67 | stock 518355395 + whiteout: end card / poster |
 
 - A soft dark band behind the info block keeps the date and time legible over the hazy shots.
+
+---
+
+## v3: centred, Spanish, simpler story (client feedback 28.09.2026)
+
+Feedback: the layout had no logic and was not centred, the WARM logo should be white and smaller, the copy should be in Spanish, and the Bribón logo should appear only at the end.
+
+- One idea per scene, every block centred on the frame (and still inside y 270–1250):
+  1. 0.00–4.72 **WARM** (white, 300 px) + `PRESENTA`, strobing through the riser; black on the suck-out.
+  2. 5.67–9.45 **JUST2 logo** alone (620 px) over his front-view footage.
+  3. 9.45–13.23 `SALVI FERNANDEZ` → `CORAL` → `BITCH` (white, stacked), flicker on the riff; haze and lasers footage.
+  4. 13.23–18.90 `24 OCTUBRE 2026` → `23:00 – 07:00` → `AGUADULCE`; stock mixer, then crowd.
+  5. 18.90–22.67 poster: WARM (white, 230 px), JUST2 logo, support acts, date · time, **Bribón lettering (only here)**, AGUADULCE.
+- Removed: scrolling marquees, permanent top/bottom stamps.
+- The WARM logo is shown in white (the client asked for it); shape and proportions are untouched.
