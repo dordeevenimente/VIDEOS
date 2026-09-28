@@ -32,12 +32,16 @@ RIFF2 = bar(10)           # stab -> end card
 LAYER = bar(11)           # new layer enters (phrase 2)
 END = DURATION
 
-# Background shots: (start, end, adobe stock id, source in-point s)
+# Background shots: (start, end, source, source in-point s, horizontal crop 0..1)
+# "just2" = the artist's own footage (720x900, supplied); numeric ids = Adobe Stock (free).
 SHOTS = [
-    (INTRO, BUILD, "799935911", 4.0),
-    (BUILD, DROP, "518355395", 2.0),
-    (DROP, RIFF1, "767667938", 3.0),
-    (RIFF1, INFO1, "517066238", 5.0),
-    (INFO1, RIFF2, "757067874", 1.0),
-    (RIFF2, END, "518355395", 12.0),
+    (INTRO, BUILD, "799935911", 4.0, 0.5),
+    (BUILD, DROP, "518355395", 2.0, 0.5),
+    (DROP, NAME2, "just2", 1.10, 0.0),     # JUST2 at the booth, his name lit behind him
+    (NAME2, NAME3, "just2", 4.40, 1.0),    # second front-view take
+    (NAME3, RIFF1, "just2", 22.55, 0.5),   # from behind, facing the crowd
+    (RIFF1, INFO1, "just2", 15.75, 0.5),   # full room in haze
+    (INFO1, INFO3, "just2", 7.35, 0.35),   # from behind, lights changing
+    (INFO3, RIFF2, "just2", 17.95, 0.5),   # lasers over the crowd
+    (RIFF2, END, "518355395", 12.0, 0.5),  # clean beams under the end card
 ]

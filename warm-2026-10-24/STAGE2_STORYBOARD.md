@@ -53,3 +53,29 @@ export FONT_DIR=…/inter/extras/ttf  # Inter 4.1
 python3 tools/bg.py                 # graded background plate -> build/bg.mp4
 BG=build/bg.mp4 TRACK=…/JUST2_Close_Your_Eyes.wav OUT=out.mp4 POSTER=poster.png python3 tools/render.py
 ```
+
+---
+
+## v2: official logos, JUST2 footage, Meta safe zone (28.09.2026)
+
+- **Logos** (in `assets/`, from `assets/source/`), used as supplied, never recoloured or reshaped, only scaled:
+  - `warm_logo.png` (red, already transparent, only trimmed): top stamp 150 px wide, end card 560 px.
+  - `just2_logo.png` (white): alone at 640 px on the drop, 440 px on top of the full bill and on the end card.
+  - `bribon_lettering.png`: **only the lettering** of the Bribón del Puerto logo (emblem and background left out, as requested). Used as the bottom stamp (170 px), in the info section (340 px) and on the end card (250 px).
+- **Hierarchy:** JUST2 is the headliner (logo, larger). SALVI FERNANDEZ, CORAL and BITCH follow in the given order, **all caps**, at one smaller size.
+- **Meta safe zone:** every piece of information sits between y 270 and 1250 (14 % top / 35 % bottom clear, as for Reels ads). Type is smaller: supports are auto-fitted to 760 px, date/time 96 px, end-card supports 64 px.
+- **Footage:** the artist's own video (`assets/source/just2_footage_source.mp4`, 720×900) now carries the drop, the bill and the info section. It is scaled to cover 9:16 with a per-shot horizontal crop, and colour-stripped then tinted into the same magenta as the stock shots. Stock remains for the intro, the build and under the end card.
+
+| Video | Shot |
+|---|---|
+| 0.00–3.78 | stock 799935911 (dark) |
+| 3.78–5.67 | stock 518355395 (beams) |
+| 5.67–7.56 | JUST2 front view at the booth, his name lit behind him (src 1.10 s): **JUST2 logo** |
+| 7.56–9.45 | JUST2 front view, second take (src 4.40 s) |
+| 9.45–11.34 | JUST2 from behind, facing the crowd (src 22.55 s): SALVI FERNANDEZ, then CORAL |
+| 11.34–13.23 | full room in haze (src 15.75 s): BITCH plus a flicker on the riff |
+| 13.23–17.01 | JUST2 from behind (src 7.35 s): date, time |
+| 17.01–18.90 | lasers over the crowd (src 17.95 s): Bribón lettering, AGUADULCE |
+| 18.90–22.67 | stock 518355395 + whiteout: end card / poster |
+
+- A soft dark band behind the info block keeps the date and time legible over the hazy shots.

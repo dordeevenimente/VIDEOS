@@ -1,7 +1,10 @@
 """Composite the WARM 24.10.26 promo: graded plate + typographic system + soundtrack.
 
 env: FONT_DIR (Inter extras/ttf), TRACK (supplied WAV), BG (plate from bg.py),
+     ASSETS (warm_logo.png, bribon_lettering.png, just2_logo.png — official logos),
      OUT (mp4 path), FFMPEG (optional), POSTER (optional png of the last frame)
+
+All information sits inside Meta's Reels safe zone (14 % top, 35 % bottom, 6 % sides kept clear).
 """
 import os
 import random
@@ -27,12 +30,13 @@ SILVER = np.array([206, 208, 210], np.float32)
 WHITE = np.array([246, 244, 240], np.float32)
 HAZE = np.array([206, 204, 200], np.float32)
 
-LINEUP = ["JUST2", "Salvi Fernandez", "CORAL", "BITCH"]  # exact spelling, given order
+SUPPORT = ["SALVI FERNANDEZ", "CORAL", "BITCH"]  # given order, all caps as requested
 DATE = "24 OCTOBER 2026"
 TIME = "23:00 – 07:00"
-VENUE = "BRIBÓN DEL PUERTO"
 TOWN = "AGUADULCE"
-ORG = "WARM"  # placeholder type — replaced by the official logo in Stage 3
+ASSETS = os.environ["ASSETS"]
+
+SAFE_TOP, SAFE_BOT = 270, 1250  # Meta Reels: 14 % top / 35 % bottom free of text
 
 
 def font(weight, size):
@@ -134,6 +138,28 @@ class Marquee:
         reg += (col[None, :, :] - reg) * m
 
 
+class Logo:
+    """Official logo sprite: scaled uniformly, colours untouched, faded/flickered only."""
+
+    def __init__(self, name, width, cy, cx=W / 2):
+        im = Image.open(os.path.join(ASSETS, name)).convert("RGBA")
+        h = round(im.height * width / im.width)
+        im = im.resize((width, h), Image.LANCZOS)
+        a = np.asarray(im, np.float32) / 255.0
+        self.rgb, self.a = a[..., :3] * 255.0, a[..., 3:]
+        self.halo = (np.asarray(im.getchannel("A").filter(ImageFilter.GaussianBlur(h * 0.18)),
+                                np.float32) / 255.0)[..., None]
+        self.x0, self.y0 = int(round(cx - width / 2)), int(round(cy - h / 2))
+        self.w, self.h = width, h
+
+    def comp(self, frame, alpha):
+        if alpha <= 0.003:
+            return
+        reg = frame[self.y0:self.y0 + self.h, self.x0:self.x0 + self.w]
+        reg *= 1 - 0.35 * np.minimum(1, 1.6 * self.halo * alpha)
+        reg += (self.rgb - reg) * (self.a * alpha)
+
+
 def fit_size(texts, weight, max_w, start):
     s = start
     while s > 20 and max(font(weight, s).getlength(t) for t in texts) > max_w:
@@ -152,29 +178,32 @@ def flicker(t, t0, frames=(0.35, 1, 0.45, 1, 0.6, 1)):
 
 # ---------------------------------------------------------------- layout
 SAFE_W = 880
-stamp_top = Line(ORG, "Regular", 34, 292, tracking=0.9, color=SILVER)
-stamp_bot = Line(VENUE, "Regular", 30, 1462, tracking=0.6, color=SILVER)
+stamp_top = Logo("warm_logo.png", 150, 318)
+stamp_bot = Logo("bribon_lettering.png", 170, 1195)
 
-mq_top = Marquee(f"{ORG}  ·  {DATE}  ·  ", 176, 640, 286, +1)
-mq_bot = Marquee(f"{VENUE}  ·  {TOWN}  ·  ", 176, 1190, 286, -1)
-mq_top_info = Marquee(f"{ORG}  ·  {DATE}  ·  ", 150, 560, 240, +1)
+mq_top = Marquee(f"WARM  ·  {DATE}  ·  ", 128, 560, 240, +1)
+mq_bot = Marquee(f"BRIBÓN DEL PUERTO  ·  {TOWN}  ·  ", 128, 930, 240, -1)
 
-ns = fit_size(LINEUP, "Black", SAFE_W, 150)
-names = [Line(n, "Black", ns, 1190 + (i - 1.5) * ns * 1.1, seed=i) for i, n in enumerate(LINEUP)]
-name_t = [DROP, NAME2, NAME3, RIFF1]
+# lineup: JUST2 alone and large over his own front-view footage, then the full bill
+head_big = Logo("just2_logo.png", 640, 1030)
+head_small = Logo("just2_logo.png", 440, 460)
+ss = fit_size(SUPPORT, "Black", 760, 84)
+support = [Line(n, "Black", ss, 620 + k * ss * 1.22, seed=3 + k) for k, n in enumerate(SUPPORT)]
+support_t = [NAME3, NAME3 + 2 * BEAT, RIFF1]
 
-isz = fit_size([DATE, TIME], "Black", SAFE_W, 140)
-info_date = Line(DATE, "Black", isz, 880)
-info_time = Line(TIME, "Black", isz, 880 + isz * 1.15)
-info_venue = Line(VENUE, "SemiBold", 62, 1180, tracking=0.04, color=WHITE)
-info_town = Line(TOWN, "SemiBold", 44, 1262, tracking=0.5, color=WHITE)
+info_date = Line(DATE, "Black", 96, 430)
+info_time = Line(TIME, "Black", 96, 545)
+info_venue = Logo("bribon_lettering.png", 340, 715)
+info_town = Line(TOWN, "SemiBold", 40, 855, tracking=0.5, color=WHITE)
 
-end_org = Line(ORG, "Black", 230, 560, tracking=-0.01, color=WHITE)
-es = fit_size(LINEUP, "Black", 720, 96)
-end_names = [Line(n, "Black", es, 820 + i * es * 1.12, seed=10 + i) for i, n in enumerate(LINEUP)]
-end_date = Line(DATE, "SemiBold", 50, 1250, tracking=0.06, color=WHITE)
-end_time = Line(TIME, "SemiBold", 50, 1318, tracking=0.06, color=WHITE)
-end_venue = Line(f"{VENUE}  ·  {TOWN}", "SemiBold", 38, 1392, tracking=0.12, color=WHITE)
+# end card — the poster
+end_org = Logo("warm_logo.png", 560, 400)
+end_head = Logo("just2_logo.png", 440, 600)
+es = fit_size(SUPPORT, "Black", 640, 64)
+end_support = [Line(n, "Black", es, 730 + k * es * 1.25, seed=11 + k) for k, n in enumerate(SUPPORT)]
+end_when = Line(f"{DATE}  ·  {TIME}", "SemiBold", 40, 1000, tracking=0.04, color=WHITE)
+end_venue = Logo("bribon_lettering.png", 250, 1108)
+end_town = Line(TOWN, "SemiBold", 30, 1212, tracking=0.5, color=WHITE)
 
 DECODE = BEAT  # letters switch on over one beat
 
@@ -182,6 +211,10 @@ rng = np.random.default_rng(7)
 GRAIN = [rng.normal(0, 3.5, (H, W, 1)).astype(np.float32) for _ in range(6)]
 yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
 VIGNETTE = (1 - 0.16 * (((xx - W / 2) / (W / 2)) ** 2 + ((yy - H / 2) / (H / 2)) ** 2) / 2)[..., None]
+
+
+# soft dark band behind the info block (hazy footage there)
+SCRIM = (1 - 0.34 * np.exp(-(((np.arange(H, dtype=np.float32) - 640) / 300) ** 2)))[:, None, None]
 
 
 def exposure(t):
@@ -203,10 +236,10 @@ def render_frame(bg, i):
         a = 0.88 * np.exp(-(t - RIFF2) / 0.18)
         f += (HAZE - f) * a
 
-    # frame stamps (brand anchor) — whole piece until the end card
-    s_a = 0.9 * (1 - ramp(t, RIFF2, 0.2))
-    comp(f, stamp_top, s_a, ramp(t, 0.15, 0.6))
-    comp(f, stamp_bot, s_a, ramp(t, 0.3, 0.6))
+    # frame stamps (official logos) — until the end card; venue stamp yields to the big venue line
+    s_a = 0.92 * ramp(t, 0.1, 0.4) * (1 - ramp(t, RIFF2, 0.2))
+    stamp_top.comp(f, s_a)
+    stamp_bot.comp(f, s_a * (1 - ramp(t, INFO3, 0.15)))
 
     # intro + build marquees
     if t < SUCK:
@@ -217,29 +250,34 @@ def render_frame(bg, i):
         mq_top.comp(f, t, a)
         mq_bot.comp(f, t, a)
 
-    # lineup — one name per bar, stack completes on the riff
-    if DROP <= t < INFO1:
-        out = 1 - ramp(t, INFO1 - 0.15, 0.15)
-        fl = flicker(t, RIFF1)
-        for ln, t0 in zip(names, name_t):
-            comp(f, ln, out * fl, ramp(t, t0, DECODE))
+    # JUST2 alone on the drop (2 bars of his front-view footage)
+    if DROP <= t < NAME3:
+        head_big.comp(f, ramp(t, DROP, DECODE / 2))
 
-    # date / time / venue — one per bar, marquees return underneath
+    # full bill: JUST2 on top, support acts decode in, stack flickers on the riff
+    if NAME3 <= t < INFO1:
+        out = (1 - ramp(t, INFO1 - 0.15, 0.15)) * flicker(t, RIFF1)
+        head_small.comp(f, out)
+        for ln, t0 in zip(support, support_t):
+            comp(f, ln, out, ramp(t, t0, DECODE))
+
+    # date / time / venue — one per bar
     if INFO1 <= t < RIFF2:
-        mq_top_info.comp(f, t, 0.38)
+        f *= 1 - (1 - SCRIM) * ramp(t, INFO1, 0.1) * (1 - ramp(t, RIFF2 - 0.1, 0.1))
         comp(f, info_date, 1.0, ramp(t, INFO1, DECODE))
         comp(f, info_time, 1.0, ramp(t, INFO2, DECODE))
-        comp(f, info_venue, 1.0, ramp(t, INFO3, DECODE))
+        info_venue.comp(f, ramp(t, INFO3, DECODE / 2))
         comp(f, info_town, 1.0, ramp(t, INFO3 + BEAT, DECODE))
 
     # end card — doubles as the poster (last frame)
     if t >= RIFF2:
-        comp(f, end_org, flicker(t, LAYER), ramp(t, RIFF2 + 0.05, DECODE))
-        for k, ln in enumerate(end_names):
-            comp(f, ln, 1.0, ramp(t, RIFF2 + BEAT + k * BEAT / 2, DECODE))
-        comp(f, end_date, 1.0, ramp(t, RIFF2 + 3 * BEAT, DECODE))
-        comp(f, end_time, 1.0, ramp(t, RIFF2 + 3.5 * BEAT, DECODE))
-        comp(f, end_venue, 1.0, ramp(t, RIFF2 + 4 * BEAT, DECODE))
+        end_org.comp(f, ramp(t, RIFF2 + 0.05, DECODE / 2) * flicker(t, LAYER))
+        end_head.comp(f, ramp(t, RIFF2 + BEAT, DECODE / 2))
+        for k, ln in enumerate(end_support):
+            comp(f, ln, 1.0, ramp(t, RIFF2 + 1.5 * BEAT + k * BEAT / 2, DECODE))
+        comp(f, end_when, 1.0, ramp(t, RIFF2 + 3 * BEAT, DECODE))
+        end_venue.comp(f, ramp(t, RIFF2 + 3.5 * BEAT, DECODE / 2))
+        comp(f, end_town, 1.0, ramp(t, RIFF2 + 4 * BEAT, DECODE))
 
     f *= VIGNETTE
     f += GRAIN[(i // 2) % len(GRAIN)]
