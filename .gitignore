@@ -3,3 +3,5 @@ card_*.png
 filter.txt
 inter/
 *.raw
+warm_24oct/video/track.wav
+warm_24oct/video/*.mp4.part
