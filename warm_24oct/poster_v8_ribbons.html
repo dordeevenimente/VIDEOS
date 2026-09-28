@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="fonts.css" rel="stylesheet">
+<style>
+:root{--cream:#FFFFFF;--ember:#FF5A1F}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;background:#000;overflow:hidden}
+.p{position:relative;width:1080px;height:1350px;background:url(bg_ribbons.jpg) center/cover;color:var(--cream);font-family:'Archivo';
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding:110px 120px}
+/* safe zone guide (debug) */
+.p::before{content:"";position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse 48% 16% at 50% 60%,rgba(0,0,0,.55),rgba(0,0,0,0) 100%);pointer-events:none}
+.p>*{position:relative;z-index:2}
+.p>.photo{position:absolute;z-index:1;left:-131px;top:-35px;width:1466px;height:2206px;background:url(photos/just2.jpg) center/cover;
+  -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,0) 6%,#000 11%,#000 31%,rgba(0,0,0,.55) 38%,rgba(0,0,0,0) 45%),radial-gradient(ellipse 30% 24% at 46% 24%,#000 62%,rgba(0,0,0,0) 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect;filter:contrast(1.06) saturate(.95)}
+.p>.halo{position:absolute;z-index:1;inset:0;background:radial-gradient(ellipse 44% 36% at 50% 36%,rgba(0,0,0,.9) 40%,rgba(0,0,0,0) 100%)}
+.p>.head{position:absolute;top:110px;left:0;right:0;display:flex;justify-content:center}
+.p>.mid{position:absolute;left:0;right:0;top:768px;transform:translateY(-50%)}
+.p>.foot{position:absolute;bottom:112px;left:50%;transform:translateX(-50%)}
+.guide{position:absolute;inset:110px 120px;border:1px dashed #0f0;display:none}
+.mono{font-family:'Space Mono';font-size:17px;letter-spacing:.14em;text-transform:uppercase}
+.logo{border:1px dashed rgba(242,232,218,.55);padding:12px 26px;font-stretch:125%;font-weight:800;font-size:40px;letter-spacing:.04em}
+.logo small{display:block;font-family:'Space Mono';font-weight:400;font-size:10px;letter-spacing:.16em;opacity:.6;margin-top:2px}
+.head{display:flex;flex-direction:column;align-items:center;gap:36px}
+.mid{display:flex;flex-direction:column;align-items:center;gap:78px}
+.date{font-stretch:125%;font-weight:800;font-size:30px;letter-spacing:.02em}
+.date span{font-family:'Space Mono';font-weight:400;font-size:17px;letter-spacing:.14em;opacity:.8;margin:0 14px;vertical-align:4px}
+.wlogo{width:250px;display:block}
+.lineup{display:flex;flex-direction:column;align-items:center;gap:16px}
+.lineup .j2{height:92px;display:block;margin-bottom:12px}
+.lineup .n{font-stretch:62%;font-weight:800;font-size:70px;line-height:.74;text-transform:uppercase;letter-spacing:-.005em}
+.lineup .sep{font-family:'Space Mono';font-size:15px;color:var(--cream);opacity:1;letter-spacing:.3em;margin:6px 0 8px}
+.time{display:flex;align-items:center;gap:26px;width:760px}
+.time b{font-stretch:125%;font-weight:300;font-size:54px}
+.time span{flex:1;height:1px;background:var(--cream);opacity:.55}
+.foot{display:flex;flex-direction:column;align-items:center;gap:10px}
+.foot b{font-weight:700;font-size:28px;letter-spacing:.01em}
+.logos{display:flex;gap:14px;margin-top:18px}
+.logos div{border:1px dashed rgba(242,232,218,.45);width:112px;height:46px;display:grid;place-items:center;font-size:10px;opacity:.7}
+.foot{gap:0;width:840px}
+.fdate{font-stretch:100%;font-weight:700;font-size:66px;letter-spacing:.005em;line-height:1;margin-bottom:34px}
+.fdate span{font-weight:300}
+.fvenue{display:flex;flex-direction:column;align-items:center;line-height:1;margin-bottom:26px}
+.fvenue b{font-stretch:80%;font-weight:700;font-size:40px;letter-spacing:.16em;padding-left:.16em}
+.fvenue i{font-style:normal;font-stretch:80%;font-weight:400;font-size:30px;letter-spacing:.01em;margin-top:2px}
+.frow,.faddr{display:flex;justify-content:center;gap:44px;width:100%;text-transform:uppercase}
+.frow{font-weight:600;font-size:18px;letter-spacing:.03em;margin-bottom:14px}
+.faddr{font-weight:500;font-size:23px;letter-spacing:.01em}
+.p{padding:120px 120px 118px}
+</style></head><body><div class="p"><div class="guide"></div>
+<div class="halo"></div>
+<div class="photo"></div>
+<div class="head"><img class="wlogo" src="logos/warm_white.png" alt="WARM"></div>
+<div class="mid"><div class="lineup">
+<img class="j2" src="logos/just2_white.png" alt="JUST2">
+<div class="n">Salvi Fernandez</div>
+<div class="n">Dani Corral</div>
+<div class="n">Lady Sasha</div>
+</div></div>
+<div class="foot">
+<div class="fvenue"><b>BRIBÓN</b><i>del puerto</i></div>
+<div class="fdate"><span>SÁB</span> 24 OCTUBRE</div>
+<div class="frow"><div>DESDE LAS 23:00H HASTA LAS 07:00H</div><div>INFO &amp; RESERVAS&nbsp;&nbsp;679 743 114</div></div>
+<div class="faddr"><div>PENÍNSULA DE CONTRADIQUE, 04720</div><div>AGUADULCE (ALMERÍA)</div></div>
+</div>
+</div></body></html>
