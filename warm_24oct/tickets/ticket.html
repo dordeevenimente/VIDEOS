@@ -1,0 +1,93 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="../fonts_poppins.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden;background:#200606}
+body{font-family:'Poppins',sans-serif;color:#fff;text-transform:uppercase}
+#bg{position:absolute;inset:0;background-size:cover;background-position:center}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,2,2,.25),rgba(15,2,2,0) 25%,rgba(15,2,2,.35) 55%,rgba(15,2,2,.75))}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.sh{text-shadow:0 2px 16px rgba(30,4,0,.6),0 1px 3px rgba(30,4,0,.4)}
+img.sh{filter:drop-shadow(0 2px 14px rgba(30,4,0,.5))}
+.warm{width:150px;flex:none}
+.region{position:relative;flex:1;width:100%;min-height:0}
+.photo{position:absolute;inset:0;background:url(../photos/just2_cutout.png) no-repeat;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 70%,rgba(0,0,0,0) 100%);filter:drop-shadow(0 0 30px rgba(20,0,0,.5))}
+.j2wrap{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center}
+.j2{height:78px}
+.sg{font-weight:500;font-size:15px;letter-spacing:.4em;padding-left:.4em;margin-top:10px}
+.lu{font-weight:600;font-size:20px;letter-spacing:.08em;margin-top:14px;flex:none}
+.lu em{font-style:normal;opacity:.55;margin:0 12px}
+/* ticket card */
+.card{flex:none;width:780px;margin-top:34px;border:1.5px solid rgba(255,255,255,.75);background:rgba(22,4,4,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:34px 40px 30px;position:relative}
+.card .tname{font-weight:600;font-size:24px;letter-spacing:.3em;padding-left:.3em}
+.card .price{font-weight:800;font-size:210px;line-height:.9;letter-spacing:-.04em;margin:14px 0 6px}
+.card .price sup{font-size:.42em;font-weight:600;vertical-align:.95em;margin-left:6px;letter-spacing:0}
+.card .dash{border-top:1.5px dashed rgba(255,255,255,.45);margin:18px -40px 20px}
+.card .until{font-weight:600;font-size:24px;letter-spacing:.08em}
+.card .note{font-weight:500;font-size:15px;letter-spacing:.3em;padding-left:.3em;margin-top:10px;opacity:.85}
+.foot{flex:none;margin-top:30px}
+.foot .ev{font-weight:600;font-size:20px;letter-spacing:.1em}
+.foot .ev em{font-style:normal;opacity:.55;margin:0 10px}
+.foot .cta{display:inline-block;margin-top:14px;font-weight:700;font-size:17px;letter-spacing:.3em;padding:12px 28px 12px calc(28px + .3em);background:#fff;color:#5a0f0a;text-shadow:none}
+/* ladder */
+.ltitle{font-weight:600;font-size:26px;letter-spacing:.4em;padding-left:.4em;margin-top:30px;flex:none}
+.ladder{flex:none;width:820px;margin-top:22px;display:flex;flex-direction:column;gap:14px}
+.row{display:flex;align-items:center;justify-content:space-between;padding:20px 30px;border:1.5px solid rgba(255,255,255,.5);background:rgba(22,4,4,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-align:left}
+.row .n{font-weight:700;font-size:24px;letter-spacing:.06em}
+.row .d{font-weight:500;font-size:16px;letter-spacing:.12em;opacity:.8;margin-top:4px}
+.row .p{font-weight:800;font-size:56px;letter-spacing:-.02em;line-height:1}
+.row .tag{display:inline-block;font-weight:700;font-size:11px;letter-spacing:.25em;padding:4px 10px;margin-left:12px;vertical-align:4px;background:#5a0f0a;color:#fff}
+.row.on{background:#fff;border-color:#fff;color:#5a0f0a;text-shadow:none}
+.row.off{opacity:.62}
+.row.gone .p,.row.gone .n{text-decoration:line-through;text-decoration-thickness:3px}
+/* urgency / sold out */
+.big{flex:none;font-weight:800;font-size:132px;line-height:.92;letter-spacing:-.03em;margin-top:40px}
+.sub{flex:none;font-weight:600;font-size:30px;letter-spacing:.1em;margin-top:26px}
+.sub b{font-weight:800}
+.chip{flex:none;display:inline-block;margin-top:22px;font-weight:600;font-size:22px;letter-spacing:.14em;padding:12px 26px;border:1.5px solid rgba(255,255,255,.8)}
+.stamp{flex:none;position:relative;margin:50px 0 34px}
+.stamp .was{font-weight:800;font-size:190px;line-height:.9;letter-spacing:-.04em;opacity:.5;text-decoration:line-through;text-decoration-thickness:10px}
+.stamp .so{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-9deg);font-weight:800;font-size:78px;letter-spacing:.02em;padding:4px 26px;border:5px solid #fff;white-space:nowrap;background:rgba(90,15,10,.55)}
+</style></head><body>
+<div id="bg"></div>
+<div class="wrap" id="w"></div>
+<script>
+const q=new URLSearchParams(location.search);
+const story=q.get('f')==='story', kind=q.get('k'), tier=q.get('t');
+const W=1080,H=story?1920:1350;
+document.body.style.width=W+'px';document.body.style.height=H+'px';
+document.getElementById('bg').style.backgroundImage=`url(../${story?'bg_swirl_story.jpg':'bg_swirl.jpg'})`;
+const T={
+ promo:{name:'Entrada Promocional',p:8,until:'Hasta el vie 2 oct · 23:59',range:'29 sep – 2 oct',note:'Plazas limitadas',next:'g1'},
+ g1:{name:'Entrada General 1',p:10,until:'Hasta el sáb 10 oct · 23:59',range:'3 – 10 oct',note:'Plazas limitadas',next:'g2'},
+ g2:{name:'Entrada General 2',p:12,until:'Hasta el mié 21 oct · 23:59',range:'11 – 21 oct',note:'Plazas limitadas',next:'g3'},
+ g3:{name:'Entrada General 3',p:16,until:'22 – 24 oct · hasta agotar',range:'22 – 24 oct',note:'Últimas entradas',next:null}};
+const order=['promo','g1','g2','g3'];
+const w=document.getElementById('w');
+w.style.padding=story?'250px 90px 330px':'70px 90px 64px';
+const head=`<img class="warm sh" src="../logos/warm_white.png">`;
+const artist=(solid=true)=>`<div class="region"><div class="photo" id="ph"></div><div class="j2wrap"><img class="j2 sh" src="../logos/just2_white.png"><div class="sg sh">Solid Grooves</div></div></div>
+ <div class="lu sh">Salvi Fernandez<em>·</em>Dani Corral</div>`;
+const foot=`<div class="foot sh"><div class="ev">Sáb 24 Octubre<em>·</em>Bribón del Puerto</div><div class="cta">Entradas · Link en bio</div></div>`;
+const eur=v=>`${v}<sup>€</sup>`;
+let html='';
+if(kind==='tier'){const t=T[tier];
+ html=head+artist()+`<div class="card sh"><div class="tname">${t.name}</div><div class="price">${eur(t.p)}</div><div class="dash"></div><div class="until">${t.until}</div><div class="note">${t.note}</div></div>`+foot;}
+else if(kind==='ladder'){const cur=order.indexOf(tier);
+ html=head+artist()+`<div class="ltitle sh">Entradas</div><div class="ladder">`+order.map((k,i)=>{const t=T[k];
+  const cls=i<cur?'row gone off':i===cur?'row on':'row off';
+  return `<div class="${cls}"><div><div class="n">${t.name.replace('Entrada ','')}${i===cur?'<span class="tag">A la venta</span>':''}</div><div class="d">${t.range}</div></div><div class="p">${t.p}€</div></div>`}).join('')+`</div>`+foot;}
+else if(kind==='last'){const t=T[tier],n=T[t.next];
+ html=head+artist()+`<div class="big sh">Últimas<br>horas</div><div class="sub sh">${t.name} a <b>${t.p}€</b></div><div class="chip sh">Hoy 23:59 sube a ${n.p}€</div>`+foot;}
+else if(kind==='soldout'){const t=T[tier],n=T[t.next];
+ html=head+artist()+`<div class="stamp sh"><div class="was">${t.p}€</div><div class="so">Sold out</div></div><div class="sub sh">${t.name} agotada</div><div class="chip sh">Ya a la venta: ${n.name.replace('Entrada ','')} · ${n.p}€</div>`+foot;}
+w.innerHTML=html;
+// fit the cut-out portrait into the flexible region (head + shoulders, centred on the face)
+const r=document.querySelector('.region'),ph=document.getElementById('ph');
+if(r){const rh=r.clientHeight,rw=r.clientWidth;const s=rh/820;
+ ph.style.backgroundSize=`${1333*s}px ${2000*s}px`;
+ ph.style.backgroundPosition=`${rw/2-655*s}px ${-150*s}px`;
+ ph.style.webkitMaskImage=`linear-gradient(180deg,#000 0%,#000 ${Math.max(40,100-9000/rh)}%,rgba(0,0,0,0) 100%)`;}
+</script>
+</body></html>
