@@ -19,9 +19,9 @@ def over(img,l,al,dy=0):
     x0,y0,x1,y1=l['box']; y0+=dy; y1+=dy
     img[y0:y1,x0:x1]=img[y0:y1,x0:x1]*(1-l['a']*al)+l['rgb']*al
 ENDT=D-7.5; T0=1.2; order=['s1','s3','s4']
-if (ENDT-T0)/3>8: order=order*2          # long clips: run the three cards twice
 SP=(ENDT-T0)/len(order)
 scenes=[(k,T0+i*SP) for i,k in enumerate(order)]
+VIS=min(SP,6.5)                  # each card shows once; long clips get clean footage between cards
 yy=np.linspace(0,1,H)[:,None,None].astype(np.float32)
 grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centred text
 gtop=1-0.35*np.clip(((0.2 if STORY else 0.16)-yy)/0.16,0,1)             # soft top for the WARM logo
@@ -46,7 +46,7 @@ for fi,fr in enumerate(rd):
     img=img*(base_mask*(1-e_end)+0.34*e_end)
     over(img,L['warm'],ease((t-0.3)/0.8))
     for k,t0 in scenes:
-        a=ease((t-t0)/0.6)*(1-ease((t-(t0+SP-0.5))/0.45))
+        a=ease((t-t0)/0.6)*(1-ease((t-(t0+VIS-0.5))/0.45))
         if a>0: over(img,L[k],a,int(round(16*(1-ease((t-t0)/0.6)))))
     if e_end>0: over(img,L['end'],e_end,int(round(16*(1-e_end))))
     p.stdin.write((np.clip(img,0,1)*255+0.5).astype(np.uint8).tobytes())
