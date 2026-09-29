@@ -18,8 +18,10 @@ def over(img,l,al,dy=0):
     if al<=0: return
     x0,y0,x1,y1=l['box']; y0+=dy; y1+=dy
     img[y0:y1,x0:x1]=img[y0:y1,x0:x1]*(1-l['a']*al)+l['rgb']*al
-ENDT=D-7.5; T0=1.2; SP=(ENDT-T0)/3
-scenes=[('s1',T0),('s3',T0+SP),('s4',T0+2*SP)]
+ENDT=D-7.5; T0=1.2; order=['s1','s3','s4']
+if (ENDT-T0)/3>8: order=order*2          # long clips: run the three cards twice
+SP=(ENDT-T0)/len(order)
+scenes=[(k,T0+i*SP) for i,k in enumerate(order)]
 yy=np.linspace(0,1,H)[:,None,None].astype(np.float32)
 grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centred text
 gtop=1-0.35*np.clip(((0.2 if STORY else 0.16)-yy)/0.16,0,1)             # soft top for the WARM logo
@@ -33,8 +35,10 @@ p=subprocess.Popen(cmd,stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
 for fi,fr in enumerate(rd):
     t=fi/FPS
     im=Image.frombytes('RGB',(sw,sh),fr)
-    if STORY:
+    if sw/sh > W/H+1e-3:
         cw=int(sh*W/H); x0=(sw-cw)//2; im=im.crop((x0,0,x0+cw,sh))
+    elif sw/sh < W/H-1e-3:
+        ch=int(sw*H/W); y0=int((sh-ch)*0.45); im=im.crop((0,y0,sw,y0+ch))
     im=im.resize((W,H),Image.LANCZOS)
     if up: im=im.filter(ImageFilter.UnsharpMask(2.2,60,2))
     img=np.asarray(im,np.float32)/255
