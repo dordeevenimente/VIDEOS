@@ -1,0 +1,12 @@
+/* Poppins everywhere, so every text block can be re-typed in Canva with the same font */
+.p,.p *{font-family:'Poppins',sans-serif!important;font-stretch:normal!important}
+.lineup{gap:4px!important}
+.lineup .j2{margin-bottom:10px!important}
+.lineup .label{font-weight:500!important;font-size:17px!important;letter-spacing:.38em!important;padding-left:.38em!important;margin:-6px 0 14px!important}
+.lineup .n{font-weight:700!important;font-size:56px!important;line-height:1.02!important;letter-spacing:-.015em!important}
+.fvenue b{font-weight:600!important;font-size:32px!important;letter-spacing:.2em!important;padding-left:.2em!important}
+.fvenue i{font-weight:400!important;font-size:24px!important;margin-top:0!important}
+.fdate{font-weight:700!important;font-size:58px!important;letter-spacing:-.01em!important;margin-bottom:22px!important}
+.fdate span{font-weight:300!important}
+.finfo .l1{font-weight:600!important;font-size:22px!important;letter-spacing:.06em!important}
+.finfo .l2,.finfo .l3{font-weight:500!important;font-size:16px!important;letter-spacing:.07em!important}
