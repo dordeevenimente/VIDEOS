@@ -1,14 +1,16 @@
 import numpy as np, subprocess, imageio_ffmpeg, sys
 from PIL import Image, ImageFilter
 src,out=sys.argv[1],sys.argv[2]
-W,H=1080,1350
+STORY=len(sys.argv)>3 and sys.argv[3]=='story'
+W,H=(1080,1920) if STORY else (1080,1350)
+PRE='ovS_' if STORY else 'ov_'
 ff=imageio_ffmpeg.get_ffmpeg_exe()
 rd=imageio_ffmpeg.read_frames(src); meta=next(rd)
 FPS=meta['fps']; D=meta['duration']; sw,sh=meta['size']
 NF=int(D*FPS)
 def lay(k):
-    a=np.asarray(Image.open(f'ov_{k}.png').convert('RGBA'),np.float32)/255
-    x0,y0,x1,y1=Image.open(f'ov_{k}.png').getchannel('A').getbbox(); y0=max(y0-24,0); y1=min(y1+4,H)
+    a=np.asarray(Image.open(f'{PRE}{k}.png').convert('RGBA'),np.float32)/255
+    x0,y0,x1,y1=Image.open(f'{PRE}{k}.png').getchannel('A').getbbox(); y0=max(y0-24,0); y1=min(y1+4,H)
     c=a[y0:y1,x0:x1]; return dict(rgb=c[...,:3]*c[...,3:],a=c[...,3:],box=(x0,y0,x1,y1))
 L={k:lay(k) for k in ['warm','s1','s3','s4','end']}
 def ease(x): x=min(max(x,0),1); return 1-(1-x)**3
@@ -20,7 +22,7 @@ ENDT=D-7.5; T0=1.2; SP=(ENDT-T0)/3
 scenes=[('s1',T0),('s3',T0+SP),('s4',T0+2*SP)]
 yy=np.linspace(0,1,H)[:,None,None].astype(np.float32)
 grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centred text
-gtop=1-0.35*np.clip((0.16-yy)/0.16,0,1)             # soft top for the WARM logo
+gtop=1-0.35*np.clip(((0.2 if STORY else 0.16)-yy)/0.16,0,1)             # soft top for the WARM logo
 base_mask=(grad*gtop).astype(np.float32)
 up=sw<700
 cmd=[ff,'-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-i',src,
@@ -30,7 +32,10 @@ cmd=[ff,'-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-
 p=subprocess.Popen(cmd,stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
 for fi,fr in enumerate(rd):
     t=fi/FPS
-    im=Image.frombytes('RGB',(sw,sh),fr).resize((W,H),Image.LANCZOS)
+    im=Image.frombytes('RGB',(sw,sh),fr)
+    if STORY:
+        cw=int(sh*W/H); x0=(sw-cw)//2; im=im.crop((x0,0,x0+cw,sh))
+    im=im.resize((W,H),Image.LANCZOS)
     if up: im=im.filter(ImageFilter.UnsharpMask(2.2,60,2))
     img=np.asarray(im,np.float32)/255
     e_end=ease((t-ENDT)/0.9)
