@@ -10,16 +10,16 @@ def lay(k):
     a=np.asarray(Image.open(f'ov_{k}.png').convert('RGBA'),np.float32)/255
     x0,y0,x1,y1=Image.open(f'ov_{k}.png').getchannel('A').getbbox(); y0=max(y0-24,0); y1=min(y1+4,H)
     c=a[y0:y1,x0:x1]; return dict(rgb=c[...,:3]*c[...,3:],a=c[...,3:],box=(x0,y0,x1,y1))
-L={k:lay(k) for k in ['warm','s1','s2','s3','s4','end']}
+L={k:lay(k) for k in ['warm','s1','s3','s4','end']}
 def ease(x): x=min(max(x,0),1); return 1-(1-x)**3
 def over(img,l,al,dy=0):
     if al<=0: return
     x0,y0,x1,y1=l['box']; y0+=dy; y1+=dy
     img[y0:y1,x0:x1]=img[y0:y1,x0:x1]*(1-l['a']*al)+l['rgb']*al
-ENDT=D-7.5; T0=1.2; SP=(ENDT-T0)/4
-scenes=[('s1',T0),('s2',T0+SP),('s3',T0+2*SP),('s4',T0+3*SP)]
+ENDT=D-7.5; T0=1.2; SP=(ENDT-T0)/3
+scenes=[('s1',T0),('s3',T0+SP),('s4',T0+2*SP)]
 yy=np.linspace(0,1,H)[:,None,None].astype(np.float32)
-grad=1-0.6*np.clip((yy-0.6)/0.4,0,1)**1.3          # lower-third support
+grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centred text
 gtop=1-0.35*np.clip((0.16-yy)/0.16,0,1)             # soft top for the WARM logo
 base_mask=(grad*gtop).astype(np.float32)
 up=sw<700

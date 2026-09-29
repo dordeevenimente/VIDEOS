@@ -11,7 +11,7 @@ img.sh{filter:drop-shadow(0 2px 16px rgba(0,0,0,.5))}
 /* persistent WARM */
 #warm img{position:absolute;top:96px;left:50%;transform:translateX(-50%);width:170px}
 /* lower-third scenes: anchored at y≈1030 */
-.lt{bottom:170px}
+.lt{top:50%;transform:translateY(-50%)}
 .j2{height:104px}
 .label{font-weight:500;font-size:19px;letter-spacing:.4em;padding-left:.4em;margin-top:18px}
 .n{font-weight:700;font-size:64px;line-height:1.04;letter-spacing:-.015em}
@@ -24,8 +24,8 @@ img.sh{filter:drop-shadow(0 2px 16px rgba(0,0,0,.5))}
 .place{font-weight:500;font-size:22px;letter-spacing:.14em;margin-top:22px;padding-left:.14em}
 /* end card: same stack as the poster */
 #end .mid{top:540px;transform:translateY(-50%)}
-#end .j2{height:92px;margin-bottom:10px}
-#end .label{font-size:17px;letter-spacing:.38em;margin:-6px 0 14px}
+#end .j2{height:100px}
+#end .label{font-size:18px;letter-spacing:.4em;margin:16px 0 64px}
 #end .n{font-size:56px;line-height:1.02}
 #end .foot{bottom:96px}
 .fvenue b{display:block;font-weight:600;font-size:32px;letter-spacing:.2em;padding-left:.2em;line-height:1}
@@ -38,16 +38,14 @@ img.sh{filter:drop-shadow(0 2px 16px rgba(0,0,0,.5))}
 </style></head><body>
 <div class="L" id="warm"><img class="sh" src="../logos/warm_white.png"></div>
 <div class="L" id="s1"><div class="c lt"><img class="j2 sh" src="../logos/just2_white.png"><div class="label sh">Solid Grooves</div></div></div>
-<div class="L" id="s2"><div class="c lt sh"><div class="n">Salvi Fernandez</div><div class="n">Dani Corral</div><div class="n">Lady Sasha</div></div></div>
 <div class="L" id="s3"><div class="c lt sh"><div class="date"><span>SÁB</span> 24 OCTUBRE</div><div class="time">23:00H <em>—</em> 07:00H</div></div></div>
 <div class="L" id="s4"><div class="c lt sh"><div class="venue"><b>BRIBÓN</b><i>del puerto</i></div><div class="place">Aguadulce · Almería</div></div></div>
-<div class="L" id="end">
- <div class="c mid sh"><img class="j2 sh" src="../logos/just2_white.png"><div class="label">Solid Grooves</div>
-  <div class="n">Salvi Fernandez</div><div class="n">Dani Corral</div><div class="n">Lady Sasha</div></div>
- <div class="c foot sh"><div class="fvenue"><b>BRIBÓN</b><i>del puerto</i></div>
+<div class="L" id="end"><div class="c lt sh">
+  <img class="j2 sh" src="../logos/just2_white.png"><div class="label">Solid Grooves</div>
+  <div class="fvenue"><b>BRIBÓN</b><i>del puerto</i></div>
   <div class="fdate"><span>SÁB</span> 24 OCTUBRE</div>
   <div class="l1">23:00H <em>—</em> 07:00H</div>
   <div class="l2">Península de Contradique, 04720 <em>·</em> Aguadulce (Almería)</div>
-  <div class="l3">Info &amp; Reservas <em>·</em> 679 743 114</div></div>
-</div>
+  <div class="l3">Info &amp; Reservas <em>·</em> 679 743 114</div>
+</div></div>
 </body></html>
