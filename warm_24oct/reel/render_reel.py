@@ -8,6 +8,9 @@ ff=imageio_ffmpeg.get_ffmpeg_exe()
 rd=imageio_ffmpeg.read_frames(src); meta=next(rd)
 FPS=meta['fps']; D=meta['duration']; sw,sh=meta['size']
 NF=int(D*FPS)
+FILL=sw>sh            # landscape source: keep the full frame, blurred fill above/below
+STEP=2 if FPS>=50 else 1
+OFPS=FPS/STEP
 def lay(k):
     a=np.asarray(Image.open(f'{PRE}{k}.png').convert('RGBA'),np.float32)/255
     x0,y0,x1,y1=Image.open(f'{PRE}{k}.png').getchannel('A').getbbox(); y0=max(y0-24,0); y1=min(y1+4,H)
@@ -27,15 +30,22 @@ grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centr
 gtop=1-0.35*np.clip(((0.2 if STORY else 0.16)-yy)/0.16,0,1)             # soft top for the WARM logo
 base_mask=(grad*gtop).astype(np.float32)
 up=sw<700
-cmd=[ff,'-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(FPS),'-i','-','-i',src,
+cmd=[ff,'-y','-f','rawvideo','-pix_fmt','rgb24','-s',f'{W}x{H}','-r',str(OFPS),'-i','-','-i',src,
      '-map','0:v','-map','1:a?','-af',f'afade=t=out:st={D-0.9:.3f}:d=0.9',
      '-c:v','libx264','-preset','slow','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',
      '-c:a','aac','-b:a','256k','-shortest',out]
 p=subprocess.Popen(cmd,stdin=subprocess.PIPE,stderr=subprocess.DEVNULL)
 for fi,fr in enumerate(rd):
     t=fi/FPS
+    if STEP>1 and fi%STEP: continue
     im=Image.frombytes('RGB',(sw,sh),fr)
-    if sw/sh > W/H+1e-3:
+    if FILL:
+        fh=int(sh*W/sw); fg=im.resize((W,fh),Image.LANCZOS)
+        cw=int(sh*W/H); x0=(sw-cw)//2
+        bgi=im.crop((x0,0,x0+cw,sh)).resize((W//8,H//8),Image.BILINEAR).filter(ImageFilter.GaussianBlur(3)).resize((W,H),Image.BICUBIC)
+        bgi=Image.eval(bgi,lambda v:int(v*0.55))
+        bgi.paste(fg,(0,(H-fh)//2)); im=bgi
+    elif sw/sh > W/H+1e-3:
         cw=int(sh*W/H); x0=(sw-cw)//2; im=im.crop((x0,0,x0+cw,sh))
     elif sw/sh < W/H-1e-3:
         ch=int(sw*H/W); y0=int((sh-ch)*0.45); im=im.crop((0,y0,sw,y0+ch))
