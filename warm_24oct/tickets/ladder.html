@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="../fonts_poppins.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden;background:#200606}
+body{width:1080px;height:1350px;font-family:'Poppins',sans-serif;color:#fff;text-transform:uppercase}
+#bg{position:absolute;inset:0;background:url(../bg_swirl.jpg) center/cover}
+#bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,2,2,.2),rgba(15,2,2,0) 22%,rgba(15,2,2,.35) 48%,rgba(15,2,2,.8) 100%)}
+.wrap{position:absolute;inset:0;padding:62px 90px 58px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.sh{text-shadow:0 2px 16px rgba(30,4,0,.6),0 1px 3px rgba(30,4,0,.4)}
+img.sh{filter:drop-shadow(0 2px 14px rgba(30,4,0,.5))}
+.warm{width:140px;flex:none}
+.region{position:relative;flex:1;width:100%;min-height:0}
+.photo{position:absolute;inset:0;background:url(../photos/just2_cutout.png) no-repeat;filter:drop-shadow(0 0 30px rgba(20,0,0,.5))}
+.j2wrap{position:absolute;left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center}
+.j2{height:74px}
+.sg{font-weight:500;font-size:14px;letter-spacing:.4em;padding-left:.4em;margin-top:9px}
+.lu{flex:none;font-weight:600;font-size:19px;letter-spacing:.08em;margin-top:12px}
+.lu em{font-style:normal;opacity:.55;margin:0 12px}
+
+.kicker{flex:none;margin-top:36px;font-weight:500;font-size:15px;letter-spacing:.45em;padding-left:.45em;opacity:.85}
+.hook{flex:none;font-weight:800;font-size:44px;letter-spacing:-.005em;line-height:1;margin-top:8px}
+
+.stairs{flex:none;display:flex;align-items:flex-end;gap:18px;margin-top:30px;height:372px}
+.tk{position:relative;width:206px;display:flex;flex-direction:column;align-items:center;padding:22px 10px 18px;
+  background:rgba(255,255,255,.09);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35);border-radius:10px}
+.tk .nm{font-weight:600;font-size:15px;letter-spacing:.22em;padding-left:.22em}
+.tk .pr{font-weight:800;font-size:84px;line-height:1;letter-spacing:-.04em;margin:auto 0}
+.tk .pr sup{font-size:.42em;font-weight:600;vertical-align:.95em;margin-left:3px;letter-spacing:0}
+.tk .perf{align-self:stretch;border-top:2px dashed rgba(255,255,255,.4);margin:0 4px 14px}
+.tk .dt{font-weight:600;font-size:15px;letter-spacing:.1em}
+.tk .st{font-weight:600;font-size:10.5px;letter-spacing:.26em;padding-left:.26em;margin-top:7px;opacity:.7}
+.tk.on{background:#fff;color:#5a0f0a;text-shadow:none;box-shadow:none;transform:translateY(-16px);
+  filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
+.tk.on .perf{border-color:rgba(90,15,10,.35)}
+.tk.on .st{opacity:1;color:#fff;background:#b3261e;padding:5px 10px 5px calc(10px + .26em);margin-top:9px}
+.badge{position:absolute;top:-15px;left:50%;transform:translateX(-50%);white-space:nowrap;font-weight:700;font-size:11px;letter-spacing:.24em;padding:6px 12px 6px calc(12px + .24em);background:#b3261e;color:#fff}
+
+.urg{flex:none;margin-top:30px;font-weight:600;font-size:18px;letter-spacing:.1em}
+.urg b{font-weight:800}
+.urg em{font-style:normal;opacity:.55;margin:0 10px}
+.foot{flex:none;margin-top:auto;padding-top:26px;display:flex;flex-direction:column;align-items:center}
+.ev{font-weight:600;font-size:18px;letter-spacing:.12em}
+.ev em{font-style:normal;opacity:.55;margin:0 10px}
+.cta{margin-top:14px;font-weight:800;font-size:19px;letter-spacing:.26em;padding:15px 34px 15px calc(34px + .26em);background:#fff;color:#5a0f0a;text-shadow:none;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+</style></head><body>
+<div id="bg"></div>
+<div class="wrap">
+ <img class="warm sh" src="../logos/warm_white.png">
+ <div class="region"><div class="photo" id="ph"></div>
+  <div class="j2wrap"><img class="j2 sh" src="../logos/just2_white.png"><div class="sg sh">Solid Grooves</div></div></div>
+ <div class="lu sh">Salvi Fernandez<em>·</em>Dani Corral</div>
+
+ <div class="kicker sh">Entradas</div>
+ <div class="hook sh">Cuanto antes, mejor precio</div>
+
+ <div class="stairs">
+  <div class="tk on" style="height:300px;--cut:66%"><div class="badge">● A la venta</div><div class="nm">Promo</div><div class="pr">8<sup>€</sup></div><div class="perf"></div><div class="dt">29 sep – 2 oct</div><div class="st">Plazas limitadas</div></div>
+  <div class="tk sh" style="height:324px;--cut:69%"><div class="nm">General 1</div><div class="pr">10<sup>€</sup></div><div class="perf"></div><div class="dt">3 – 10 oct</div><div class="st">Próximamente</div></div>
+  <div class="tk sh" style="height:348px;--cut:71%"><div class="nm">General 2</div><div class="pr">12<sup>€</sup></div><div class="perf"></div><div class="dt">11 – 21 oct</div><div class="st">Próximamente</div></div>
+  <div class="tk sh" style="height:372px;--cut:73%"><div class="nm">General 3</div><div class="pr">16<sup>€</sup></div><div class="perf"></div><div class="dt">22 – 24 oct</div><div class="st">Últimas</div></div>
+ </div>
+
+ <div class="urg sh"><b>8€</b> solo hasta el vie 2 oct · 23:59<em>·</em>Después 10€</div>
+ <div class="foot sh"><div class="ev">Sáb 24 Octubre<em>·</em>Bribón del Puerto<em>·</em>Aguadulce</div><div class="cta">Consigue tu entrada · Link en bio</div></div>
+</div>
+<script>
+const r=document.querySelector('.region'),ph=document.getElementById('ph');
+const rh=r.clientHeight,rw=r.clientWidth,s=rh/760;
+ph.style.backgroundSize=`${1333*s}px ${2000*s}px`;
+ph.style.backgroundPosition=`${rw/2-655*s}px ${-170*s}px`;
+ph.style.webkitMaskImage='linear-gradient(180deg,#000 0%,#000 62%,rgba(0,0,0,0) 100%)';
+</script>
+</body></html>
