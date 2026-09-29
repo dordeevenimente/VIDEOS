@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="../fonts_poppins.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1080px;height:1350px;background:transparent;overflow:hidden;font-family:'Poppins',sans-serif;color:#fff;text-transform:uppercase}
+.L{position:absolute;inset:0;display:none}
+.on{display:block}
+.sh{text-shadow:0 2px 18px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.35)}
+img.sh{filter:drop-shadow(0 2px 16px rgba(0,0,0,.5))}
+.c{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+/* persistent WARM */
+#warm img{position:absolute;top:96px;left:50%;transform:translateX(-50%);width:170px}
+/* lower-third scenes: anchored at y≈1030 */
+.lt{bottom:170px}
+.j2{height:104px}
+.label{font-weight:500;font-size:19px;letter-spacing:.4em;padding-left:.4em;margin-top:18px}
+.n{font-weight:700;font-size:64px;line-height:1.04;letter-spacing:-.015em}
+.date{font-weight:700;font-size:78px;letter-spacing:-.01em;line-height:1}
+.date span{font-weight:300}
+.time{font-weight:600;font-size:30px;letter-spacing:.06em;margin-top:18px}
+.time em,.l1 em,.l2 em,.l3 em{font-style:normal;opacity:.55;margin:0 12px}
+.venue b{display:block;font-weight:600;font-size:52px;letter-spacing:.2em;padding-left:.2em;line-height:1.1}
+.venue i{display:block;font-style:normal;font-weight:400;font-size:36px;text-transform:none;line-height:1.1}
+.place{font-weight:500;font-size:22px;letter-spacing:.14em;margin-top:22px;padding-left:.14em}
+/* end card: same stack as the poster */
+#end .mid{top:540px;transform:translateY(-50%)}
+#end .j2{height:92px;margin-bottom:10px}
+#end .label{font-size:17px;letter-spacing:.38em;margin:-6px 0 14px}
+#end .n{font-size:56px;line-height:1.02}
+#end .foot{bottom:96px}
+.fvenue b{display:block;font-weight:600;font-size:32px;letter-spacing:.2em;padding-left:.2em;line-height:1}
+.fvenue i{display:block;font-style:normal;font-weight:400;font-size:24px;text-transform:none;margin-bottom:22px}
+.fdate{font-weight:700;font-size:58px;letter-spacing:-.01em;line-height:1;margin-bottom:22px}
+.fdate span{font-weight:300}
+.l1{font-weight:600;font-size:22px;letter-spacing:.06em;margin-bottom:16px}
+.l2,.l3{font-weight:500;font-size:16px;letter-spacing:.07em;margin-bottom:10px}
+.l3{opacity:.85}
+</style></head><body>
+<div class="L" id="warm"><img class="sh" src="../logos/warm_white.png"></div>
+<div class="L" id="s1"><div class="c lt"><img class="j2 sh" src="../logos/just2_white.png"><div class="label sh">Solid Grooves</div></div></div>
+<div class="L" id="s2"><div class="c lt sh"><div class="n">Salvi Fernandez</div><div class="n">Dani Corral</div><div class="n">Lady Sasha</div></div></div>
+<div class="L" id="s3"><div class="c lt sh"><div class="date"><span>SÁB</span> 24 OCTUBRE</div><div class="time">23:00H <em>—</em> 07:00H</div></div></div>
+<div class="L" id="s4"><div class="c lt sh"><div class="venue"><b>BRIBÓN</b><i>del puerto</i></div><div class="place">Aguadulce · Almería</div></div></div>
+<div class="L" id="end">
+ <div class="c mid sh"><img class="j2 sh" src="../logos/just2_white.png"><div class="label">Solid Grooves</div>
+  <div class="n">Salvi Fernandez</div><div class="n">Dani Corral</div><div class="n">Lady Sasha</div></div>
+ <div class="c foot sh"><div class="fvenue"><b>BRIBÓN</b><i>del puerto</i></div>
+  <div class="fdate"><span>SÁB</span> 24 OCTUBRE</div>
+  <div class="l1">23:00H <em>—</em> 07:00H</div>
+  <div class="l2">Península de Contradique, 04720 <em>·</em> Aguadulce (Almería)</div>
+  <div class="l3">Info &amp; Reservas <em>·</em> 679 743 114</div></div>
+</div>
+</body></html>
