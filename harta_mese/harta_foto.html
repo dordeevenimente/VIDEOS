@@ -36,20 +36,23 @@
 
   /* bandă legendă în poză (varianta landscape) */
   .lg{left:0;right:0;bottom:0;height:192px;border-radius:0;border-width:1px 0 0;
-    display:grid;grid-template-columns:repeat(4,1fr) .9fr;padding:0 16px;background:rgba(6,6,10,.84)}
-  .lg > div{padding:34px 20px 0;border-right:1px solid rgba(255,255,255,.08)}
+    display:grid;grid-template-columns:repeat(5,1fr) 1.05fr;padding:0 10px;background:rgba(6,6,10,.84)}
+  .lg > div{padding:34px 16px 0;border-right:1px solid rgba(255,255,255,.08)}
   .lg > div:last-child{border-right:0}
-  .lg .k{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;letter-spacing:.2em}
+  .lg .k{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.12em;white-space:nowrap}
   .lg .sw{width:16px;height:16px;border-radius:50%;flex:none}
-  .lg .p{font-weight:800;font-size:36px;margin-top:9px;line-height:1}
-  .lg .s{font-size:13.5px;color:#cdc8d4;margin-top:8px;line-height:1.5}
+  .lg .p{font-weight:800;font-size:34px;margin-top:9px;line-height:1}
+  .lg .s{font-size:12.5px;color:#cdc8d4;margin-top:8px;line-height:1.5}
   .lg .rz{display:flex;flex-direction:column;justify-content:flex-start}
   .lg .rz span{font-size:10.5px;letter-spacing:.26em;color:var(--mute);font-weight:700}
-  .lg .rz b{font-size:29px;font-weight:800;letter-spacing:.06em;margin-top:10px}
+  .lg .rz b{font-size:25px;font-weight:800;letter-spacing:.06em;margin-top:10px}
   .lg .rz i{font-style:normal;font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:10px;font-weight:700}
   .sw.plat{background:radial-gradient(circle at 35% 30%,#fff,#d9dce2 45%,#80858f)}
   .sw.gold{background:radial-gradient(circle at 35% 30%,#ffe7a6,#e2b04a 50%,#8e6420)}
   .sw.bronze{background:radial-gradient(circle at 35% 30%,#f3c297,#c9803f 50%,#6d3d16)}
+  .sw.vip{background:radial-gradient(circle at 35% 30%,#e6d2ff,#b77cff 50%,#5e3596)}
+  .sw.bal{background:radial-gradient(circle at 35% 30%,#d7e0ff,#6f8cff 50%,#2e3f99)}
+  .c-vip{color:#c79bff} .c-bal{color:#8ea4ff}
   .sw.gold2{background:#15110a;border:2.5px solid #e2b04a}
   .sw.sofa{border-radius:4px;background:linear-gradient(180deg,#e7b394,#8a553d)}
   .c-plat{color:var(--plat)} .c-gold{color:var(--gold)} .c-bronze{color:var(--bronze)} .c-sofa{color:var(--sofa)}
@@ -79,7 +82,10 @@
   .pt div{font-weight:600;font-size:12px;letter-spacing:.3em;color:var(--mute);text-align:right;line-height:1.7}
   .pt div b{color:var(--ink)}
   .frame{position:relative;width:1080px;height:626px;overflow:hidden}
-  .pl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 48px 0}
+  .pl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 48px 0}
+  .pl .pz{display:flex;flex-direction:column;justify-content:center;border-color:rgba(226,176,74,.4)}
+  .pl .pz span{font-size:10.5px;letter-spacing:.24em;color:var(--mute);font-weight:700}
+  .pl .pz b{font-size:27px;font-weight:800;letter-spacing:.06em;margin-top:10px}
   .story .pl{grid-template-columns:repeat(2,1fr);gap:12px}
   .pl > div{border:1px solid #2a2833;border-radius:14px;padding:15px 15px 14px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
   .pl .k{display:flex;align-items:center;gap:9px;font-weight:700;font-size:12.5px;letter-spacing:.18em}
@@ -89,9 +95,9 @@
   .pf{margin:20px 48px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;color:var(--mute);font-weight:600}
   .pf b{color:var(--ink);font-size:20px;letter-spacing:.1em;font-weight:800;margin-left:12px}
 
-  .story .frame{height:758px}
-  .story #vstage{transform:translateX(-95px) scale(.86) !important}
-  .vert.story .vp{left:18px;width:420px;padding-left:120px}
+  .story .frame{height:652px}
+  .story #vstage{transform:translateX(-40px) scale(.74) !important}
+  .vert.story .vp{left:18px;width:360px;padding-left:60px}
   .story .pl .p{font-size:38px} .story .pl .s{font-size:15px} .story .pl .k{font-size:15px}
   .story .pl > div{padding:22px 22px 20px}
   .vp,.vb{display:none}
@@ -100,8 +106,8 @@
     background:linear-gradient(180deg,rgba(7,7,11,.0),#07070b 8%)}
   .vp h2{font-weight:800;font-size:30px;letter-spacing:.06em;line-height:1.1}
   .vp h2 span{display:block;color:var(--gold);font-size:17px;letter-spacing:.3em;margin-top:6px}
-  .vp ul{list-style:none;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:grid;gap:11px}
-  .vp li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px;letter-spacing:.14em}
+  .vp ul{list-style:none;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);display:grid;gap:8px}
+  .vp li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;letter-spacing:.14em}
   .vp .sw{width:18px;height:18px;border-radius:50%}
   .vert .page{justify-content:center}
   .vert .pl .p{font-size:33px} .vert .pl .s{font-size:13.5px} .vert .pl .k{font-size:13.5px}
@@ -128,6 +134,19 @@
     </defs>
 
 
+
+    <!-- BALCON (etaj, dreapta sus): VIP Balcony Sofa ×2 + Balcony Standing Table ×2 -->
+    <g>
+      <rect x="930" y="90" width="550" height="236" rx="18" fill="#8f7bff" opacity=".10"/>
+      <rect x="930" y="90" width="550" height="236" rx="18" fill="none" stroke="#a48cff" stroke-width="2.2" stroke-dasharray="7 6"/>
+      <line x1="1205" y1="78" x2="1205" y2="90" stroke="#a48cff" stroke-width="2"/>
+      <rect x="956" y="14" width="508" height="64" rx="16" fill="#0a0912" fill-opacity=".96" stroke="#a48cff" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="984" y="40" fill="#fff" font-weight="800" font-size="13" letter-spacing="4">BALCON · ETAJ</text>
+      <circle cx="990" cy="60" r="6" fill="#b77cff"/>
+      <text x="1002" y="64.5" fill="#e3d0ff" font-weight="700" font-size="12" letter-spacing="1.5">VIP BALCONY SOFA ×2 · 500€</text>
+      <circle cx="1234" cy="60" r="6" fill="#6f8cff"/>
+      <text x="1246" y="64.5" fill="#d3dcff" font-weight="700" font-size="12" letter-spacing="1.5">BALCONY TABLE ×2 · 250€</text>
+    </g>
     <!-- SCENA: platforma cu echipament din spate-stânga -->
     <g>
       <ellipse cx="535" cy="410" rx="120" ry="34" fill="#ff3b5c" opacity=".30" filter="url(#blur12)"/>
@@ -147,8 +166,8 @@
       <text x="792" y="533" fill="#150f04">GOLD · 250€</text>
 
       <line x1="514" y1="667" x2="1080" y2="667" stroke="url(#lGold)" stroke-width="3"/>
-      <rect x="704" y="649" width="172" height="32" rx="16" fill="#15110a" stroke="#e2b04a" stroke-width="1.8" filter="url(#shadow)"/>
-      <text x="790" y="670" fill="#f0c66a">GOLD · 200€</text>
+      <rect x="706" y="651" width="168" height="32" rx="16" fill="#e2b04a" filter="url(#shadow)"/>
+      <text x="790" y="672" fill="#150f04">GOLD · 250€</text>
     </g>
 
     <g id="marks" font-weight="800" text-anchor="middle"></g>
@@ -193,11 +212,13 @@
     <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
       <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
     <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
-      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>A doua linie, în fața scenei</div></div>
-    <div><div class="k"><span class="sw gold2"></span>GOLD</div><div class="p c-gold">200€</div>
-      <div class="s">Standing table<br>A treia linie, după ring</div></div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Linia a doua și a treia</div></div>
     <div><div class="k"><span class="sw sofa"></span>SOFA ×2</div><div class="p c-sofa">4–6 pers.</div>
       <div class="s">Canapea cu masă mică<br>Lângă DJ</div></div>
+    <div><div class="k"><span class="sw vip"></span>VIP BALCONY SOFA</div><div class="p c-vip">500€</div>
+      <div class="s">6 pers. · 2 sticle · 6 bilete<br>Balcon · 2 mese</div></div>
+    <div><div class="k"><span class="sw bal"></span>BALCONY TABLE</div><div class="p c-bal">250€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Balcon · 2 mese</div></div>
     <div class="rz"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b><i>DOR · LIVE CU FORMAȚIA</i></div>
   </div>
 </div>
@@ -212,20 +233,23 @@
   <div class="frame"><div class="stage" id="vstage" style="transform:scale(.703125)">
     <div class="vb"></div>
     <div class="glass vp"><h2>PLANTA BAJA<span>MAIN FLOOR</span></h2>
-      <ul><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD 250€</li>
-          <li><span class="sw gold2"></span>GOLD 200€</li><li><span class="sw sofa"></span>SOFA</li></ul></div>
+      <ul><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD</li>
+          <li><span class="sw sofa"></span>SOFA</li><li><span class="sw vip"></span>VIP BALCONY</li><li><span class="sw bal"></span>BALCONY</li></ul></div>
   </div></div>
   <div class="pl">
     <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
       <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
     <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
-      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>A doua linie, în fața scenei</div></div>
-    <div><div class="k"><span class="sw gold2"></span>GOLD</div><div class="p c-gold">200€</div>
-      <div class="s">Standing table<br>A treia linie, după ring</div></div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Linia a doua și a treia</div></div>
     <div><div class="k"><span class="sw sofa"></span>SOFA ×2</div><div class="p c-sofa">4–6 pers.</div>
       <div class="s">Canapea cu masă mică<br>Lângă DJ</div></div>
+    <div><div class="k"><span class="sw vip"></span>VIP BALCONY SOFA</div><div class="p c-vip">500€</div>
+      <div class="s">6 pers. · 2 sticle · 6 bilete<br>Balcon · 2 mese</div></div>
+    <div><div class="k"><span class="sw bal"></span>BALCONY TABLE</div><div class="p c-bal">250€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Balcon · 2 mese</div></div>
+    <div class="pz"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b></div>
   </div>
-  <div class="pf"><span>INFORMACIÓN Y RESERVAS<b>679 743 114</b></span><span>DOR · LIVE CU FORMAȚIA</span></div>
+  <div class="pf"><span>DOR · LIVE CU FORMAȚIA</span><span>BOGDAN DLP · 9 OCTUBRE</span></div>
 </div>
 
 <script>
@@ -238,7 +262,7 @@
   const rows = [
     { kind: 'plat',  y: 442, xs: [553, 613, 674, 736, null, 896, 957, 1021] },
     { kind: 'gold',  y: 555, xs: [540, 616, 689, 763, 833, 905, 976, 1046] },
-    { kind: 'gold2', y: 693, xs: [524, 613, 690, 763, 833, 906, 984, 1070] },
+    { kind: 'gold',  y: 693, xs: [524, 613, 690, 763, 833, 906, 984, 1070] },
   ];
   const NS = 'http://www.w3.org/2000/svg';
   const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
