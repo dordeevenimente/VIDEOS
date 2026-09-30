@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mapa de mesas foto · Bribón del Puerto</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  :root{
+    --ink:#F3E4CE; --mute:#b7a28c; --butter:#FFE7AE; --taupe:#7c6856; --camel:#b8743f; --wine:#a2412f;
+    --plat:#efe9e1; --gold:#dca64b; --bronze:#c9803f; --sofa:#d49a78; --stage:#ff3b5c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#1a110b}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  /* scena foto în coordonatele imaginii sursă (1536×1024) */
+  .stage{position:relative;width:1536px;height:1024px;overflow:hidden;transform-origin:0 0}
+  .stage > img{position:absolute;inset:0;width:100%;height:100%;filter:sepia(.62) saturate(.9) contrast(1.07) brightness(.98) hue-rotate(-6deg)}
+  .stage svg{position:absolute;inset:0;z-index:2}
+  .glass{position:absolute;z-index:3;background:rgba(30,20,13,.96);backdrop-filter:blur(18px);
+    border:1px solid rgba(243,228,206,.22);border-radius:16px}
+
+  /* antet în poză (varianta landscape) */
+  .hd{left:18px;top:18px;width:430px;height:272px;padding:24px 26px 20px;display:flex;flex-direction:column}
+  .hd .b{font-weight:700;font-size:34px;letter-spacing:.34em;line-height:1;color:#F3E4CE}
+  .hd .d{font-size:19px;font-weight:400;letter-spacing:.2em;margin-top:6px;padding-left:3px;color:#F3E4CE}
+  .hd .d i{display:block;width:20px;height:1px;background:var(--gold)}
+  .hd .a{font-size:9.5px;letter-spacing:.42em;color:var(--mute);margin-top:7px;font-weight:600}
+  .hd .fl{margin-top:auto;padding-top:15px;border-top:1px solid rgba(243,228,206,.2);display:flex;justify-content:space-between;align-items:flex-end}
+  .hd .fl h2{font-weight:800;font-size:26px;letter-spacing:-.03em;line-height:1.05}
+  .hd .fl h2 span{display:block;color:var(--butter);font-size:12px;font-weight:600;letter-spacing:.14em;margin-top:6px}
+  .hd .ev{text-align:right}
+  .hd .ev img{height:19px;display:block;margin-left:auto}
+  .hd .ev b{display:block;font-size:20px;letter-spacing:-.03em;margin-top:6px;font-weight:800}
+  .hd .ev s{display:block;white-space:nowrap;text-decoration:none;font-size:10.5px;letter-spacing:.06em;color:var(--butter);margin-top:4px;font-weight:600}
+
+  /* bandă legendă în poză (varianta landscape) */
+  .lg{left:0;right:0;bottom:0;height:192px;border-radius:0;border-width:1px 0 0;
+    display:grid;grid-template-columns:repeat(5,1fr);padding:0 10px;background:rgba(26,17,11,.92)}
+  .lg > div{padding:26px 18px 0;border-right:1px solid rgba(243,228,206,.12)}
+  .lg > div:last-child{border-right:0}
+  .lg .k{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.05em;white-space:nowrap}
+  .lg .sw{width:16px;height:16px;border-radius:50%;flex:none}
+  .lg .p{font-weight:800;letter-spacing:-.03em;font-size:36px;margin-top:9px;line-height:1}
+  .lg .s{font-size:12.5px;color:#d9c7b0;margin-top:8px;line-height:1.5}
+  .lg .rz{display:flex;flex-direction:column;justify-content:flex-start}
+  .lg .rz span{font-size:10.5px;letter-spacing:.26em;color:var(--mute);font-weight:700}
+  .lg .rz b{font-size:25px;font-weight:800;letter-spacing:.06em;margin-top:10px}
+  .lg .rz i{font-style:normal;font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:10px;font-weight:700}
+  .sw.plat{background:radial-gradient(circle at 35% 30%,#fffdf9,#e9e2d8 45%,#8f8579)}
+  .sw.gold{background:radial-gradient(circle at 35% 30%,#ffe7ae,#dca64b 50%,#7e5418)}
+  .sw.bronze{background:radial-gradient(circle at 35% 30%,#f3c297,#c9803f 50%,#6d3d16)}
+  .sw.vip{background:radial-gradient(circle at 35% 30%,#f0b5a3,#a2412f 50%,#4f1a12)}
+  .sw.bal{background:radial-gradient(circle at 35% 30%,#f2c9a3,#b8743f 50%,#5a3114)}
+  .c-vip{color:#d9745d} .c-bal{color:#d49460}
+  .sw.gold2{background:#15110a;border:2.5px solid #dca64b}
+  .sw.sofa{border-radius:4px;background:linear-gradient(180deg,#e7b394,#8a553d)}
+  .c-plat{color:var(--plat)} .c-gold{color:var(--gold)} .c-bronze{color:var(--bronze)} .c-sofa{color:var(--sofa)}
+
+  /* ——— variante verticale: antet și legendă în afara pozei ——— */
+  .page{display:none}
+  .vert .page{display:flex;flex-direction:column;width:1080px;height:1350px;padding:54px 0 44px;
+    background:radial-gradient(900px 600px at 50% 40%,rgba(140,87,53,.35),transparent 70%),linear-gradient(180deg,#3a2a1f,#1a110b 55%,#120b07)}
+  .vert.story .page{height:1920px;padding:150px 0 180px;justify-content:center}
+  .vert > .stage{display:none}
+  .vert .hd,.vert .lg{display:none}
+  .vert .mask{display:block}
+  .mask{display:none}
+  .pv{padding:0 48px}
+  .ph{display:flex;justify-content:space-between;align-items:flex-start}
+  .ph .b{font-weight:700;font-size:40px;letter-spacing:.34em;line-height:1}
+  .ph .d{font-size:22px;font-weight:400;letter-spacing:.2em;margin-top:6px;padding-left:4px}
+  .ph .d i{display:block;width:22px;height:1px;background:var(--gold)}
+  .ph .a{font-size:10px;letter-spacing:.42em;color:var(--mute);margin-top:8px;font-weight:600}
+  .ph .ev{text-align:right}
+  .ph .ev img{height:28px;display:block;margin-left:auto}
+  .ph .ev b{display:block;font-size:34px;letter-spacing:-.04em;margin-top:10px;font-weight:800;line-height:1}
+  .ph .ev s{display:block;text-decoration:none;font-size:14px;letter-spacing:.06em;color:var(--butter);margin-top:8px;font-weight:600}
+  .pt{margin:30px 48px 22px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(243,228,206,.2);padding-bottom:14px}
+  .pt h1{font-weight:800;font-size:58px;letter-spacing:-.045em;line-height:.95}
+  .pt h1 span{color:var(--butter)}
+  .pt div{font-weight:600;font-size:13px;letter-spacing:.12em;color:var(--mute);text-align:right;line-height:1.7}
+  .pt div b{color:var(--ink)}
+  .frame{position:relative;width:1080px;height:626px;overflow:hidden}
+  .pl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 48px 0}
+  .pl .pz{display:flex;flex-direction:column;justify-content:center;border-color:rgba(255,231,174,.4)}
+  .pl .pz span{font-size:10.5px;letter-spacing:.24em;color:var(--mute);font-weight:700}
+  .pl .pz b{font-size:27px;font-weight:800;letter-spacing:.06em;margin-top:10px}
+  .story .pl{grid-template-columns:repeat(2,1fr);gap:12px}
+  .pl > div{border:1px solid rgba(243,228,206,.18);border-radius:14px;padding:15px 15px 14px;background:linear-gradient(180deg,rgba(60,40,27,.55),rgba(30,20,13,.55))}
+  .pl .k{display:flex;align-items:flex-start;gap:9px;font-weight:700;font-size:13px;letter-spacing:.05em;line-height:1.35;min-height:34px}
+  .pl .sw{width:18px;height:18px;border-radius:50%;flex:none}
+  .pl .p{font-weight:800;letter-spacing:-.03em;font-size:31px;margin-top:10px}
+  .pl .s{font-size:12px;color:#d9c7b0;margin-top:4px;line-height:1.5}
+  .pf{margin:20px 48px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;color:var(--mute);font-weight:600}
+  .pf b{color:var(--ink);font-size:20px;letter-spacing:.1em;font-weight:800;margin-left:12px}
+
+  .story .frame{height:652px}
+  .story #vstage{transform:translateX(-40px) scale(.74) !important}
+  .vert.story .vp{left:18px;width:360px;padding-left:60px}
+  .story .pl .p{font-size:38px} .story .pl .s{font-size:15px} .story .pl .k{font-size:15px}
+  .story .pl > div{padding:22px 22px 20px}
+  .vp,.vb{display:none}
+  .vert .vp{display:block;left:18px;top:18px;width:300px;height:272px;padding:26px 26px 22px}
+  .vert .vb{display:block;position:absolute;z-index:1;left:0;right:0;bottom:0;height:200px;
+    background:linear-gradient(180deg,rgba(26,17,11,0),#1c120c 8%)}
+  .vp h2{font-weight:800;font-size:30px;letter-spacing:-.03em;line-height:1.05}
+  .vp h2 span{display:block;color:var(--butter);font-size:14px;font-weight:600;letter-spacing:.14em;margin-top:6px}
+  .vp ul{list-style:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(243,228,206,.2);display:grid;gap:5px}
+  .vp li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;letter-spacing:.04em;letter-spacing:.14em}
+  .vp .sw{width:18px;height:18px;border-radius:50%}
+  .vert .page{justify-content:center}
+  .vert .pl .p{font-size:33px} .vert .pl .s{font-size:13.5px} .vert .pl .k{font-size:13.5px}
+  .vert .pl > div{padding:18px 17px 17px}
+
+  /* Platinum Privé: inserție foto (sala e pe balconul din față, de unde e făcută fotografia) */
+  .inset{position:absolute;z-index:3;left:16px;top:574px;width:282px;padding:10px 10px 12px;border-radius:16px;
+    background:rgba(30,20,13,.97);border:1.5px solid rgba(255,231,174,.7);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+  .inset img{display:block;width:100%;height:150px;object-fit:cover;object-position:50% 30%;border-radius:9px}
+  .inset .t{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
+  .inset b{font-weight:800;font-size:17px;color:#F3E4CE;letter-spacing:-.01em}
+  .inset em{font-style:normal;font-weight:800;font-size:17px;color:#FFE7AE}
+  .inset span{display:block;font-size:11.5px;color:#d9c7b0;margin-top:5px;line-height:1.4}
+  .vert.story .inset{left:66px}
+  .sw.prive{background:radial-gradient(circle at 35% 30%,#fffaf0,#ffe7ae 45%,#a88450)}
+  .c-prive{color:#FFE7AE}
+  .hd .rzh{margin-top:16px;display:flex;flex-direction:column}
+  .hd .rzh span{font-size:9.5px;letter-spacing:.26em;color:var(--mute);font-weight:700}
+  .hd .rzh b{font-size:22px;font-weight:800;letter-spacing:.06em;margin-top:5px}
+  .pl .prv{grid-column:1/-1;display:flex;align-items:center;gap:26px;border-color:rgba(255,231,174,.55);
+    background:radial-gradient(500px 160px at 90% 0%,rgba(255,231,174,.14),transparent 70%),#24170f}
+  .pl .prv .nm{font-weight:800;font-size:30px;color:#F3E4CE;line-height:1;letter-spacing:-.03em}
+  .pl .prv .p{margin-top:6px}
+  .pl .prv .ft{font-size:13px;color:#e6d6c0;line-height:1.6;border-left:1px solid rgba(255,231,174,.3);padding-left:24px}
+  .vert .page{padding-top:40px;padding-bottom:30px}
+  .pl{row-gap:10px}
+  .grain{position:absolute;inset:0;pointer-events:none;z-index:9;opacity:.16;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  .vert .page{position:relative}
+  .up{color:#FFE7AE;font-weight:800;letter-spacing:.04em}
+  .pf .xc{background:#FFE7AE;color:#2a1a10;font-weight:800;font-size:17px;letter-spacing:-.01em;padding:11px 22px;border-radius:99px}
+  .pf .xc b{color:#2a1a10;font-size:17px;margin-left:4px;letter-spacing:.06em}
+
+  .dorlogo{display:block;filter:drop-shadow(0 6px 22px rgba(20,10,4,.4))}
+  .ph .dorlogo{height:78px}
+  .hd .dorlogo{height:62px;margin-bottom:4px}
+  .hd .fl{margin-top:18px !important}
+  .bw{text-align:center;padding-right:20px;border-right:1px solid rgba(243,228,206,.2)}
+  .bb{font-weight:700;font-size:20px;letter-spacing:.34em;padding-left:.34em;line-height:1;color:var(--ink)}
+  .bd{font-size:12px;letter-spacing:.2em;margin-top:4px;color:var(--ink)}
+  .inf .r{font-size:10.5px;font-weight:700;letter-spacing:.2em;color:var(--mute)}
+  .inf .t{font-weight:800;font-size:26px;letter-spacing:-.02em;color:var(--ink);margin-top:2px}
+  .inf .a{font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--mute);margin-top:4px}
+  .pfr{display:flex;align-items:center;gap:20px;text-align:right}
+  .pf{align-items:center !important}
+  .pf .pfr .inf{letter-spacing:normal}
+  .rzh2{margin-top:auto;padding-top:14px;border-top:1px solid rgba(243,228,206,.2);display:flex;align-items:center;gap:20px}
+  .hd .rzh2 .inf .t{font-size:24px}
+  .story .ph .dorlogo{height:84px}
+  .story .inf .t{font-size:30px} .story .inf .a{font-size:12px}
+
+  /* ——— TikTok 9:16 ——— */
+  .tiktok .page{height:1920px !important;padding:180px 0 540px !important;justify-content:flex-start !important}
+  .tiktok .pv{padding:0 170px 0 64px}
+  .tiktok .ph{align-items:center}
+  .tiktok .ph .dorlogo{height:64px}
+  .tiktok .ph .ev b{font-size:26px} .tiktok .ph .ev s{font-size:11px;max-width:330px;line-height:1.5}
+  .tiktok .pt{margin:18px 170px 14px 64px;padding-bottom:10px}
+  .tiktok .pt h1{font-size:50px} .tiktok .pt div{font-size:11px}
+  .tiktok .frame{height:700px}
+  .tiktok #vstage{transform:translateX(-90px) scale(.8) !important}
+  .tiktok .pl{display:none}
+  .tiktok .pf{margin:18px 170px 0 64px;flex-direction:column;align-items:flex-start !important;gap:14px}
+  .tiktok .pfr{text-align:left}
+  .tiktok .pf .xc{font-size:18px}
+  .tiktok .vp{left:112px !important;width:300px !important;padding-left:26px !important}
+  .tiktok .inset{left:112px !important}
+</style>
+</head>
+<body>
+
+<template id="photo">
+  <img src="surse/schita_planta_baja.png" alt="">
+  <svg viewBox="0 0 1536 1024" width="1536" height="1024" font-family="Inter, sans-serif">
+    <defs>
+      <radialGradient id="gPlat" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fffdf9"/><stop offset=".45" stop-color="#ebe4da"/><stop offset="1" stop-color="#7c818b"/></radialGradient>
+      <radialGradient id="gGold" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffe7ae"/><stop offset=".5" stop-color="#dca64b"/><stop offset="1" stop-color="#8e6420"/></radialGradient>
+      <radialGradient id="gBronze" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f6c89e"/><stop offset=".5" stop-color="#c9803f"/><stop offset="1" stop-color="#6d3d16"/></radialGradient>
+      <linearGradient id="lPlat" x1="0" x2="1"><stop offset="0" stop-color="#efe9e1" stop-opacity="0"/><stop offset=".12" stop-color="#efe9e1"/><stop offset=".88" stop-color="#efe9e1"/><stop offset="1" stop-color="#efe9e1" stop-opacity="0"/></linearGradient>
+      <linearGradient id="lGold" x1="0" x2="1"><stop offset="0" stop-color="#dca64b" stop-opacity="0"/><stop offset=".12" stop-color="#dca64b"/><stop offset=".88" stop-color="#dca64b"/><stop offset="1" stop-color="#dca64b" stop-opacity="0"/></linearGradient>
+      <linearGradient id="lBronze" x1="0" x2="1"><stop offset="0" stop-color="#c9803f" stop-opacity="0"/><stop offset=".12" stop-color="#c9803f"/><stop offset=".88" stop-color="#c9803f"/><stop offset="1" stop-color="#c9803f" stop-opacity="0"/></linearGradient>
+      <linearGradient id="mBot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07070b" stop-opacity="0"/><stop offset=".35" stop-color="#07070b" stop-opacity=".92"/><stop offset="1" stop-color="#07070b"/></linearGradient>
+      <radialGradient id="mTL" cx="0" cy="0" r="1"><stop offset="0" stop-color="#07070b"/><stop offset=".62" stop-color="#07070b" stop-opacity=".97"/><stop offset="1" stop-color="#07070b" stop-opacity="0"/></radialGradient>
+      <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="blur12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity=".7"/></filter>
+    </defs>
+
+
+
+    <!-- BALCON (etaj, dreapta sus): VIP Balcony Sofa ×2 + Balcony Standing Table ×2 -->
+    <g>
+      <rect x="930" y="90" width="550" height="236" rx="18" fill="#FFE7AE" opacity=".07"/>
+      <rect x="930" y="90" width="550" height="236" rx="18" fill="none" stroke="#FFE7AE" stroke-width="2.2" stroke-dasharray="7 6"/>
+      <line x1="1205" y1="78" x2="1205" y2="90" stroke="#FFE7AE" stroke-width="2"/>
+      <rect x="946" y="14" width="540" height="64" rx="16" fill="#1e140d" fill-opacity=".96" stroke="#FFE7AE" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="984" y="40" fill="#fff" font-weight="800" font-size="13" letter-spacing="4">BALCÓN · PLANTA ALTA</text>
+      <circle cx="990" cy="60" r="6" fill="#a2412f" stroke="#f0b5a3" stroke-width="1"/>
+      <text x="1002" y="64.5" fill="#f3d2c6" font-weight="700" font-size="12" letter-spacing="1.5">VIP BALCONY SOFA ×2 · 500€</text>
+      <circle cx="1234" cy="60" r="6" fill="#b8743f" stroke="#f2c9a3" stroke-width="1"/>
+      <text x="1246" y="64.5" fill="#f3dcc4" font-weight="700" font-size="12" letter-spacing="1.5">BALCONY STANDING ×2 · 250€</text>
+    </g>
+    <!-- SCENA: platforma cu echipament din spate-stânga -->
+    <g>
+      <ellipse cx="535" cy="410" rx="120" ry="34" fill="#FFE7AE" opacity=".22" filter="url(#blur12)"/>
+      <rect x="444" y="318" width="184" height="36" rx="18" fill="#F3E4CE" stroke="#FFE7AE" stroke-width="1.8" filter="url(#shadow)"/>
+      <text x="536" y="342" text-anchor="middle" fill="#2a1a10" font-weight="800" font-size="16" letter-spacing="4">ESCENARIO</text>
+      <line x1="536" y1="354" x2="536" y2="372" stroke="#FFE7AE" stroke-width="1.8"/>
+    </g>
+
+    <!-- rânduri: linii noi peste cele vechi + etichete -->
+    <g font-weight="700" font-size="12.5" letter-spacing="3" text-anchor="middle">
+      <line x1="586" y1="416" x2="984" y2="416" stroke="url(#lPlat)" stroke-width="3"/>
+      <rect x="664" y="398" width="176" height="32" rx="16" fill="#1e140d" stroke="#efe9e1" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="752" y="419" fill="#f2f4f7">PLATINUM · 400€</text>
+
+      <line x1="536" y1="530" x2="1050" y2="530" stroke="url(#lGold)" stroke-width="3"/>
+      <rect x="708" y="512" width="168" height="32" rx="16" fill="#dca64b" filter="url(#shadow)"/>
+      <text x="792" y="533" fill="#150f04">GOLD · 250€</text>
+
+      <line x1="514" y1="667" x2="1080" y2="667" stroke="url(#lGold)" stroke-width="3"/>
+      <rect x="706" y="651" width="168" height="32" rx="16" fill="#dca64b" filter="url(#shadow)"/>
+      <text x="790" y="672" fill="#150f04">GOLD · 250€</text>
+    </g>
+
+    <g id="marks" font-weight="800" text-anchor="middle"></g>
+
+    <!-- canapele, DJ, bar -->
+    <g font-weight="700" font-size="11" letter-spacing="2.2" text-anchor="middle">
+      <rect x="1296" y="400" width="56" height="26" rx="13" fill="#1e140d" stroke="#d9c7b0" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="1324" y="417" fill="#fff" font-size="12.5" letter-spacing="3">DJ</text>
+
+      <rect x="164" y="520" width="72" height="26" rx="13" fill="#1e140d" stroke="#d9c7b0" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="200" y="537" fill="#F3E4CE" font-size="12" letter-spacing="4">BAR</text>
+    </g>
+
+    <!-- acces principal (peste eticheta veche, în varianta verticală după mască) -->
+    <g class="acc">
+      <rect x="584" y="800" width="208" height="28" rx="14" fill="#1e140d" stroke="#dca64b" stroke-width="1.4" filter="url(#shadow)"/>
+      <path d="M604 820 V808 M599 812 L604 806 L609 812" fill="none" stroke="#dca64b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="700" y="819" text-anchor="middle" fill="#F3E4CE" font-weight="800" font-size="11.5" letter-spacing="3">ACCESO PRINCIPAL</text>
+    </g>
+  </svg>
+</template>
+
+<!-- landscape -->
+<div class="stage" id="land">
+  <div class="grain"></div>
+  <div class="inset"><img src="surse/platinum_prive.png" alt="Platinum Privé">
+    <div class="t"><b>PLATINUM PRIVÉ</b><em>5.000€</em></div>
+    <span>Sala privada en planta alta, con vistas al escenario · 20 pers. · 10 botellas</span></div>
+  <div class="glass hd">
+    <img class="dorlogo" src="dor_logo.png" alt="DOR">
+    <div class="fl">
+      <h2>Mapa de mesas<span>PLANTA BAJA</span></h2>
+      <div class="ev"><b>Bogdan DLP</b><s>VIE 09 OCTUBRE · 23:00H</s></div>
+    </div>
+    <div class="rzh2"><div class="bw"><div class="bb">BRIBÓN</div><div class="bd">del puerto</div></div><div class="inf"><div class="r">RESERVA EN XCEED · INFO</div><div class="t">679 743 114</div></div></div>
+  </div>
+  <div class="glass lg">
+    <div><div class="k"><span class="sw prive"></span>PLATINUM PRIVÉ</div><div class="p c-prive">5.000€</div>
+      <div class="s">20 pers. · 10 botellas · sala privada en planta alta<br>Con vistas al escenario · camarero exclusivo<br><b class="up">BAÑO PRIVADO · TERRAZA PRIVADA</b></div></div>
+    <div><div class="k"><span class="sw vip"></span>VIP BALCONY SOFA</div><div class="p c-vip">500€</div>
+      <div class="s">6 pers. · 2 botellas · 6 entradas<br>Sofá en planta alta<br>Con vistas al escenario</div></div>
+    <div><div class="k"><span class="sw plat"></span>STANDING TABLE PLATINUM</div><div class="p c-plat">400€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>Primera fila<br>Frente al escenario</div></div>
+    <div><div class="k"><span class="sw gold"></span>STANDING TABLE GOLD</div><div class="p c-gold">250€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>Segunda y tercera fila<br>Frente al escenario</div></div>
+    <div><div class="k"><span class="sw bal"></span>BALCONY STANDING TABLE</div><div class="p c-bal">250€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>En el balcón<br>Con vistas al escenario</div></div>
+  </div>
+</div>
+
+<!-- feed / story -->
+<div class="page">
+  <div class="grain"></div>
+  <div class="pv ph">
+    <img class="dorlogo" src="dor_logo.png" alt="DOR">
+    <div class="ev"><b>Bogdan DLP</b><s>LIVE CU FORMAȚIA · VIE 09 OCTUBRE · 23:00H</s></div>
+  </div>
+  <div class="pt"><h1>Mapa de <span>mesas</span></h1><div><b>PLANTA BAJA</b><br>PISTA PRINCIPAL</div></div>
+  <div class="frame"><div class="stage" id="vstage" style="transform:scale(.703125)">
+    <div class="vb"></div>
+    <div class="inset"><img src="surse/platinum_prive.png" alt="Platinum Privé">
+    <div class="t"><b>PLATINUM PRIVÉ</b><em>5.000€</em></div>
+    <span>Sala privada en planta alta, con vistas al escenario · 20 pers. · 10 botellas</span></div>
+    <div class="glass vp"><h2>Planta baja<span>PISTA PRINCIPAL</span></h2>
+      <ul><li><span class="sw prive"></span>PRIVÉ</li><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD</li>
+          <li><span class="sw vip"></span>VIP BALCONY SOFA</li><li><span class="sw bal"></span>BALCONY TABLE</li></ul></div>
+  </div></div>
+  <div class="pl">
+    <div class="prv"><div><div class="k"><span class="sw prive"></span>SALA PRIVADA · PLANTA ALTA</div><div class="nm">PLATINUM PRIVÉ</div><div class="p c-prive">5.000€</div></div>
+      <div class="ft">20 personas · 10 botellas · sala privada en planta alta<br>Con vistas al escenario · camarero exclusivo<br><b class="up">BAÑO PRIVADO · TERRAZA PRIVADA</b></div></div>
+    <div><div class="k"><span class="sw vip"></span>VIP BALCONY SOFA</div><div class="p c-vip">500€</div>
+      <div class="s">6 pers. · 2 botellas · 6 entradas<br>Sofá en planta alta<br>Con vistas al escenario</div></div>
+    <div><div class="k"><span class="sw plat"></span>STANDING TABLE PLATINUM</div><div class="p c-plat">400€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>Primera fila<br>Frente al escenario</div></div>
+    <div><div class="k"><span class="sw gold"></span>STANDING TABLE GOLD</div><div class="p c-gold">250€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>Segunda y tercera fila<br>Frente al escenario</div></div>
+    <div><div class="k"><span class="sw bal"></span>BALCONY STANDING TABLE</div><div class="p c-bal">250€</div>
+      <div class="s">4 pers. · 1 botella · 4 entradas<br>En el balcón<br>Con vistas al escenario</div></div>
+  </div>
+  <div class="pf"><span class="xc">Reserva online en <b>XCEED</b></span><div class="pfr"><div class="bw"><div class="bb">BRIBÓN</div><div class="bd">del puerto</div></div><div class="inf"><div class="r">INFO &amp; RESERVAS</div><div class="t">679 743 114</div><div class="a">PENÍNSULA DE CONTRADIQUE, 04720 · AGUADULCE</div></div></div></div>
+</div>
+
+<script>
+  for (const c of location.hash.slice(1).split(',')) if (c) document.body.classList.add(c);
+  const vert = document.body.classList.contains('vert');
+  const host = document.getElementById(vert ? 'vstage' : 'land');
+  host.prepend(document.getElementById('photo').content.cloneNode(true));
+
+  // poziții măsurate pe schiță (centrele bulinelor vechi, coordonate sursă 1536×1024)
+  const rows = [
+    { kind: 'plat',  y: 442, xs: [553, 613, 674, 736, null, 896, 957, 1021] },
+    { kind: 'gold',  y: 555, xs: [540, 616, 689, 763, 833, 905, 976, 1046] },
+    { kind: 'gold',  y: 693, xs: [524, 613, 690, 763, 833, 906, 984, 1070] },
+  ];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  const C = { plat: '#efe9e1', gold: '#dca64b', gold2: '#dca64b' };
+  const F = { plat: 'url(#gPlat)', gold: 'url(#gGold)', gold2: '#15110a' };
+  const g = host.querySelector('#marks');
+  rows.forEach((r, ri) => r.xs.forEach((x, i) => {
+    if (x == null) return;                       // poziția 5 Platinum = stâlpul
+    const s = 1 + ri * 0.08;                     // perspectivă: rândurile din față puțin mai mari
+    const top = r.y + 20 * s;                    // blatul mesei sub bulină
+    g.append(el('ellipse', { cx: x, cy: top, rx: 30 * s, ry: 9 * s, fill: C[r.kind], opacity: .55, filter: 'url(#blur6)' }));
+    g.append(el('ellipse', { cx: x, cy: top, rx: 24 * s, ry: 6.5 * s, fill: 'none', stroke: C[r.kind], 'stroke-width': 1.6, opacity: .9 }));
+    const ring = r.kind === 'gold2';               // Gold 200€: bulină cu contur, ca pe harta de plan
+    g.append(el('circle', { cx: x, cy: r.y, r: 16.5 * s, fill: F[r.kind], stroke: ring ? '#dca64b' : '#0b0b10', 'stroke-width': ring ? 3 : 2, filter: 'url(#shadow)' }));
+    const t = el('text', { x, y: r.y + 5.5 * s, 'font-size': 15.5 * s, fill: ring ? '#f0c66a' : '#141118' });
+    t.textContent = i + 1;
+    g.append(t);
+  }));
+
+  if (vert) host.querySelector('.acc').setAttribute('transform', 'translate(0 46)');
+  if (document.body.classList.contains('tiktok')) {       // coloana de iconițe TikTok acoperă ~170px din dreapta
+    const balc = host.querySelector('[stroke-dasharray="7 6"]').parentNode;
+    balc.querySelectorAll('rect[y="14"], text, circle, line').forEach(e => e.setAttribute('transform', 'translate(-260 0)'));
+    host.querySelectorAll('rect[x="1296"], text[x="1324"]').forEach(e => e.setAttribute('transform', 'translate(-120 0)'));
+    host.querySelector('.acc').setAttribute('transform', 'translate(0 -20)');
+  }
+</script>
+</body>
+</html>

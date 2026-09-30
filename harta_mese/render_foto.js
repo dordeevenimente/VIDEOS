@@ -14,6 +14,13 @@ const { chromium } = require('playwright');
     { hash: '', w: 1536, h: 1024, scale: 1.25, out: 'harta_foto_planta_baja_1920x1280.png' },
     { hash: '#vert', w: 1080, h: 1350, scale: 2, out: 'harta_foto_planta_baja_1080x1350.png' },
     { hash: '#vert,story', w: 1080, h: 1920, scale: 2, out: 'harta_foto_planta_baja_story_1080x1920.png' },
+    { file: 'lista_es.html', hash: '', w: 1080, h: 1350, scale: 2, out: 'es_lista_mesas_1080x1350.png' },
+    { file: 'lista_es.html', hash: '#story', w: 1080, h: 1920, scale: 2, out: 'es_lista_mesas_story_1080x1920.png' },
+    { file: 'lista_es.html', hash: '#tiktok', w: 1080, h: 1920, scale: 2, out: 'es_tiktok_2_lista_mesas_1080x1920.png' },
+    { file: 'harta_foto_es.html', hash: '#vert,tiktok', w: 1080, h: 1920, scale: 2, out: 'es_tiktok_1_mapa_mesas_1080x1920.png' },
+    { file: 'harta_foto_es.html', hash: '', w: 1536, h: 1024, scale: 1.25, out: 'es_mapa_mesas_1920x1280.png' },
+    { file: 'harta_foto_es.html', hash: '#vert', w: 1080, h: 1350, scale: 2, out: 'es_mapa_mesas_1080x1350.png' },
+    { file: 'harta_foto_es.html', hash: '#vert,story', w: 1080, h: 1920, scale: 2, out: 'es_mapa_mesas_story_1080x1920.png' },
   ];
   for (const j of jobs) {
     const page = await browser.newPage({ viewport: { width: j.w, height: j.h }, deviceScaleFactor: j.scale });

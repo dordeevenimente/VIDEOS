@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Mesas disponibles · Bribón del Puerto</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  :root{--ink:#F3E4CE;--mute:#d2bea6;--butter:#FFE7AE;--line:rgba(243,228,206,.18)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#1a110b}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{position:relative;width:1080px;height:1350px;overflow:hidden;display:flex;flex-direction:column;padding:64px 72px 104px;
+    background:#3a2a1f}
+  .bg{position:absolute;inset:0;background:radial-gradient(700px 520px at 50% 34%,rgba(255,226,190,.16),transparent 70%),url(surse/fundal_afis_curat.png) center/cover}
+  .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(60,42,30,0) 0%,rgba(50,33,22,.05) 35%,rgba(38,24,15,.25) 70%,rgba(30,18,11,.45) 100%)}
+  .page > *:not(.bg):not(.shade){position:relative}
+  .grain{position:absolute !important}
+  .ring{position:absolute !important}
+  .story .page{height:1920px;padding:190px 72px 330px}
+  .grain{position:absolute;inset:0;pointer-events:none;opacity:.22;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  .ring{position:absolute;width:820px;height:820px;border-radius:50%;border:22px solid rgba(243,228,206,.09);box-shadow:0 0 60px rgba(243,228,206,.05) inset;left:50%;top:44%;transform:translate(-50%,-50%)}
+
+  header{text-align:center}
+  .b{font-weight:700;font-size:40px;letter-spacing:.34em;padding-left:.34em;line-height:1}
+  .d{font-size:23px;letter-spacing:.2em;margin-top:6px}
+  h1{text-shadow:0 4px 30px rgba(30,18,10,.35);font-weight:800;font-size:92px;letter-spacing:-.05em;line-height:.9;margin-top:34px}
+  h1 span{color:var(--butter)}
+  .sub{display:flex;justify-content:center;align-items:baseline;gap:18px;margin-top:20px}
+  .sub b{font-weight:800;font-size:30px;letter-spacing:-.03em}
+  .sub i{font-style:normal;font-size:14px;font-weight:700;letter-spacing:.14em;color:var(--butter)}
+
+  .list{margin-top:44px;flex:1;display:flex;flex-direction:column;justify-content:center}
+  .row{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:28px;padding:22px 0;border-top:1px solid var(--line)}
+  .row:last-child{border-bottom:1px solid var(--line)}
+  .nm{display:flex;align-items:center;gap:14px}
+  .sw{width:20px;height:20px;border-radius:50%;flex:none}
+  .nm b{font-weight:800;font-size:27px;letter-spacing:-.01em;text-transform:uppercase}
+  .nm em{font-style:normal;font-size:12.5px;font-weight:700;letter-spacing:.12em;color:var(--mute);border:1px solid var(--line);border-radius:99px;padding:5px 11px;margin-left:4px;white-space:nowrap}
+  .pr{font-weight:800;font-size:44px;letter-spacing:-.04em;text-align:right;line-height:1}
+  .det{grid-column:1/2;font-size:16px;color:#eadbc6;margin-top:9px;padding-left:34px;line-height:1.5}
+  .row.hero{padding:28px 26px;margin-bottom:10px;border:1px solid rgba(255,231,174,.5);border-radius:18px;
+    background:radial-gradient(600px 200px at 90% 0%,rgba(255,231,174,.14),transparent 70%),rgba(40,26,17,.5);backdrop-filter:blur(8px)}
+  .row.hero + .row{border-top:0}
+  .row.hero .nm b{font-size:33px} .det .up{color:#FFE7AE;font-weight:800;letter-spacing:.04em} .row.hero .pr{font-size:56px}
+
+  .s-prive{background:radial-gradient(circle at 35% 30%,#fffaf0,#ffe7ae 45%,#a88450)} .c-prive{color:#FFE7AE}
+  .s-vip{background:radial-gradient(circle at 35% 30%,#f0b5a3,#a2412f 50%,#4f1a12)}   .c-vip{color:#d9745d}
+  .s-plat{background:radial-gradient(circle at 35% 30%,#fffdf9,#e9e2d8 45%,#8f8579)} .c-plat{color:#efe9e1}
+  .s-gold{background:radial-gradient(circle at 35% 30%,#ffe7ae,#dca64b 50%,#7e5418)} .c-gold{color:#dca64b}
+  .s-bal{background:radial-gradient(circle at 35% 30%,#f2c9a3,#b8743f 50%,#5a3114)}  .c-bal{color:#d49460}
+
+  footer{margin-top:30px;display:flex;justify-content:space-between;align-items:center;gap:30px}
+  footer .fl{text-align:left} footer .fr{text-align:right}
+  .dorlogo{display:block;height:84px;margin:0 auto;filter:drop-shadow(0 6px 24px rgba(20,10,4,.35))}
+  footer .fr{display:flex;align-items:center;gap:26px}
+  .bw{text-align:center;padding-right:26px;border-right:1px solid var(--line)}
+  .bb{font-weight:700;font-size:26px;letter-spacing:.34em;padding-left:.34em;line-height:1}
+  .bd{font-size:14px;letter-spacing:.2em;margin-top:4px}
+  .story .dorlogo{height:96px}
+  .cta{display:inline-block;background:#FFE7AE;color:#2a1a10;font-weight:800;font-size:26px;letter-spacing:-.02em;padding:16px 34px;border-radius:99px;box-shadow:0 10px 30px rgba(20,10,4,.35)}
+  .cta b{font-weight:900;letter-spacing:.06em}
+  .cta2{font-size:14px;font-weight:600;letter-spacing:.06em;color:var(--mute);margin-top:12px}
+  footer .r{font-size:14px;font-weight:700;letter-spacing:.2em;color:var(--mute)}
+  footer .t{font-weight:800;font-size:38px;letter-spacing:-.02em;margin-top:4px}
+  footer .a{font-size:12.5px;font-weight:600;letter-spacing:.1em;color:var(--mute);margin-top:8px;line-height:1.5}
+
+  .story h1{font-size:104px;margin-top:56px}
+  .story .row{padding:30px 0} .story .det{font-size:18px}
+  .story .nm b{font-size:29px} .story .pr{font-size:50px}
+  .story .row.hero{padding:34px 28px}
+  .story footer{margin-top:44px}
+
+  /* ——— TikTok 9:16: meniu sus, iconițe pe dreapta, descriere + locație jos ——— */
+  .tiktok .page{height:1920px;padding:180px 170px 540px 64px}
+  .tiktok .ring{left:calc(50% - 53px)}
+  .tiktok .dorlogo{height:70px}
+  .tiktok h1{font-size:74px;margin-top:22px}
+  .tiktok .sub{flex-direction:column;align-items:center;gap:6px;margin-top:14px}
+  .tiktok .sub b{font-size:26px} .tiktok .sub i{font-size:12.5px}
+  .tiktok .list{margin-top:26px}
+  .tiktok .row{padding:15px 0;column-gap:16px}
+  .tiktok .nm{gap:11px} .tiktok .sw{width:16px;height:16px}
+  .tiktok .nm b{font-size:22px} .tiktok .nm em{font-size:10.5px;padding:4px 9px}
+  .tiktok .pr{font-size:36px}
+  .tiktok .det{font-size:14.5px;padding-left:27px;margin-top:6px}
+  .tiktok .row.hero{padding:20px 20px} .tiktok .row.hero .nm b{font-size:25px} .tiktok .row.hero .pr{font-size:42px}
+  .tiktok .row.hero .nm{flex-wrap:wrap;row-gap:6px}
+  .tiktok footer{margin-top:24px;gap:18px}
+  .tiktok .cta{font-size:19px;padding:12px 22px}
+  .tiktok footer .fr{gap:16px} .tiktok .bw{padding-right:16px}
+  .tiktok .bb{font-size:17px} .tiktok .bd{font-size:11px}
+  .tiktok footer .r{font-size:11px} .tiktok footer .t{font-size:28px} .tiktok footer .a{font-size:10.5px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bg"></div><div class="shade"></div>
+  <div class="ring"></div>
+  <header>
+    <img class="dorlogo" src="dor_logo.png" alt="DOR">
+    <h1>Mesas <span>disponibles</span></h1>
+    <div class="sub"><b>Bogdan DLP</b><i>LIVE CU FORMAȚIA · VIE 09 OCTUBRE · 23:00H</i></div>
+  </header>
+
+  <div class="list">
+    <div class="row hero">
+      <div class="nm"><span class="sw s-prive"></span><b>Platinum Privé</b><em>SALA PRIVADA · PLANTA ALTA</em></div>
+      <div class="pr c-prive">5.000€</div>
+      <div class="det">20 personas · 10 botellas · sala privada en la planta alta · con vistas al escenario<br>Camarero exclusivo · <b class="up">BAÑO PRIVADO · TERRAZA PRIVADA</b></div>
+    </div>
+    <div class="row">
+      <div class="nm"><span class="sw s-vip"></span><b>VIP Balcony Sofa</b></div>
+      <div class="pr c-vip">500€</div>
+      <div class="det">6 personas · 2 botellas · 6 entradas · sofá en la planta alta, con vistas al escenario</div>
+    </div>
+    <div class="row">
+      <div class="nm"><span class="sw s-plat"></span><b>Standing Table Platinum</b></div>
+      <div class="pr c-plat">400€</div>
+      <div class="det">4 personas · 1 botella · 4 entradas · primera fila, frente al escenario</div>
+    </div>
+    <div class="row">
+      <div class="nm"><span class="sw s-gold"></span><b>Standing Table Gold</b></div>
+      <div class="pr c-gold">250€</div>
+      <div class="det">4 personas · 1 botella · 4 entradas · segunda y tercera fila, frente al escenario</div>
+    </div>
+    <div class="row">
+      <div class="nm"><span class="sw s-bal"></span><b>Balcony Standing Table</b></div>
+      <div class="pr c-bal">250€</div>
+      <div class="det">4 personas · 1 botella · 4 entradas · en el balcón, con vistas al escenario</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="fl">
+      <div class="cta">Reserva online en <b>XCEED</b></div>
+    </div>
+    <div class="fr">
+      <div class="bw"><div class="bb">BRIBÓN</div><div class="bd">del puerto</div></div>
+      <div class="inf">
+        <div class="r">INFO &amp; RESERVAS</div>
+        <div class="t">679 743 114</div>
+        <div class="a">PENÍNSULA DE CONTRADIQUE, 04720<br>AGUADULCE (ALMERÍA)</div>
+      </div>
+    </div>
+  </footer>
+  <div class="grain"></div>
+</div>
+<script>for (const c of location.hash.slice(1).split(',')) if (c) document.body.classList.add(c);</script>
+</body>
+</html>
