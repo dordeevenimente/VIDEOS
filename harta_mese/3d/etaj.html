@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Planta Alta 3D · Bribón del Puerto</title>
+<link href="../fonts.css" rel="stylesheet">
+<style>
+  :root{--ink:#F8F5F1;--mute:#b3aebd;--gold:#e2b04a;--prive:#e9d7b0;--bal:#7d97ff;--vip:#b77cff}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#07070b;overflow:hidden}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  #wrap{position:relative;width:1920px;height:1440px}
+  canvas{display:block}
+  #ov{position:absolute;inset:0;pointer-events:none}
+  .pin{position:absolute;transform:translate(-50%,-50%)}
+  .pill{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;border-radius:99px;padding:9px 18px;
+    font-weight:800;font-size:15px;letter-spacing:.2em;background:rgba(8,8,13,.9);border:1.5px solid;box-shadow:0 6px 18px rgba(0,0,0,.55)}
+  .num{position:absolute;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;display:grid;place-items:center;
+    font-weight:800;font-size:18px;color:#0b0d1a;background:radial-gradient(circle at 35% 30%,#e3e9ff,#7d97ff 55%,#34469e);
+    border:2.5px solid #0b0b10;box-shadow:0 0 22px rgba(125,151,255,.75),0 4px 10px rgba(0,0,0,.6)}
+  .hdr{position:absolute;left:56px;top:48px}
+  .hdr h1{font-weight:800;font-size:44px;letter-spacing:.06em;line-height:1}
+  .hdr h1 span{color:var(--gold)}
+  .hdr .v{font-family:Cinzel,serif;font-size:22px;letter-spacing:.3em;color:#d9d4de;margin-top:12px}
+  .ev{position:absolute;right:56px;top:48px;text-align:right}
+  .ev img{height:36px;display:block;margin-left:auto}
+  .ev b{display:block;font-weight:800;font-size:24px;letter-spacing:.14em;margin-top:12px}
+  .ev s{display:block;text-decoration:none;font-weight:600;font-size:14px;letter-spacing:.26em;color:var(--gold);margin-top:6px}
+  .prv{position:absolute;transform:translate(-50%,0);width:372px;padding:18px 22px 18px;border-radius:14px;
+    background:rgba(12,10,7,.93);border:1.5px solid rgba(233,215,176,.8);box-shadow:0 12px 30px rgba(0,0,0,.6)}
+  .prv .t{display:flex;justify-content:space-between;align-items:baseline}
+  .prv b{font-family:Cinzel,serif;font-weight:600;font-size:25px;color:#fbf3e2}
+  .prv em{font-style:normal;font-weight:800;font-size:25px;color:var(--prive)}
+  .prv p{font-size:14px;color:#e4dac6;line-height:1.55;margin-top:9px}
+  .lab{position:absolute;transform:translate(-50%,-50%);text-align:center;font-weight:700;font-size:15px;letter-spacing:.24em;color:#e9e6f0;
+    text-shadow:0 2px 10px rgba(0,0,0,.9)}
+  .lab small{display:block;font-size:12px;letter-spacing:.2em;color:var(--mute);margin-top:6px}
+  .leg{position:absolute;left:56px;right:56px;bottom:44px;display:flex;gap:14px;align-items:stretch}
+  .leg > div{flex:1;border:1px solid #2a2833;border-radius:14px;padding:16px 20px;background:rgba(10,10,15,.88)}
+  .leg .k{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;letter-spacing:.18em}
+  .leg .sw{width:18px;height:18px;border-radius:50%}
+  .leg .p{font-weight:800;font-size:32px;margin-top:8px}
+  .leg .s{font-size:13.5px;color:#cdc8d4;margin-top:4px;line-height:1.5}
+  .leg .rz{flex:.8;display:flex;flex-direction:column;justify-content:center;border-color:rgba(226,176,74,.45)}
+  .leg .rz span{font-size:11px;letter-spacing:.26em;color:var(--mute);font-weight:700}
+  .leg .rz b{font-size:28px;font-weight:800;letter-spacing:.06em;margin-top:8px}
+</style>
+<script type="importmap">
+{"imports":{"three":"./node_modules/three/build/three.module.js","three/addons/":"./node_modules/three/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="wrap">
+  <div id="ov">
+    <div class="hdr"><h1>PLANTA ALTA <span>· UPPER FLOOR</span></h1><div class="v">BRIBÓN DEL PUERTO</div></div>
+    <div class="ev"><img src="../dor_logo.png" alt="DOR"><b>BOGDAN DLP</b><s>9 OCTUBRE · 22:00</s></div>
+    <div class="leg">
+      <div><div class="k"><span class="sw" style="background:radial-gradient(circle at 35% 30%,#fff4d6,#e9d7b0 45%,#8f7445)"></span>PLATINUM PRIVÉ</div>
+        <div class="p" style="color:#ecd9ad">5.000€</div><div class="s">20 pers. · 10 sticle · ospătar dedicat<br>Sală privată · baie &amp; terasă privată</div></div>
+      <div><div class="k"><span class="sw" style="background:radial-gradient(circle at 35% 30%,#e3e9ff,#7d97ff 55%,#34469e)"></span>BALCONY STANDING TABLE</div>
+        <div class="p" style="color:#94a8ff">250€</div><div class="s">4 pers. · 1 sticlă · 4 bilete<br>La balustradă, cu vedere spre ring</div></div>
+      <div class="rz"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+const W = 1920, H = 1440;
+// plan în coordonatele referinței (px 1448×1086) → metri-scenă
+const S = 40, CX = 720, CY = 540;
+const X = px => (px - CX) / S, Z = py => (py - CY) / S;
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(W, H);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.05;
+document.getElementById('wrap').prepend(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x07070b);
+
+const cam = new THREE.PerspectiveCamera(26, W / H, 1, 400);
+cam.position.set(1.5, 52, 36);
+cam.lookAt(1.2, -1.5, 2.2);
+if (location.hash === '#dbg') { cam.position.set(X(1250), 8, Z(420)); cam.lookAt(X(1300), 0, Z(250)); }
+
+// ——— texturi procedurale ———
+function canvasTex(w, h, draw, rep = [1, 1]) {
+  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  draw(c.getContext('2d'), w, h);
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+  t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(...rep); t.anisotropy = 8;
+  return t;
+}
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const wood = canvasTex(1024, 1024, (g, w, h) => {
+  const ph = 46;
+  for (let y = 0; y < h; y += ph) {
+    let x = -rnd() * 300;
+    while (x < w) {
+      const L = 420 + rnd() * 380, v = 0.78 + rnd() * 0.3;
+      g.fillStyle = `rgb(${120 * v | 0},${72 * v | 0},${44 * v | 0})`; g.fillRect(x, y, L, ph);
+      for (let i = 0; i < 14; i++) { g.strokeStyle = `rgba(40,20,10,${0.08 + rnd() * 0.1})`; g.beginPath();
+        const yy = y + rnd() * ph; g.moveTo(x, yy); g.bezierCurveTo(x + L * .3, yy + rnd() * 6 - 3, x + L * .7, yy + rnd() * 6 - 3, x + L, yy); g.stroke(); }
+      g.fillStyle = 'rgba(15,8,4,.8)'; g.fillRect(x, y, 2, ph);
+      x += L;
+    }
+    g.fillStyle = 'rgba(15,8,4,.85)'; g.fillRect(0, y, w, 2);
+  }
+}, [4, 4]);
+const marble = canvasTex(1024, 1024, (g, w, h) => {
+  g.fillStyle = '#e9e7e4'; g.fillRect(0, 0, w, h);
+  for (let i = 0; i < 38; i++) {
+    g.strokeStyle = `rgba(120,118,125,${0.12 + rnd() * 0.25})`; g.lineWidth = 0.6 + rnd() * 1.8;
+    g.beginPath(); let x = rnd() * w, y = rnd() * h; g.moveTo(x, y);
+    for (let k = 0; k < 9; k++) { x += (rnd() - .3) * 140; y += (rnd() - .5) * 120; g.lineTo(x, y); } g.stroke();
+  }
+  g.strokeStyle = 'rgba(0,0,0,.08)'; g.lineWidth = 2;
+  for (let i = 0; i <= w; i += 256) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i, h); g.stroke(); g.beginPath(); g.moveTo(0, i); g.lineTo(w, i); g.stroke(); }
+}, [2, 3]);
+
+// ——— materiale ———
+const M = {
+  wood: new THREE.MeshStandardMaterial({ map: wood, roughness: .55, metalness: .05 }),
+  marble: new THREE.MeshStandardMaterial({ map: marble, roughness: .3, metalness: .05, color: 0xb9b6b2 }),
+  wall: new THREE.MeshStandardMaterial({ color: 0x1b1a20, roughness: .8 }),
+  wallTop: new THREE.MeshStandardMaterial({ color: 0x2c2a33, roughness: .7 }),
+  pillar: new THREE.MeshStandardMaterial({ color: 0x141318, roughness: .6 }),
+  glass: new THREE.MeshStandardMaterial({ color: 0x9fc0ff, transparent: true, opacity: .16, roughness: .05, metalness: .2, depthWrite: false }),
+  rail: new THREE.MeshStandardMaterial({ color: 0x222129, roughness: .4, metalness: .6 }),
+  ledBlue: new THREE.MeshBasicMaterial({ color: new THREE.Color(0.25, 0.35, 3.2) }),
+  ledRed: new THREE.MeshBasicMaterial({ color: new THREE.Color(3.2, 0.12, 0.18) }),
+  amber: new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, .85, .25) }),
+  gold: new THREE.MeshStandardMaterial({ color: 0xd8b36a, roughness: .25, metalness: 1 }),
+  black: new THREE.MeshStandardMaterial({ color: 0x0c0c0e, roughness: .15, metalness: .3 }),
+  pink: new THREE.MeshStandardMaterial({ color: 0xd9a6a4, roughness: .85 }),
+  teal: new THREE.MeshStandardMaterial({ color: 0x14595a, roughness: .85 }),
+  cream: new THREE.MeshStandardMaterial({ color: 0xc9bfae, roughness: .9 }),
+  tableTop: new THREE.MeshStandardMaterial({ color: 0xf1ede8, roughness: .2 }),
+  red: new THREE.MeshStandardMaterial({ color: 0xa3101e, roughness: .4, emissive: 0x7a0010, emissiveIntensity: 1.1, side: THREE.DoubleSide }),
+  counter: new THREE.MeshStandardMaterial({ color: 0x1a1618, roughness: .15, metalness: .4, side: THREE.DoubleSide }),
+  below: new THREE.MeshStandardMaterial({ color: 0x0d0e1c, roughness: .9 }),
+};
+
+const add = (geo, mat, x, y, z, o = {}) => {
+  const m = new THREE.Mesh(geo, mat); m.position.set(x, y, z);
+  if (o.ry) m.rotation.y = o.ry;
+  m.castShadow = o.cast !== false; m.receiveShadow = true; scene.add(m); return m;
+};
+const box = (w, h, d, mat, x, y, z, o) => add(new THREE.BoxGeometry(w, h, d), mat, x, y, z, o);
+
+// segment de perete între două puncte (px), înălțime h
+function wallSeg(p1, p2, h = 1.2, t = .35, mat = M.wall) {
+  const x1 = X(p1[0]), z1 = Z(p1[1]), x2 = X(p2[0]), z2 = Z(p2[1]);
+  const L = Math.hypot(x2 - x1, z2 - z1), a = Math.atan2(z2 - z1, x2 - x1);
+  const m = box(L + t, h, t, mat, (x1 + x2) / 2, h / 2, (z1 + z2) / 2, { ry: -a });
+  box(L + t, .05, t + .02, M.wallTop, (x1 + x2) / 2, h + .025, (z1 + z2) / 2, { ry: -a, cast: false });
+  return m;
+}
+// balustradă de sticlă cu LED albastru la bază
+function railSeg(p1, p2, led = M.ledBlue) {
+  const x1 = X(p1[0]), z1 = Z(p1[1]), x2 = X(p2[0]), z2 = Z(p2[1]);
+  const L = Math.hypot(x2 - x1, z2 - z1), a = -Math.atan2(z2 - z1, x2 - x1), cx = (x1 + x2) / 2, cz = (z1 + z2) / 2;
+  box(L, 1.0, .05, M.glass, cx, .6, cz, { ry: a, cast: false });
+  box(L, .07, .12, M.rail, cx, 1.12, cz, { ry: a });
+  box(L, .05, .09, led, cx, .06, cz, { ry: a, cast: false });
+  box(L, .03, .05, led, cx, 1.17, cz, { ry: a, cast: false });
+}
+
+// ——— podeaua etajului cu golul spre parter ———
+const outline = [[60,140],[560,140],[560,195],[1045,195],[1045,112],[1405,112],[1405,842],[350,842],[350,702],[60,702]];
+const hole = [[535,300],[990,300],[1205,545],[1030,705],[535,705]];
+const shp = new THREE.Shape(outline.map(([a, b]) => new THREE.Vector2(X(a), -Z(b))));
+shp.holes.push(new THREE.Path(hole.map(([a, b]) => new THREE.Vector2(X(a), -Z(b)))));
+const slab = new THREE.ExtrudeGeometry(shp, { depth: .5, bevelEnabled: false });
+slab.rotateX(-Math.PI / 2); slab.translate(0, -.5, 0);
+// UV planare pentru lemn
+{ const pos = slab.attributes.position, uv = slab.attributes.uv;
+  for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / 16, pos.getZ(i) / 16); }
+const slabM = add(slab, M.wood, 0, 0, 0, { cast: false });
+
+// podea de marmură în Privé
+const pm = new THREE.PlaneGeometry(X(418) - X(92), Z(692) - Z(168)); pm.rotateX(-Math.PI / 2);
+add(pm, M.marble, (X(418) + X(92)) / 2, .012, (Z(692) + Z(168)) / 2, { cast: false });
+
+// parterul văzut prin gol
+{ const g = new THREE.PlaneGeometry(40, 30); g.rotateX(-Math.PI / 2); add(g, M.below, X(870), -6, Z(500), { cast: false });
+  // puncte LED din tavanul parterului reflectate/strălucire difuză
+  const glow = new THREE.PointLight(0x3346ff, 60, 30, 1.6); glow.position.set(X(820), -3.5, Z(520)); scene.add(glow);
+  const glow2 = new THREE.PointLight(0xff2244, 18, 16, 1.8); glow2.position.set(X(1050), -4, Z(620)); scene.add(glow2);
+  // pereți interiori ai golului
+  for (let i = 0; i < hole.length; i++) {
+    const a = hole[i], b = hole[(i + 1) % hole.length];
+    const x1 = X(a[0]), z1 = Z(a[1]), x2 = X(b[0]), z2 = Z(b[1]);
+    const L = Math.hypot(x2 - x1, z2 - z1), ang = -Math.atan2(z2 - z1, x2 - x1);
+    box(L, 6, .2, M.wall, (x1 + x2) / 2, -3.3, (z1 + z2) / 2, { ry: ang, cast: false });
+    box(L, .06, .1, M.ledBlue, (x1 + x2) / 2, -.62, (z1 + z2) / 2, { ry: ang, cast: false });
+  }
+  // grile de LED (ca în sală) pe peretele din fundul golului
+  const dot = new THREE.SphereGeometry(.07, 8, 6);
+  for (let r = 0; r < 8; r++) for (let c = 0; c < 9; c++)
+    add(dot, M.ledBlue, X(760) + c * .3, -1.6 - r * .42, Z(300) + .2, { cast: false });
+}
+
+// ——— pereți exteriori (tăiați jos, ca în referință) ———
+const wallPath = [[60,700],[60,140],[560,140],[560,195]];
+for (let i = 0; i < wallPath.length - 1; i++) wallSeg(wallPath[i], wallPath[i + 1]);
+[[[1045,195],[1045,112]],[[1045,112],[1405,112]],[[1405,112],[1405,842]],[[1405,842],[350,842]],
+ [[350,842],[350,990]],[[195,990],[195,700]],[[195,700],[60,700]]].forEach(([a, b]) => wallSeg(a, b));
+// Privé: perete jos + separare de sticlă cu rame aurii spre balcon
+wallSeg([195,700],[418,700]);
+for (const [a, b] of [[[418,168],[418,470]]]) {
+  const x = X(418), z1 = Z(a[1]), z2 = Z(b[1]);
+  box(.06, 2.2, z2 - z1, M.glass, x, 1.1, (z1 + z2) / 2, { cast: false });
+  for (let z = z1; z <= z2 + .01; z += (z2 - z1) / 5) box(.09, 2.2, .09, M.gold, x, 1.1, z);
+  box(.09, .09, z2 - z1, M.gold, x, 2.2, (z1 + z2) / 2);
+}
+wallSeg([418,560],[418,700], 1.2);
+
+// balustrada de sus (spre exterior) și balustradele golului
+railSeg([580,195],[1030,195]);
+for (let i = 0; i < hole.length; i++) railSeg(hole[i], hole[(i + 1) % hole.length]);
+
+// stâlpi
+const pil = (px, py, h = 3.4, s = .95) => {
+  box(s, h, s, M.pillar, X(px), h / 2, Z(py));
+  box(s * .3, .28, .03, M.amber, X(px), 1.7, Z(py) + s / 2 + .02, { cast: false });
+};
+[[548,318],[990,312],[1200,548],[1004,690],[548,688],[562,160],[1062,165],[1390,690],[1390,395],[580,825]].forEach(([a, b]) => pil(a, b));
+
+// ——— Balcony standing tables ———
+const tables = [[743,228],[925,228],[723,738],[927,738]];
+const tGeo = { top: new THREE.CylinderGeometry(.62, .62, .07, 40), pole: new THREE.CylinderGeometry(.06, .06, 1.05, 12), base: new THREE.BoxGeometry(.6, .05, .6) };
+const bM = new THREE.MeshStandardMaterial({ color: 0x9fb3ff, emissive: 0x3346ff, emissiveIntensity: 1.2, transparent: true, opacity: .55 });
+tables.forEach(([a, b]) => {
+  const x = X(a), z = Z(b);
+  add(tGeo.base, M.black, x, .03, z); add(tGeo.pole, M.black, x, .56, z); add(tGeo.top, M.tableTop, x, 1.1, z);
+  const ring = new THREE.Mesh(new THREE.RingGeometry(.75, .9, 48), bM); ring.rotation.x = -Math.PI / 2; ring.position.set(x, .02, z); scene.add(ring);
+});
+
+// ——— bar curbat roșu ———
+{ const cx = X(1420), cz = Z(135), r1 = 5.1, r2 = 6.0, a0 = Math.PI * .5, a1 = Math.PI;
+  // bar construit din segmente pe arcul [90°,180°] (față roșie luminată, blat negru, benzi LED)
+  const N = 36, rm = (r1 + r2) / 2;
+  const barTop = new THREE.MeshStandardMaterial({ color: 0x4a0c14, roughness: .12, metalness: .3, emissive: 0x2a0006 });
+  for (let k = 0; k < N; k++) {
+    const a = a0 + (a1 - a0) * (k + .5) / N, seg = (a1 - a0) / N;
+    const ry = -Math.atan2(Math.cos(a), -Math.sin(a));
+    const at = (r, y, w, h, d, m) => box(w, h, d, m, cx + Math.cos(a) * r, y, cz + Math.sin(a) * r, { ry });
+    at(rm, .575, seg * r2 + .02, 1.15, r2 - r1, M.red);
+    at(rm, 1.19, seg * (r2 + .15) + .02, .07, r2 - r1 + .3, barTop);
+    at(r2 + .03, .07, seg * r2 + .02, .06, .06, M.ledRed);
+    at(r2 + .03, 1.1, seg * r2 + .02, .05, .06, M.ledRed);
+  }
+  const pb = new THREE.PointLight(0xff2438, 25, 6, 1.5); pb.position.set(cx + Math.cos(2.3) * 7.2, .6, cz + Math.sin(2.3) * 7.2); scene.add(pb);
+  // spate de bar cu rafturi luminate
+  box(.5, 2.2, 5.5, M.counter, X(1395), 1.1, Z(260));
+  box(5.5, 2.2, .5, M.counter, X(1290), 1.1, Z(118));
+  for (let i = 0; i < 4; i++) box(.06, .05, 5, M.ledRed, X(1385), .6 + i * .45, Z(260), { cast: false });
+  const pl = new THREE.PointLight(0xff1830, 70, 14, 1.4); pl.position.set(X(1300), 2.2, Z(260)); scene.add(pl);
+}
+
+// ——— Platinum Privé: mobilier ———
+{ // masă lungă neagră + scaune roz
+  box(1.35, .08, 4.6, M.black, X(247), .78, Z(375));
+  box(.9, .74, 4.1, M.black, X(247), .37, Z(375));
+  const chair = new RoundedBoxGeometry(.55, .5, .55, 3, .12), back = new RoundedBoxGeometry(.55, .7, .14, 3, .06);
+  for (let i = 0; i < 7; i++) {
+    const z = Z(300) + i * .62;
+    add(chair, M.pink, X(203), .3, z); add(back, M.pink, X(203) - .27, .75, z, { ry: Math.PI / 2 });
+    add(chair, M.pink, X(292), .3, z); add(back, M.pink, X(292) + .27, .75, z, { ry: Math.PI / 2 });
+  }
+  add(chair, M.pink, X(247), .3, Z(282)); add(chair, M.pink, X(247), .3, Z(470));
+  // canapea + fotolii sus
+  const sofa = new RoundedBoxGeometry(2.3, .55, .9, 3, .15), sofaB = new RoundedBoxGeometry(2.3, .6, .25, 3, .1);
+  add(sofa, M.cream, X(258), .3, Z(212)); add(sofaB, M.cream, X(258), .75, Z(196));
+  const arm = new RoundedBoxGeometry(.9, .6, .9, 3, .2), armB = new RoundedBoxGeometry(.9, .55, .22, 3, .1);
+  for (const [px, py, m] of [[190,212,M.teal],[330,212,M.teal],[385,232,M.pink]]) { add(arm, m, X(px), .32, Z(py)); add(armB, m, X(px), .78, Z(py) - .36); }
+  // coloana stângă de fotolii
+  [[125,225,M.cream],[125,268,M.cream],[125,305,M.teal],[125,345,M.cream],[125,385,M.cream],[125,428,M.teal],[125,470,M.cream],[125,515,M.teal],[125,565,M.cream]]
+    .forEach(([px, py, m]) => { add(arm, m, X(px), .32, Z(py), { ry: Math.PI / 2 }); add(armB, m, X(px) - .36, .78, Z(py), { ry: Math.PI / 2 }); });
+  // scaune de bar roz la ferestre (jos)
+  const stool = new THREE.CylinderGeometry(.34, .34, .12, 28), sp = new THREE.CylinderGeometry(.03, .03, .8, 8);
+  [[205,548],[243,550],[282,550],[320,548],[360,545]].forEach(([px, py]) => { add(sp, M.gold, X(px), .4, Z(py)); add(stool, M.pink, X(px), .82, Z(py)); });
+  // candelabre cub aurii
+  const edges = new THREE.EdgesGeometry(new THREE.BoxGeometry(.7, .7, .7));
+  for (const pz of [320, 430]) { const l = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0xffd98a })); l.position.set(X(247), 3.1, Z(pz)); l.rotation.y = .5; scene.add(l); }
+  const warm = new THREE.PointLight(0xffd7a0, 9, 10, 1.6); warm.position.set(X(250), 3.2, Z(380)); warm.castShadow = false; scene.add(warm);
+  const warm2 = new THREE.PointLight(0xffe3bd, 5, 8, 1.7); warm2.position.set(X(160), 3, Z(560)); scene.add(warm2);
+}
+
+// ——— casa scării (coboară) ———
+{ const sl = new THREE.PointLight(0xffd9a8, 14, 12, 1.4); sl.position.set((X(345) + X(200)) / 2, 1.2, Z(820)); scene.add(sl);
+  for (const px of [195, 350]) box(.35, 4.2, Z(990) - Z(702), M.wall, X(px), -1.5, (Z(990) + Z(702)) / 2, { cast: false });
+  box(X(350) - X(195), 4.2, .35, M.wall, (X(350) + X(195)) / 2, -1.5, Z(990), { cast: false }); }
+for (let i = 0; i < 12; i++) {
+  const z = Z(712) + i * .56, y = -i * .26;
+  box(X(345) - X(200), .26, .56, i % 2 ? M.wallTop : M.wall, (X(345) + X(200)) / 2, y - .13, z, { cast: false });
+  box(X(345) - X(200) - .2, .02, .04, M.amber, (X(345) + X(200)) / 2, y + .005, z - .26, { cast: false });
+}
+
+// ——— lumini ———
+scene.add(new THREE.HemisphereLight(0x8a93c8, 0x1a1210, .55));
+const key = new THREE.DirectionalLight(0xfff1e0, 1.25);
+key.position.set(-14, 30, 18); key.castShadow = true;
+key.shadow.mapSize.set(4096, 4096);
+Object.assign(key.shadow.camera, { left: -26, right: 26, top: 20, bottom: -20, near: 1, far: 90 });
+key.shadow.bias = -0.0004; key.shadow.normalBias = .03;
+scene.add(key);
+const fill = new THREE.DirectionalLight(0x6f7dff, .35); fill.position.set(20, 16, -10); scene.add(fill);
+[[700,500],[900,780],[1150,700],[800,230]].forEach(([a, b]) => { const l = new THREE.PointLight(0xffcf9a, 10, 9, 1.8); l.position.set(X(a), 2.6, Z(b)); scene.add(l); });
+
+// ——— randare cu bloom ———
+const composer = new EffectComposer(renderer);
+composer.setPixelRatio(window.devicePixelRatio);
+composer.setSize(W, H);
+composer.addPass(new RenderPass(scene, cam));
+composer.addPass(new UnrealBloomPass(new THREE.Vector2(W, H), .42, .45, .95));
+composer.addPass(new OutputPass());
+composer.render();
+
+// ——— etichete HTML proiectate din coordonatele 3D ———
+const ov = document.getElementById('ov');
+const proj = (px, py, y = 0) => { const v = new THREE.Vector3(X(px), y, Z(py)).project(cam); return [(v.x + 1) / 2 * W, (1 - v.y) / 2 * H]; };
+const el = (cls, html, [x, y], style = '') => { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; d.style.cssText = `left:${x}px;top:${y}px;${style}`; ov.appendChild(d); return d; };
+tables.forEach(([a, b], i) => el('num', i + 1, proj(a, b, 1.9)));
+el('pill', 'BALCONY TABLE · 250€', proj(834, 150, 1.6), 'color:#cdd7ff;border-color:#7d97ff');
+el('pill', 'BALCONY TABLE · 250€', proj(825, 800, 1.2), 'color:#cdd7ff;border-color:#7d97ff');
+el('lab', 'GOL CĂTRE PARTER<small>vedere spre ring ↓</small>', proj(790, 520, 0));
+el('pill', 'BAR', proj(1250, 330, 1.6), 'color:#ffb3bd;border-color:#ff3b5c');
+el('lab', '↑ CASĂ SCĂRII<small>ACCES ETAJ</small>', proj(272, 1025, -3));
+const pv = proj(245, 612, 1.3);
+el('prv', `<div class="t"><b>PLATINUM PRIVÉ</b><em>5.000€</em></div>
+  <p>20 persoane · 10 sticle · sală privată<br>În fața scenei · ospătar dedicat<br>Baie privată · terasă privată</p>`, pv);
+document.body.dataset.ready = '1';
+</script>
+</body>
+</html>
