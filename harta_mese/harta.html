@@ -51,7 +51,7 @@
   .card .sw{width:22px;height:22px;border-radius:50%;flex:none}
   .card .cat{font-weight:700;font-size:13px;letter-spacing:.16em}
   .card .p{font-weight:800;font-size:30px;margin-top:12px;letter-spacing:.01em}
-  .card .s{font-size:12.5px;color:#c9c5cf;margin-top:4px;line-height:1.45}
+  .card .s{font-size:12.5px;color:#c9c5cf;margin-top:4px;line-height:1.5} .card .s b{color:var(--ink);font-weight:700}
   .card.plat{border-color:rgba(217,220,226,.35)} .card.plat .p{color:var(--plat)}
   .card.g1{border-color:rgba(216,168,67,.55)} .card.g1 .p{color:var(--gold)}
   .card.g2{border-color:rgba(216,168,67,.3)} .card.g2 .p{color:var(--gold)}
@@ -68,6 +68,52 @@
   .story .legend{grid-template-columns:repeat(2,1fr);gap:14px}
   .story .card{padding:20px 20px 18px}
   .story footer{margin-top:28px}
+
+  /* ——— pagina 2: etaj & privé ——— */
+  .p2,.p2t{display:none}
+  .etaj .p1{display:none} .etaj .p2t{display:flex}
+  .etaj .p2{display:flex;flex-direction:column;flex:1;gap:18px;margin-top:30px;min-height:0}
+  .prive{position:relative;flex:1;border-radius:22px;padding:40px 40px 36px;overflow:hidden;
+    border:1px solid rgba(233,215,176,.55);
+    background:radial-gradient(700px 380px at 85% 0%,rgba(233,215,176,.16),transparent 65%),
+               linear-gradient(180deg,#14110c,#0b0a08)}
+  .prive:before{content:"";position:absolute;inset:10px;border:1px solid rgba(233,215,176,.18);border-radius:15px;pointer-events:none}
+  .prive .tag{font-size:12.5px;font-weight:700;letter-spacing:.34em;color:var(--prive)}
+  .prive h2{font-family:Cinzel,serif;font-weight:600;font-size:64px;letter-spacing:.03em;line-height:1.02;margin-top:18px;color:#fbf3e2}
+  .prive .price{font-weight:800;font-size:66px;margin-top:18px;letter-spacing:.01em;
+    background:linear-gradient(180deg,#fff4d6,#d9bc84 60%,#a88450);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .prive .kpis{display:flex;gap:14px;margin-top:26px}
+  .kpi{border:1px solid rgba(233,215,176,.35);border-radius:14px;padding:14px 20px;min-width:150px}
+  .kpi b{display:block;font-size:34px;font-weight:800;color:#fbf3e2;line-height:1}
+  .kpi span{display:block;font-size:11.5px;letter-spacing:.24em;color:var(--prive);margin-top:8px;font-weight:700}
+  .prive{display:grid;grid-template-columns:1.15fr 1fr;gap:36px;align-items:center}
+  .feat{display:flex;flex-direction:column;border-left:1px solid rgba(233,215,176,.25);padding-left:36px}
+  .feat div{padding:17px 0;border-bottom:1px solid rgba(233,215,176,.14);font-size:21px !important}
+  .feat div:last-child{border-bottom:0}
+  .story .prive{grid-template-columns:1fr;gap:10px;align-content:center}
+  .story .feat{border-left:0;padding-left:0;border-top:1px solid rgba(233,215,176,.25);margin-top:14px}
+  .feat div{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:500;color:#eee6d6}
+  .feat div:before{content:"";width:8px;height:8px;transform:rotate(45deg);background:var(--prive);flex:none}
+  .duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .pk{border-radius:20px;padding:26px 26px 24px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+  .pk .tag{font-size:11.5px;font-weight:700;letter-spacing:.3em}
+  .pk h3{font-weight:800;font-size:25px;letter-spacing:.06em;margin-top:12px;line-height:1.15}
+  .pk .price{font-weight:800;font-size:46px;margin-top:12px}
+  .pk .row{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .pk .row span{font-size:13px;font-weight:700;letter-spacing:.06em;padding:7px 12px;border-radius:99px;border:1px solid}
+  .pk .d{font-size:14.5px;color:#c9c5cf;margin-top:14px;line-height:1.5}
+  .pk.vip{border-color:rgba(183,124,255,.5);background:radial-gradient(420px 220px at 100% 0%,rgba(183,124,255,.16),transparent 70%),#0d0b12}
+  .pk.vip .tag,.pk.vip .price{color:var(--vip-sofa)} .pk.vip .row span{border-color:rgba(183,124,255,.45);color:#e3d0ff}
+  .pk.bal{border-color:rgba(111,140,255,.5);background:radial-gradient(420px 220px at 100% 0%,rgba(111,140,255,.16),transparent 70%),#0b0c13}
+  .pk.bal .tag,.pk.bal .price{color:var(--balcony)} .pk.bal .row span{border-color:rgba(111,140,255,.45);color:#d3dcff}
+  body:not(.story) .prive h2{font-size:86px}
+  body:not(.story) .prive .price{font-size:92px;margin-top:22px}
+  body:not(.story) .prive .kpi{padding:18px 24px;min-width:170px}
+  body:not(.story) .prive .kpi b{font-size:44px}
+  body:not(.story) .prive .tag{font-size:14px}
+  body:not(.story) .feat div{font-size:24px !important;padding:22px 0}
+  .story .p2 .duo{grid-template-columns:1fr}
+  .story .prive h2{font-size:60px}
 </style>
 </head>
 <body>
@@ -85,12 +131,12 @@
     </div>
   </header>
 
-  <div class="title">
+  <div class="title p1">
     <h1>HARTA <span>MESELOR</span></h1>
     <div class="fl"><b>PLANTA BAJA</b><br>MAIN FLOOR</div>
   </div>
 
-  <div class="plan">
+  <div class="plan p1">
 <svg viewBox="0 0 1100 880" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
   <defs>
     <radialGradient id="plat" cx="35%" cy="30%" r="75%">
@@ -165,8 +211,8 @@
     <circle cx="965" cy="332" r="13" fill="#231c18" stroke="#c98a6a" stroke-width="2"/>
     <circle cx="965" cy="332" r="3.5" fill="#ffcf7a"/>
   </g>
-  <text x="968" y="234" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="12" letter-spacing="2.5">SOFA 1</text>
-  <text x="968" y="368" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="12" letter-spacing="2.5">SOFA 2</text>
+  <text x="972" y="234" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="11" letter-spacing="2">SOFA 1</text>
+  <text x="972" y="368" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="11" letter-spacing="2">SOFA 2</text>
 
   <!-- DJ -->
   <rect x="975" y="430" width="75" height="160" fill="#ff2040" opacity=".28" filter="url(#glowS)"/>
@@ -215,15 +261,53 @@
 </svg>
   </div>
 
-  <div class="legend">
+  <div class="legend p1">
     <div class="card plat"><div class="k"><div class="sw plat"></div><div class="cat">PLATINUM</div></div>
-      <div class="p">400€</div><div class="s">Standing table · prima linie<br>7 mese</div></div>
+      <div class="p">400€</div><div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei<br><b>7 mese</b></div></div>
     <div class="card g1"><div class="k"><div class="sw g1"></div><div class="cat">GOLD</div></div>
-      <div class="p">250€</div><div class="s">Standing table · a doua linie<br>8 mese</div></div>
+      <div class="p">250€</div><div class="s">4 pers. · 1 sticlă · 4 bilete<br>A doua linie, în fața scenei<br><b>8 mese</b></div></div>
     <div class="card g2"><div class="k"><div class="sw g2"></div><div class="cat">GOLD</div></div>
-      <div class="p">200€</div><div class="s">Standing table · a treia linie<br>8 mese</div></div>
+      <div class="p">200€</div><div class="s">Standing table<br>A treia linie<br><b>8 mese</b></div></div>
     <div class="card sofa"><div class="k"><div class="sw sofa"></div><div class="cat">SOFA ×2</div></div>
-      <div class="p">4–6 pers.</div><div class="s">Canapea pe podium, cu masă mică</div></div>
+      <div class="p">4–6 pers.</div><div class="s">Canapea pe podium<br>cu masă mică<br><b>2 canapele</b></div></div>
+  </div>
+
+  <div class="title p2t">
+    <h1>ETAJ <span>&amp; PRIVÉ</span></h1>
+    <div class="fl"><b>PLANTA ALTA</b><br>BALCÓN · SALĂ PRIVATĂ</div>
+  </div>
+  <div class="p2">
+    <div class="prive">
+      <div class="lc"><div class="tag">EXPERIENȚA SUPREMĂ</div>
+      <h2>PLATINUM<br>PRIVÉ</h2>
+      <div class="price">5.000€</div>
+      <div class="kpis">
+        <div class="kpi"><b>20</b><span>PERSOANE</span></div>
+        <div class="kpi"><b>10</b><span>STICLE</span></div>
+      </div>
+      </div>
+      <div class="feat">
+        <div>Sală privată</div><div>În fața scenei</div>
+        <div>Ospătar dedicat</div><div>Baie privată</div>
+        <div>Terasă privată</div>
+      </div>
+    </div>
+    <div class="duo">
+      <div class="pk vip">
+        <div class="tag">ETAJ · SOFA</div>
+        <h3>VIP BALCONY SOFA</h3>
+        <div class="price">500€</div>
+        <div class="row"><span>6 PERS.</span><span>2 STICLE</span><span>6 BILETE</span></div>
+        <div class="d">Sofa la etaj, cu vedere către scenă</div>
+      </div>
+      <div class="pk bal">
+        <div class="tag">BALCON · STANDING</div>
+        <h3>BALCONY STANDING TABLE</h3>
+        <div class="price">250€</div>
+        <div class="row"><span>4 PERS.</span><span>1 STICLĂ</span><span>4 BILETE</span></div>
+        <div class="d">Masă înaltă la balcon, cu vedere către scenă</div>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -233,7 +317,7 @@
 </div>
 
 <script>
-  if (location.hash === '#story') document.body.classList.add('story');
+  for (const c of location.hash.slice(1).split(',')) if (c) document.body.classList.add(c);
   const g = document.getElementById('tables');
   const NS = 'http://www.w3.org/2000/svg';
   const xs = i => 560 + (i - 3.5) * 80;         // 8 poziții, aliniate pe cele 3 rânduri

@@ -9,6 +9,8 @@ const { chromium } = require('playwright');
   const jobs = [
     { hash: '', w: 1080, h: 1350, out: 'harta_mese_planta_baja_1080x1350.png' },
     { hash: '#story', w: 1080, h: 1920, out: 'harta_mese_planta_baja_story_1080x1920.png' },
+    { hash: '#etaj', w: 1080, h: 1350, out: 'mese_etaj_prive_1080x1350.png' },
+    { hash: '#story,etaj', w: 1080, h: 1920, out: 'mese_etaj_prive_story_1080x1920.png' },
   ];
   for (const j of jobs) {
     const page = await browser.newPage({ viewport: { width: j.w, height: j.h }, deviceScaleFactor: 2 });
