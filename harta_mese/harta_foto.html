@@ -158,6 +158,23 @@
   .hd .rzh2 .inf .t{font-size:24px}
   .story .ph .dorlogo{height:84px}
   .story .inf .t{font-size:30px} .story .inf .a{font-size:12px}
+
+  /* ——— TikTok 9:16 ——— */
+  .tiktok .page{height:1920px !important;padding:180px 0 540px !important;justify-content:flex-start !important}
+  .tiktok .pv{padding:0 170px 0 64px}
+  .tiktok .ph{align-items:center}
+  .tiktok .ph .dorlogo{height:64px}
+  .tiktok .ph .ev b{font-size:26px} .tiktok .ph .ev s{font-size:11px;max-width:330px;line-height:1.5}
+  .tiktok .pt{margin:18px 170px 14px 64px;padding-bottom:10px}
+  .tiktok .pt h1{font-size:50px} .tiktok .pt div{font-size:11px}
+  .tiktok .frame{height:700px}
+  .tiktok #vstage{transform:translateX(-90px) scale(.8) !important}
+  .tiktok .pl{display:none}
+  .tiktok .pf{margin:18px 170px 0 64px;flex-direction:column;align-items:flex-start !important;gap:14px}
+  .tiktok .pfr{text-align:left}
+  .tiktok .pf .xc{font-size:18px}
+  .tiktok .vp{left:112px !important;width:300px !important;padding-left:26px !important}
+  .tiktok .inset{left:112px !important}
 </style>
 </head>
 <body>
@@ -327,6 +344,12 @@
   }));
 
   if (vert) host.querySelector('.acc').setAttribute('transform', 'translate(0 46)');
+  if (document.body.classList.contains('tiktok')) {       // coloana de iconițe TikTok acoperă ~170px din dreapta
+    const balc = host.querySelector('[stroke-dasharray="7 6"]').parentNode;
+    balc.querySelectorAll('rect[y="14"], text, circle, line').forEach(e => e.setAttribute('transform', 'translate(-260 0)'));
+    host.querySelectorAll('rect[x="1296"], text[x="1324"]').forEach(e => e.setAttribute('transform', 'translate(-120 0)'));
+    host.querySelector('.acc').setAttribute('transform', 'translate(0 -20)');
+  }
 </script>
 </body>
 </html>

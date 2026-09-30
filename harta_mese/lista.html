@@ -70,6 +70,27 @@
   .story .nm b{font-size:29px} .story .pr{font-size:50px}
   .story .row.hero{padding:34px 28px}
   .story footer{margin-top:44px}
+
+  /* ——— TikTok 9:16: meniu sus, iconițe pe dreapta, descriere + locație jos ——— */
+  .tiktok .page{height:1920px;padding:180px 170px 540px 64px}
+  .tiktok .ring{left:calc(50% - 53px)}
+  .tiktok .dorlogo{height:70px}
+  .tiktok h1{font-size:74px;margin-top:22px}
+  .tiktok .sub{flex-direction:column;align-items:center;gap:6px;margin-top:14px}
+  .tiktok .sub b{font-size:26px} .tiktok .sub i{font-size:12.5px}
+  .tiktok .list{margin-top:26px}
+  .tiktok .row{padding:15px 0;column-gap:16px}
+  .tiktok .nm{gap:11px} .tiktok .sw{width:16px;height:16px}
+  .tiktok .nm b{font-size:22px} .tiktok .nm em{font-size:10.5px;padding:4px 9px}
+  .tiktok .pr{font-size:36px}
+  .tiktok .det{font-size:14.5px;padding-left:27px;margin-top:6px}
+  .tiktok .row.hero{padding:20px 20px} .tiktok .row.hero .nm b{font-size:25px} .tiktok .row.hero .pr{font-size:42px}
+  .tiktok .row.hero .nm{flex-wrap:wrap;row-gap:6px}
+  .tiktok footer{margin-top:24px;gap:18px}
+  .tiktok .cta{font-size:19px;padding:12px 22px}
+  .tiktok footer .fr{gap:16px} .tiktok .bw{padding-right:16px}
+  .tiktok .bb{font-size:17px} .tiktok .bd{font-size:11px}
+  .tiktok footer .r{font-size:11px} .tiktok footer .t{font-size:28px} .tiktok footer .a{font-size:10.5px}
 </style>
 </head>
 <body>
@@ -125,6 +146,6 @@
   </footer>
   <div class="grain"></div>
 </div>
-<script>if (location.hash === '#story') document.body.classList.add('story');</script>
+<script>for (const c of location.hash.slice(1).split(',')) if (c) document.body.classList.add(c);</script>
 </body>
 </html>
