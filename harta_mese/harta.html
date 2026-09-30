@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Harta meselor · Bribón del Puerto</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07070b; --ink:#F8F5F1; --mute:#9a96a3; --line:#2a2833;
+    --plat-hi:#ffffff; --plat:#d9dce2; --plat-lo:#8d929c;
+    --gold-hi:#ffe39a; --gold:#d8a843; --gold-lo:#8e6420;
+    --sofa:#c98a6a;
+    /* rezervate pentru etaj — nu apar pe parter */
+    --balcony:#6f8cff; --vip-sofa:#b77cff; --prive:#e9d7b0;
+    --stage:#e0304e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg)}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .page{position:relative;width:1080px;height:1350px;overflow:hidden;
+    background:
+      radial-gradient(900px 520px at 50% 46%, rgba(120,90,200,.13), transparent 70%),
+      radial-gradient(700px 400px at 50% 100%, rgba(216,168,67,.07), transparent 70%),
+      var(--bg);
+    padding:56px 56px 48px; display:flex; flex-direction:column}
+  .story .page{height:1920px;padding:150px 44px 190px}
+
+  header{display:flex;justify-content:space-between;align-items:flex-start}
+  .venue{line-height:1}
+  .venue .b{font-family:Cinzel,serif;font-weight:600;font-size:46px;letter-spacing:.04em}
+  .venue .d{font-family:Cinzel,serif;font-size:15px;letter-spacing:.42em;margin-top:8px;display:flex;align-items:center;gap:10px}
+  .venue .d i{display:block;width:22px;height:1px;background:var(--gold)}
+  .venue .a{font-size:10.5px;letter-spacing:.42em;color:var(--mute);margin-top:9px;font-weight:600}
+  .event{text-align:right}
+  .event img{height:30px;display:block;margin-left:auto}
+  .event .n{font-weight:800;font-size:22px;letter-spacing:.14em;margin-top:12px}
+  .event .t{font-weight:600;font-size:12.5px;letter-spacing:.26em;color:var(--gold);margin-top:6px}
+
+  .title{margin-top:34px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:16px}
+  .title h1{font-weight:800;font-size:40px;letter-spacing:.06em;line-height:1}
+  .title h1 span{color:var(--gold)}
+  .title .fl{font-weight:600;font-size:12.5px;letter-spacing:.3em;color:var(--mute);text-align:right;line-height:1.7}
+  .title .fl b{color:var(--ink);font-weight:700}
+
+  .plan{flex:1;display:flex;align-items:center;justify-content:center;min-height:0}
+  .plan svg{width:100%;height:auto;display:block}
+
+  .legend{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:16px 16px 15px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.01))}
+  .card .k{display:flex;align-items:center;gap:10px}
+  .card .sw{width:22px;height:22px;border-radius:50%;flex:none}
+  .card .cat{font-weight:700;font-size:13px;letter-spacing:.16em}
+  .card .p{font-weight:800;font-size:30px;margin-top:12px;letter-spacing:.01em}
+  .card .s{font-size:12.5px;color:#c9c5cf;margin-top:4px;line-height:1.45}
+  .card.plat{border-color:rgba(217,220,226,.35)} .card.plat .p{color:var(--plat)}
+  .card.g1{border-color:rgba(216,168,67,.55)} .card.g1 .p{color:var(--gold)}
+  .card.g2{border-color:rgba(216,168,67,.3)} .card.g2 .p{color:var(--gold)}
+  .card.sofa{border-color:rgba(201,138,106,.4)} .card.sofa .p{color:var(--sofa);font-size:22px;margin-top:17px}
+  .sw.plat{background:radial-gradient(circle at 35% 30%,var(--plat-hi),var(--plat) 45%,var(--plat-lo))}
+  .sw.g1{background:radial-gradient(circle at 35% 30%,var(--gold-hi),var(--gold) 50%,var(--gold-lo))}
+  .sw.g2{background:#15120c;border:2.5px solid var(--gold)}
+  .sw.sofa{border-radius:5px;background:linear-gradient(180deg,#e0a888,#8a553d)}
+
+  footer{margin-top:22px;display:flex;justify-content:space-between;align-items:center;font-size:12.5px;letter-spacing:.2em;color:var(--mute);font-weight:600}
+  footer b{color:var(--ink);font-size:20px;letter-spacing:.1em;font-weight:800;margin-left:12px}
+
+  .story .title{margin-top:56px}
+  .story .legend{grid-template-columns:repeat(2,1fr);gap:14px}
+  .story .card{padding:20px 20px 18px}
+  .story footer{margin-top:28px}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="venue">
+      <div class="b">BRIBÓN</div>
+      <div class="d"><i></i>DEL PUERTO<i></i></div>
+      <div class="a">AGUADULCE</div>
+    </div>
+    <div class="event">
+      <img src="dor_logo.png" alt="DOR">
+      <div class="n">BOGDAN DLP</div>
+      <div class="t">9 OCTUBRE · 22:00</div>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>HARTA <span>MESELOR</span></h1>
+    <div class="fl"><b>PLANTA BAJA</b><br>MAIN FLOOR</div>
+  </div>
+
+  <div class="plan">
+<svg viewBox="0 0 1100 880" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif">
+  <defs>
+    <radialGradient id="plat" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#d9dce2"/><stop offset="1" stop-color="#7f848e"/>
+    </radialGradient>
+    <radialGradient id="gold" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ffe39a"/><stop offset=".5" stop-color="#d8a843"/><stop offset="1" stop-color="#8e6420"/>
+    </radialGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#15131d"/><stop offset="1" stop-color="#100f16"/>
+    </linearGradient>
+    <linearGradient id="stageG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a0d18"/><stop offset="1" stop-color="#1c070d"/>
+    </linearGradient>
+    <linearGradient id="sofaG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#8a553d"/><stop offset="1" stop-color="#d9a283"/>
+    </linearGradient>
+    <linearGradient id="dj" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b3142a"/><stop offset="1" stop-color="#6d0b19"/>
+    </linearGradient>
+    <filter id="glowW" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+    <filter id="glowS" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="14"/></filter>
+    <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1" fill="#ffffff" opacity=".05"/></pattern>
+    <pattern id="bottles" width="10" height="16" patternUnits="userSpaceOnUse"><rect x="3" y="3" width="4" height="10" rx="2" fill="#e8a24a" opacity=".55"/></pattern>
+  </defs>
+
+  <!-- sala -->
+  <path d="M50 70 H1050 V760 H640 V760 H480 H50 Z" fill="url(#floor)"/>
+  <rect x="50" y="70" width="1000" height="690" fill="url(#dots)"/>
+  <!-- pereți: stânga, fund, dreapta -->
+  <path d="M50 760 V70 H1050 V760" fill="none" stroke="#4a4658" stroke-width="6" stroke-linejoin="round"/>
+  <!-- LED perimetral (balustrada etajului se vede deasupra) -->
+  <path d="M60 750 V80 H1040 V750" fill="none" stroke="#5b5cff" stroke-width="1.4" opacity=".55" stroke-dasharray="2 6"/>
+
+  <!-- SCENA -->
+  <rect x="80" y="70" width="400" height="120" fill="#e0304e" opacity=".35" filter="url(#glowS)"/>
+  <rect x="80" y="70" width="400" height="120" rx="0" fill="url(#stageG)" stroke="#e0304e" stroke-width="2"/>
+  <line x1="80" y1="190" x2="480" y2="190" stroke="#ff5a74" stroke-width="3"/>
+  <text x="280" y="140" text-anchor="middle" fill="#F8F5F1" font-weight="800" font-size="34" letter-spacing="12">SCENA</text>
+  <text x="280" y="166" text-anchor="middle" fill="#ff8ea0" font-weight="600" font-size="11" letter-spacing="4">ESCENARIO · LIVE</text>
+
+  <!-- BAR (stânga) -->
+  <rect x="50" y="250" width="34" height="490" fill="url(#bottles)"/>
+  <rect x="112" y="250" width="40" height="490" rx="4" fill="#1d1a24" stroke="#e8a24a" stroke-width="1.5"/>
+  <rect x="148" y="250" width="4" height="490" fill="#e8a24a" opacity=".8"/>
+  <text transform="translate(135 495) rotate(-90)" text-anchor="middle" fill="#e8a24a" font-weight="700" font-size="14" letter-spacing="10">BAR</text>
+
+  <!-- stâlp central -->
+  <rect x="570" y="300" width="60" height="60" rx="3" fill="#2b2835" stroke="#6a6680" stroke-width="2"/>
+  <path d="M570 300 L630 360 M630 300 L570 360" stroke="#6a6680" stroke-width="1" opacity=".6"/>
+  <text x="600" y="380" text-anchor="middle" fill="#8a8698" font-size="10" font-weight="600" letter-spacing="2.5">STÂLP</text>
+
+  <!-- pilaștri perete dreapta + canapele -->
+  <g fill="#2b2835" stroke="#4a4658" stroke-width="1.5">
+    <rect x="1020" y="118" width="30" height="24"/>
+    <rect x="1020" y="252" width="30" height="24"/>
+    <rect x="1020" y="386" width="30" height="24"/>
+  </g>
+  <g>
+    <rect x="1006" y="154" width="36" height="88" rx="8" fill="url(#sofaG)"/>
+    <rect x="1030" y="154" width="12" height="88" rx="4" fill="#6e4331"/>
+    <circle cx="965" cy="198" r="13" fill="#231c18" stroke="#c98a6a" stroke-width="2"/>
+    <circle cx="965" cy="198" r="3.5" fill="#ffcf7a"/>
+
+    <rect x="1006" y="288" width="36" height="88" rx="8" fill="url(#sofaG)"/>
+    <rect x="1030" y="288" width="12" height="88" rx="4" fill="#6e4331"/>
+    <circle cx="965" cy="332" r="13" fill="#231c18" stroke="#c98a6a" stroke-width="2"/>
+    <circle cx="965" cy="332" r="3.5" fill="#ffcf7a"/>
+  </g>
+  <text x="968" y="234" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="12" letter-spacing="2.5">SOFA 1</text>
+  <text x="968" y="368" text-anchor="middle" fill="#c98a6a" font-weight="700" font-size="12" letter-spacing="2.5">SOFA 2</text>
+
+  <!-- DJ -->
+  <rect x="975" y="430" width="75" height="160" fill="#ff2040" opacity=".28" filter="url(#glowS)"/>
+  <rect x="978" y="430" width="52" height="160" rx="4" fill="url(#dj)" stroke="#ff4d63" stroke-width="1.5"/>
+  <text transform="translate(1004 510) rotate(-90)" text-anchor="middle" fill="#fff" font-weight="800" font-size="16" letter-spacing="6">DJ</text>
+
+  <!-- scări spre etaj (dreapta jos) -->
+  <g stroke="#5a566a" stroke-width="1.5">
+    <rect x="960" y="640" width="90" height="120" fill="#16141d"/>
+    <line x1="960" y1="655" x2="1050" y2="655"/><line x1="960" y1="670" x2="1050" y2="670"/>
+    <line x1="960" y1="685" x2="1050" y2="685"/><line x1="960" y1="700" x2="1050" y2="700"/>
+    <line x1="960" y1="715" x2="1050" y2="715"/><line x1="960" y1="730" x2="1050" y2="730"/>
+    <line x1="960" y1="745" x2="1050" y2="745"/>
+  </g>
+  <line x1="960" y1="640" x2="960" y2="760" stroke="#8fb4ff" stroke-width="2" opacity=".6"/>
+  <text x="1003" y="614" text-anchor="middle" fill="#9a96a3" font-size="10.5" font-weight="700" letter-spacing="2.5">SCĂRI</text>
+  <text x="1003" y="630" text-anchor="middle" fill="#9a96a3" font-size="10.5" font-weight="700" letter-spacing="2.5">↑ ETAJ</text>
+
+  <!-- față: balustradă de sticlă + acces -->
+  <line x1="50" y1="760" x2="480" y2="760" stroke="#8fb4ff" stroke-width="3" opacity=".7"/>
+  <line x1="640" y1="760" x2="960" y2="760" stroke="#8fb4ff" stroke-width="3" opacity=".7"/>
+  <path d="M480 760 V850 M640 760 V850" stroke="#4a4658" stroke-width="4"/>
+  <rect x="484" y="760" width="152" height="90" fill="#0f0e14"/>
+  <path d="M560 842 V790 M546 804 L560 788 L574 804" fill="none" stroke="#d8a843" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="560" y="874" text-anchor="middle" fill="#F8F5F1" font-weight="800" font-size="15" letter-spacing="4">ACCES PRINCIPAL</text>
+
+  <!-- etichete rânduri -->
+  <g font-weight="700" font-size="12.5" letter-spacing="3" text-anchor="middle">
+    <line x1="250" y1="262" x2="470" y2="262" stroke="#d9dce2" stroke-width="1" opacity=".45"/>
+    <line x1="650" y1="262" x2="870" y2="262" stroke="#d9dce2" stroke-width="1" opacity=".45"/>
+    <rect x="474" y="248" width="172" height="28" rx="14" fill="#0b0b10" stroke="#d9dce2" stroke-width="1.2"/>
+    <text x="560" y="267" fill="#eef0f3">PLATINUM · 400€</text>
+
+    <line x1="250" y1="412" x2="470" y2="412" stroke="#d8a843" stroke-width="1" opacity=".5"/>
+    <line x1="650" y1="412" x2="870" y2="412" stroke="#d8a843" stroke-width="1" opacity=".5"/>
+    <rect x="474" y="398" width="172" height="28" rx="14" fill="#d8a843"/>
+    <text x="560" y="417" fill="#140f05">GOLD · 250€</text>
+
+    <line x1="250" y1="552" x2="470" y2="552" stroke="#d8a843" stroke-width="1" opacity=".35"/>
+    <line x1="650" y1="552" x2="870" y2="552" stroke="#d8a843" stroke-width="1" opacity=".35"/>
+    <rect x="474" y="538" width="172" height="28" rx="14" fill="#0b0b10" stroke="#d8a843" stroke-width="1.4"/>
+    <text x="560" y="557" fill="#e9c270">GOLD · 200€</text>
+  </g>
+
+  <g id="tables" font-weight="800" font-size="17" text-anchor="middle"></g>
+</svg>
+  </div>
+
+  <div class="legend">
+    <div class="card plat"><div class="k"><div class="sw plat"></div><div class="cat">PLATINUM</div></div>
+      <div class="p">400€</div><div class="s">Standing table · prima linie<br>7 mese</div></div>
+    <div class="card g1"><div class="k"><div class="sw g1"></div><div class="cat">GOLD</div></div>
+      <div class="p">250€</div><div class="s">Standing table · a doua linie<br>8 mese</div></div>
+    <div class="card g2"><div class="k"><div class="sw g2"></div><div class="cat">GOLD</div></div>
+      <div class="p">200€</div><div class="s">Standing table · a treia linie<br>8 mese</div></div>
+    <div class="card sofa"><div class="k"><div class="sw sofa"></div><div class="cat">SOFA ×2</div></div>
+      <div class="p">4–6 pers.</div><div class="s">Canapea cu masă mică</div></div>
+  </div>
+
+  <footer>
+    <span>INFORMACIÓN Y RESERVAS<b>679 743 114</b></span>
+    <span>DOR · LIVE CU FORMAȚIA</span>
+  </footer>
+</div>
+
+<script>
+  if (location.hash === '#story') document.body.classList.add('story');
+  const g = document.getElementById('tables');
+  const NS = 'http://www.w3.org/2000/svg';
+  const xs = i => 560 + (i - 3.5) * 80;         // 8 poziții, aliniate pe cele 3 rânduri
+  const rows = [
+    { y: 330, kind: 'plat', skip: [4] },          // poziția 5 = stâlpul (schiță: 1–4, 6–8)
+    { y: 470, kind: 'g1' },
+    { y: 610, kind: 'g2' },
+  ];
+  const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  for (const r of rows) for (let i = 0; i < 8; i++) {
+    if (r.skip && r.skip.includes(i)) continue;
+    const x = xs(i), y = r.y;
+    const halo = { plat: '#ffffff', g1: '#e0b04e', g2: '#d8a843' }[r.kind];
+    g.append(el('circle', { cx: x, cy: y + 3, r: 27, fill: halo, opacity: r.kind === 'g2' ? .18 : .32, filter: 'url(#glowW)' }));
+    if (r.kind === 'plat') g.append(el('circle', { cx: x, cy: y, r: 24, fill: 'url(#plat)' }));
+    if (r.kind === 'g1')   g.append(el('circle', { cx: x, cy: y, r: 24, fill: 'url(#gold)' }));
+    if (r.kind === 'g2')   g.append(el('circle', { cx: x, cy: y, r: 22.5, fill: '#15120c', stroke: '#d8a843', 'stroke-width': 3 }));
+    const t = el('text', { x, y: y + 6, fill: r.kind === 'g2' ? '#f0c667' : '#15131a' });
+    t.textContent = i + 1;
+    g.append(t);
+  }
+</script>
+</body>
+</html>
