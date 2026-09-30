@@ -36,7 +36,7 @@
 
   /* bandă legendă în poză (varianta landscape) */
   .lg{left:0;right:0;bottom:0;height:192px;border-radius:0;border-width:1px 0 0;
-    display:grid;grid-template-columns:repeat(5,1fr) 1.05fr;padding:0 10px;background:rgba(6,6,10,.84)}
+    display:grid;grid-template-columns:1.12fr repeat(5,1fr);padding:0 10px;background:rgba(6,6,10,.84)}
   .lg > div{padding:34px 16px 0;border-right:1px solid rgba(255,255,255,.08)}
   .lg > div:last-child{border-right:0}
   .lg .k{display:flex;align-items:center;gap:8px;font-weight:700;font-size:12.5px;letter-spacing:.12em;white-space:nowrap}
@@ -106,12 +106,34 @@
     background:linear-gradient(180deg,rgba(7,7,11,.0),#07070b 8%)}
   .vp h2{font-weight:800;font-size:30px;letter-spacing:.06em;line-height:1.1}
   .vp h2 span{display:block;color:var(--gold);font-size:17px;letter-spacing:.3em;margin-top:6px}
-  .vp ul{list-style:none;margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);display:grid;gap:8px}
+  .vp ul{list-style:none;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.14);display:grid;gap:5px}
   .vp li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;letter-spacing:.14em}
   .vp .sw{width:18px;height:18px;border-radius:50%}
   .vert .page{justify-content:center}
   .vert .pl .p{font-size:33px} .vert .pl .s{font-size:13.5px} .vert .pl .k{font-size:13.5px}
   .vert .pl > div{padding:18px 17px 17px}
+
+  /* Platinum Privé: inserție foto (sala e pe balconul din față, de unde e făcută fotografia) */
+  .inset{position:absolute;z-index:3;left:16px;top:574px;width:282px;padding:10px 10px 12px;border-radius:16px;
+    background:rgba(12,10,7,.96);border:1.5px solid rgba(233,215,176,.75);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+  .inset img{display:block;width:100%;height:150px;object-fit:cover;object-position:50% 30%;border-radius:9px}
+  .inset .t{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px}
+  .inset b{font-family:Cinzel,serif;font-weight:600;font-size:18px;color:#fbf3e2;letter-spacing:.04em}
+  .inset em{font-style:normal;font-weight:800;font-size:17px;color:#e9d7b0}
+  .inset span{display:block;font-size:11.5px;color:#d9ceb8;margin-top:5px;line-height:1.4}
+  .vert.story .inset{left:66px}
+  .sw.prive{background:radial-gradient(circle at 35% 30%,#fff4d6,#e9d7b0 45%,#8f7445)}
+  .c-prive{color:#ecd9ad}
+  .hd .rzh{margin-top:16px;display:flex;flex-direction:column}
+  .hd .rzh span{font-size:9.5px;letter-spacing:.26em;color:var(--mute);font-weight:700}
+  .hd .rzh b{font-size:22px;font-weight:800;letter-spacing:.06em;margin-top:5px}
+  .pl .prv{grid-column:1/-1;display:flex;align-items:center;gap:26px;border-color:rgba(233,215,176,.55);
+    background:radial-gradient(500px 160px at 90% 0%,rgba(233,215,176,.14),transparent 70%),#0e0c09}
+  .pl .prv .nm{font-family:Cinzel,serif;font-weight:600;font-size:26px;color:#fbf3e2;line-height:1.05}
+  .pl .prv .p{margin-top:6px}
+  .pl .prv .ft{font-size:13px;color:#e4dac6;line-height:1.6;border-left:1px solid rgba(233,215,176,.3);padding-left:24px}
+  .vert .page{padding-top:40px;padding-bottom:30px}
+  .pl{row-gap:10px}
 </style>
 </head>
 <body>
@@ -199,16 +221,22 @@
 
 <!-- landscape -->
 <div class="stage" id="land">
+  <div class="inset"><img src="surse/platinum_prive.png" alt="Platinum Privé">
+    <div class="t"><b>PLATINUM PRIVÉ</b><em>5.000€</em></div>
+    <span>Sală privată pe balconul din față, vizavi de scenă · 20 pers. · 10 sticle</span></div>
   <div class="glass hd">
     <div class="b">BRIBÓN</div>
     <div class="d"><i></i>DEL PUERTO<i></i></div>
     <div class="a">AGUADULCE</div>
+    <div class="rzh"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b></div>
     <div class="fl">
       <h2>PLANTA BAJA<span>MAIN FLOOR</span></h2>
       <div class="ev"><img src="dor_logo.png" alt="DOR"><b>BOGDAN DLP</b><s>9 OCTUBRE · 22:00</s></div>
     </div>
   </div>
   <div class="glass lg">
+    <div><div class="k"><span class="sw prive"></span>PLATINUM PRIVÉ</div><div class="p c-prive">5.000€</div>
+      <div class="s">20 pers. · 10 sticle · ospătar dedicat<br>Sală privată, baie &amp; terasă privată</div></div>
     <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
       <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
     <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
@@ -219,7 +247,6 @@
       <div class="s">6 pers. · 2 sticle · 6 bilete<br>Balcon · 2 mese</div></div>
     <div><div class="k"><span class="sw bal"></span>BALCONY TABLE</div><div class="p c-bal">250€</div>
       <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Balcon · 2 mese</div></div>
-    <div class="rz"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b><i>DOR · LIVE CU FORMAȚIA</i></div>
   </div>
 </div>
 
@@ -232,11 +259,16 @@
   <div class="pt"><h1>HARTA <span>MESELOR</span></h1><div><b>PLANTA BAJA</b><br>MAIN FLOOR</div></div>
   <div class="frame"><div class="stage" id="vstage" style="transform:scale(.703125)">
     <div class="vb"></div>
+    <div class="inset"><img src="surse/platinum_prive.png" alt="Platinum Privé">
+    <div class="t"><b>PLATINUM PRIVÉ</b><em>5.000€</em></div>
+    <span>Sală privată pe balconul din față, vizavi de scenă · 20 pers. · 10 sticle</span></div>
     <div class="glass vp"><h2>PLANTA BAJA<span>MAIN FLOOR</span></h2>
-      <ul><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD</li>
+      <ul><li><span class="sw prive"></span>PRIVÉ</li><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD</li>
           <li><span class="sw sofa"></span>SOFA</li><li><span class="sw vip"></span>VIP BALCONY</li><li><span class="sw bal"></span>BALCONY</li></ul></div>
   </div></div>
   <div class="pl">
+    <div class="prv"><div><div class="k"><span class="sw prive"></span>SALĂ PRIVATĂ</div><div class="nm">PLATINUM PRIVÉ</div><div class="p c-prive">5.000€</div></div>
+      <div class="ft">20 persoane · 10 sticle<br>În fața scenei · ospătar dedicat<br>Baie privată · terasă privată</div></div>
     <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
       <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
     <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
