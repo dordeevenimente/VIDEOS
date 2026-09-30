@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Harta meselor foto · Bribón del Puerto</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  :root{
+    --ink:#F8F5F1; --mute:#b9b4c2;
+    --plat:#e4e7ec; --gold:#e2b04a; --bronze:#c9803f; --sofa:#d49a78; --stage:#ff3b5c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#050507}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+  /* scena foto în coordonatele imaginii sursă (1536×1024) */
+  .stage{position:relative;width:1536px;height:1024px;overflow:hidden;transform-origin:0 0}
+  .stage > img{position:absolute;inset:0;width:100%;height:100%;filter:saturate(1.06) contrast(1.04)}
+  .stage svg{position:absolute;inset:0;z-index:2}
+  .glass{position:absolute;z-index:3;background:rgba(9,8,13,.97);backdrop-filter:blur(18px) saturate(1.2);
+    border:1px solid rgba(255,255,255,.12);border-radius:16px}
+
+  /* antet în poză (varianta landscape) */
+  .hd{left:18px;top:18px;width:400px;height:272px;padding:24px 26px 20px;display:flex;flex-direction:column}
+  .hd .b{font-family:Cinzel,serif;font-weight:600;font-size:40px;letter-spacing:.04em;line-height:1}
+  .hd .d{font-family:Cinzel,serif;font-size:13px;letter-spacing:.42em;margin-top:8px;display:flex;align-items:center;gap:10px}
+  .hd .d i{display:block;width:20px;height:1px;background:var(--gold)}
+  .hd .a{font-size:9.5px;letter-spacing:.42em;color:var(--mute);margin-top:7px;font-weight:600}
+  .hd .fl{margin-top:auto;padding-top:15px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:flex-end}
+  .hd .fl h2{font-weight:800;font-size:22px;letter-spacing:.08em;line-height:1.15}
+  .hd .fl h2 span{display:block;color:var(--gold);font-size:14px;letter-spacing:.3em;margin-top:4px}
+  .hd .ev{text-align:right}
+  .hd .ev img{height:19px;display:block;margin-left:auto}
+  .hd .ev b{display:block;font-size:12.5px;letter-spacing:.16em;margin-top:7px}
+  .hd .ev s{display:block;text-decoration:none;font-size:10px;letter-spacing:.2em;color:var(--gold);margin-top:3px;font-weight:600}
+
+  /* bandă legendă în poză (varianta landscape) */
+  .lg{left:0;right:0;bottom:0;height:192px;border-radius:0;border-width:1px 0 0;
+    display:grid;grid-template-columns:repeat(4,1fr) .9fr;padding:0 16px;background:rgba(6,6,10,.84)}
+  .lg > div{padding:34px 20px 0;border-right:1px solid rgba(255,255,255,.08)}
+  .lg > div:last-child{border-right:0}
+  .lg .k{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;letter-spacing:.2em}
+  .lg .sw{width:16px;height:16px;border-radius:50%;flex:none}
+  .lg .p{font-weight:800;font-size:36px;margin-top:9px;line-height:1}
+  .lg .s{font-size:13.5px;color:#cdc8d4;margin-top:8px;line-height:1.5}
+  .lg .rz{display:flex;flex-direction:column;justify-content:flex-start}
+  .lg .rz span{font-size:10.5px;letter-spacing:.26em;color:var(--mute);font-weight:700}
+  .lg .rz b{font-size:29px;font-weight:800;letter-spacing:.06em;margin-top:10px}
+  .lg .rz i{font-style:normal;font-size:11px;letter-spacing:.2em;color:var(--gold);margin-top:10px;font-weight:700}
+  .sw.plat{background:radial-gradient(circle at 35% 30%,#fff,#d9dce2 45%,#80858f)}
+  .sw.gold{background:radial-gradient(circle at 35% 30%,#ffe7a6,#e2b04a 50%,#8e6420)}
+  .sw.bronze{background:radial-gradient(circle at 35% 30%,#f3c297,#c9803f 50%,#6d3d16)}
+  .sw.sofa{border-radius:4px;background:linear-gradient(180deg,#e7b394,#8a553d)}
+  .c-plat{color:var(--plat)} .c-gold{color:var(--gold)} .c-bronze{color:var(--bronze)} .c-sofa{color:var(--sofa)}
+
+  /* ——— variante verticale: antet și legendă în afara pozei ——— */
+  .page{display:none}
+  .vert .page{display:flex;flex-direction:column;width:1080px;height:1350px;padding:54px 0 44px;
+    background:radial-gradient(900px 500px at 50% 50%,rgba(110,80,200,.14),transparent 70%),#07070b}
+  .vert.story .page{height:1920px;padding:150px 0 180px;justify-content:center}
+  .vert > .stage{display:none}
+  .vert .hd,.vert .lg{display:none}
+  .vert .mask{display:block}
+  .mask{display:none}
+  .pv{padding:0 48px}
+  .ph{display:flex;justify-content:space-between;align-items:flex-start}
+  .ph .b{font-family:Cinzel,serif;font-weight:600;font-size:44px;letter-spacing:.04em;line-height:1}
+  .ph .d{font-family:Cinzel,serif;font-size:14px;letter-spacing:.42em;margin-top:8px;display:flex;align-items:center;gap:10px}
+  .ph .d i{display:block;width:22px;height:1px;background:var(--gold)}
+  .ph .a{font-size:10px;letter-spacing:.42em;color:var(--mute);margin-top:8px;font-weight:600}
+  .ph .ev{text-align:right}
+  .ph .ev img{height:28px;display:block;margin-left:auto}
+  .ph .ev b{display:block;font-size:21px;letter-spacing:.14em;margin-top:11px;font-weight:800}
+  .ph .ev s{display:block;text-decoration:none;font-size:12px;letter-spacing:.26em;color:var(--gold);margin-top:6px;font-weight:600}
+  .pt{margin:30px 48px 22px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid #2a2833;padding-bottom:14px}
+  .pt h1{font-weight:800;font-size:38px;letter-spacing:.06em;line-height:1}
+  .pt h1 span{color:var(--gold)}
+  .pt div{font-weight:600;font-size:12px;letter-spacing:.3em;color:var(--mute);text-align:right;line-height:1.7}
+  .pt div b{color:var(--ink)}
+  .frame{position:relative;width:1080px;height:626px;overflow:hidden}
+  .pl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 48px 0}
+  .story .pl{grid-template-columns:repeat(2,1fr);gap:12px}
+  .pl > div{border:1px solid #2a2833;border-radius:14px;padding:15px 15px 14px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+  .pl .k{display:flex;align-items:center;gap:9px;font-weight:700;font-size:12.5px;letter-spacing:.18em}
+  .pl .sw{width:18px;height:18px;border-radius:50%;flex:none}
+  .pl .p{font-weight:800;font-size:29px;margin-top:10px}
+  .pl .s{font-size:12px;color:#cdc8d4;margin-top:4px;line-height:1.5}
+  .pf{margin:20px 48px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.2em;color:var(--mute);font-weight:600}
+  .pf b{color:var(--ink);font-size:20px;letter-spacing:.1em;font-weight:800;margin-left:12px}
+
+  .story .frame{height:758px}
+  .story #vstage{transform:translateX(-95px) scale(.86) !important}
+  .vert.story .vp{left:18px;width:420px;padding-left:120px}
+  .story .pl .p{font-size:38px} .story .pl .s{font-size:15px} .story .pl .k{font-size:15px}
+  .story .pl > div{padding:22px 22px 20px}
+  .vp,.vb{display:none}
+  .vert .vp{display:block;left:18px;top:18px;width:300px;height:272px;padding:26px 26px 22px}
+  .vert .vb{display:block;position:absolute;z-index:1;left:0;right:0;bottom:0;height:200px;
+    background:linear-gradient(180deg,rgba(7,7,11,.0),#07070b 8%)}
+  .vp h2{font-weight:800;font-size:30px;letter-spacing:.06em;line-height:1.1}
+  .vp h2 span{display:block;color:var(--gold);font-size:17px;letter-spacing:.3em;margin-top:6px}
+  .vp ul{list-style:none;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.14);display:grid;gap:11px}
+  .vp li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:17px;letter-spacing:.14em}
+  .vp .sw{width:18px;height:18px;border-radius:50%}
+  .vert .page{justify-content:center}
+  .vert .pl .p{font-size:33px} .vert .pl .s{font-size:13.5px} .vert .pl .k{font-size:13.5px}
+  .vert .pl > div{padding:18px 17px 17px}
+</style>
+</head>
+<body>
+
+<template id="photo">
+  <img src="surse/schita_planta_baja_v2.png" alt="">
+  <svg viewBox="0 0 1536 1024" width="1536" height="1024" font-family="Inter, sans-serif">
+    <defs>
+      <radialGradient id="gPlat" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".45" stop-color="#dfe2e7"/><stop offset="1" stop-color="#7c818b"/></radialGradient>
+      <radialGradient id="gGold" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#e2b04a"/><stop offset="1" stop-color="#8e6420"/></radialGradient>
+      <radialGradient id="gBronze" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#f6c89e"/><stop offset=".5" stop-color="#c9803f"/><stop offset="1" stop-color="#6d3d16"/></radialGradient>
+      <linearGradient id="lPlat" x1="0" x2="1"><stop offset="0" stop-color="#e4e7ec" stop-opacity="0"/><stop offset=".12" stop-color="#e4e7ec"/><stop offset=".88" stop-color="#e4e7ec"/><stop offset="1" stop-color="#e4e7ec" stop-opacity="0"/></linearGradient>
+      <linearGradient id="lGold" x1="0" x2="1"><stop offset="0" stop-color="#e2b04a" stop-opacity="0"/><stop offset=".12" stop-color="#e2b04a"/><stop offset=".88" stop-color="#e2b04a"/><stop offset="1" stop-color="#e2b04a" stop-opacity="0"/></linearGradient>
+      <linearGradient id="lBronze" x1="0" x2="1"><stop offset="0" stop-color="#c9803f" stop-opacity="0"/><stop offset=".12" stop-color="#c9803f"/><stop offset=".88" stop-color="#c9803f"/><stop offset="1" stop-color="#c9803f" stop-opacity="0"/></linearGradient>
+      <linearGradient id="mBot" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#07070b" stop-opacity="0"/><stop offset=".35" stop-color="#07070b" stop-opacity=".92"/><stop offset="1" stop-color="#07070b"/></linearGradient>
+      <radialGradient id="mTL" cx="0" cy="0" r="1"><stop offset="0" stop-color="#07070b"/><stop offset=".62" stop-color="#07070b" stop-opacity=".97"/><stop offset="1" stop-color="#07070b" stop-opacity="0"/></radialGradient>
+      <filter id="blur6" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="blur12" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="12"/></filter>
+      <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#000" flood-opacity=".7"/></filter>
+    </defs>
+
+
+    <!-- SCENA: platforma cu echipament din spate-stânga -->
+    <g>
+      <ellipse cx="535" cy="410" rx="120" ry="34" fill="#ff3b5c" opacity=".30" filter="url(#blur12)"/>
+      <rect x="470" y="318" width="132" height="36" rx="18" fill="#12060a" stroke="#ff3b5c" stroke-width="1.8" filter="url(#shadow)"/>
+      <text x="536" y="342" text-anchor="middle" fill="#fff" font-weight="800" font-size="16" letter-spacing="6">SCENA</text>
+      <line x1="536" y1="354" x2="536" y2="372" stroke="#ff3b5c" stroke-width="1.8"/>
+    </g>
+
+    <!-- rânduri: linii noi peste cele vechi + etichete -->
+    <g font-weight="700" font-size="12.5" letter-spacing="3" text-anchor="middle">
+      <line x1="586" y1="416" x2="984" y2="416" stroke="url(#lPlat)" stroke-width="3"/>
+      <rect x="664" y="398" width="176" height="32" rx="16" fill="#0b0b10" stroke="#e4e7ec" stroke-width="1.5" filter="url(#shadow)"/>
+      <text x="752" y="419" fill="#f2f4f7">PLATINUM · 400€</text>
+
+      <line x1="536" y1="541" x2="1050" y2="541" stroke="url(#lGold)" stroke-width="3"/>
+      <rect x="708" y="523" width="168" height="32" rx="16" fill="#e2b04a" filter="url(#shadow)"/>
+      <text x="792" y="544" fill="#150f04">GOLD · 250€</text>
+
+      <line x1="514" y1="667" x2="1080" y2="667" stroke="url(#lBronze)" stroke-width="3"/>
+      <rect x="704" y="649" width="172" height="32" rx="16" fill="#1a0f07" stroke="#c9803f" stroke-width="1.6" filter="url(#shadow)"/>
+      <text x="790" y="670" fill="#f0b684">BRONZ · 200€</text>
+    </g>
+
+    <g id="marks" font-weight="800" text-anchor="middle"></g>
+
+    <!-- canapele, DJ, bar -->
+    <g font-weight="700" font-size="11" letter-spacing="2.2" text-anchor="middle">
+      <ellipse cx="975" cy="392" rx="52" ry="14" fill="#d49a78" opacity=".35" filter="url(#blur6)"/>
+      <ellipse cx="1130" cy="448" rx="52" ry="14" fill="#d49a78" opacity=".35" filter="url(#blur6)"/>
+      <rect x="938" y="338" width="74" height="24" rx="12" fill="#140d09" stroke="#d49a78" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="975" y="354" fill="#f2c7ad">SOFA 1</text>
+      <rect x="1093" y="386" width="74" height="24" rx="12" fill="#140d09" stroke="#d49a78" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="1130" y="402" fill="#f2c7ad">SOFA 2</text>
+
+      <rect x="1296" y="400" width="56" height="26" rx="13" fill="#1a0508" stroke="#ff3b5c" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="1324" y="417" fill="#fff" font-size="12.5" letter-spacing="3">DJ</text>
+
+      <rect x="164" y="520" width="72" height="26" rx="13" fill="#140f07" stroke="#e8a24a" stroke-width="1.4" filter="url(#shadow)"/>
+      <text x="200" y="537" fill="#ffd7a0" font-size="12" letter-spacing="4">BAR</text>
+    </g>
+
+    <!-- acces principal (peste eticheta veche, în varianta verticală după mască) -->
+    <g class="acc">
+      <rect x="592" y="800" width="192" height="28" rx="14" fill="#0b0a10" stroke="#e2b04a" stroke-width="1.4" filter="url(#shadow)"/>
+      <path d="M612 820 V808 M607 812 L612 806 L617 812" fill="none" stroke="#e2b04a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <text x="698" y="819" text-anchor="middle" fill="#F8F5F1" font-weight="800" font-size="11.5" letter-spacing="3">ACCES PRINCIPAL</text>
+    </g>
+  </svg>
+</template>
+
+<!-- landscape -->
+<div class="stage" id="land">
+  <div class="glass hd">
+    <div class="b">BRIBÓN</div>
+    <div class="d"><i></i>DEL PUERTO<i></i></div>
+    <div class="a">AGUADULCE</div>
+    <div class="fl">
+      <h2>PLANTA BAJA<span>MAIN FLOOR</span></h2>
+      <div class="ev"><img src="dor_logo.png" alt="DOR"><b>BOGDAN DLP</b><s>9 OCTUBRE · 22:00</s></div>
+    </div>
+  </div>
+  <div class="glass lg">
+    <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
+    <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>A doua linie, în fața scenei</div></div>
+    <div><div class="k"><span class="sw bronze"></span>BRONZ</div><div class="p c-bronze">200€</div>
+      <div class="s">Standing table<br>A treia linie, după stâlp</div></div>
+    <div><div class="k"><span class="sw sofa"></span>SOFA ×2</div><div class="p c-sofa">4–6 pers.</div>
+      <div class="s">Canapea cu masă mică<br>La ring, lângă DJ</div></div>
+    <div class="rz"><span>INFORMACIÓN Y RESERVAS</span><b>679 743 114</b><i>DOR · LIVE CU FORMAȚIA</i></div>
+  </div>
+</div>
+
+<!-- feed / story -->
+<div class="page">
+  <div class="pv ph">
+    <div><div class="b">BRIBÓN</div><div class="d"><i></i>DEL PUERTO<i></i></div><div class="a">AGUADULCE</div></div>
+    <div class="ev"><img src="dor_logo.png" alt="DOR"><b>BOGDAN DLP</b><s>9 OCTUBRE · 22:00</s></div>
+  </div>
+  <div class="pt"><h1>HARTA <span>MESELOR</span></h1><div><b>PLANTA BAJA</b><br>MAIN FLOOR</div></div>
+  <div class="frame"><div class="stage" id="vstage" style="transform:scale(.703125)">
+    <div class="vb"></div>
+    <div class="glass vp"><h2>PLANTA BAJA<span>MAIN FLOOR</span></h2>
+      <ul><li><span class="sw plat"></span>PLATINUM</li><li><span class="sw gold"></span>GOLD</li>
+          <li><span class="sw bronze"></span>BRONZ</li><li><span class="sw sofa"></span>SOFA</li></ul></div>
+  </div></div>
+  <div class="pl">
+    <div><div class="k"><span class="sw plat"></span>PLATINUM</div><div class="p c-plat">400€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>Prima linie, în fața scenei</div></div>
+    <div><div class="k"><span class="sw gold"></span>GOLD</div><div class="p c-gold">250€</div>
+      <div class="s">4 pers. · 1 sticlă · 4 bilete<br>A doua linie, în fața scenei</div></div>
+    <div><div class="k"><span class="sw bronze"></span>BRONZ</div><div class="p c-bronze">200€</div>
+      <div class="s">Standing table<br>A treia linie, după stâlp</div></div>
+    <div><div class="k"><span class="sw sofa"></span>SOFA ×2</div><div class="p c-sofa">4–6 pers.</div>
+      <div class="s">Canapea cu masă mică<br>La ring, lângă DJ</div></div>
+  </div>
+  <div class="pf"><span>INFORMACIÓN Y RESERVAS<b>679 743 114</b></span><span>DOR · LIVE CU FORMAȚIA</span></div>
+</div>
+
+<script>
+  for (const c of location.hash.slice(1).split(',')) if (c) document.body.classList.add(c);
+  const vert = document.body.classList.contains('vert');
+  const host = document.getElementById(vert ? 'vstage' : 'land');
+  host.prepend(document.getElementById('photo').content.cloneNode(true));
+
+  // poziții măsurate pe schiță (centrele bulinelor vechi, coordonate sursă 1536×1024)
+  const rows = [
+    { kind: 'plat',   y: 443, xs: [554, 613, 675, 737, null, 896, 958, 1022] },
+    { kind: 'gold',   y: 571, xs: [541, 617, 690, 764, 834, 905, 977, 1046] },
+    { kind: 'bronze', y: 693, xs: [525, 613, 690, 763, 833, 907, 985, 1070] },
+  ];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
+  const C = { plat: '#e4e7ec', gold: '#e2b04a', bronze: '#c9803f' };
+  const F = { plat: 'url(#gPlat)', gold: 'url(#gGold)', bronze: 'url(#gBronze)' };
+  const g = host.querySelector('#marks');
+  rows.forEach((r, ri) => r.xs.forEach((x, i) => {
+    if (x == null) return;                       // poziția 5 Platinum = stâlpul
+    const s = 1 + ri * 0.08;                     // perspectivă: rândurile din față puțin mai mari
+    const top = r.y + 20 * s;                    // blatul mesei sub bulină
+    g.append(el('ellipse', { cx: x, cy: top, rx: 30 * s, ry: 9 * s, fill: C[r.kind], opacity: .55, filter: 'url(#blur6)' }));
+    g.append(el('ellipse', { cx: x, cy: top, rx: 24 * s, ry: 6.5 * s, fill: 'none', stroke: C[r.kind], 'stroke-width': 1.6, opacity: .9 }));
+    g.append(el('circle', { cx: x, cy: r.y, r: 16.5 * s, fill: F[r.kind], stroke: '#0b0b10', 'stroke-width': 2, filter: 'url(#shadow)' }));
+    const t = el('text', { x, y: r.y + 5.5 * s, 'font-size': 15.5 * s, fill: '#141118' });
+    t.textContent = i + 1;
+    g.append(t);
+  }));
+
+  if (vert) host.querySelector('.acc').setAttribute('transform', 'translate(0 46)');
+</script>
+</body>
+</html>
