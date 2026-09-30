@@ -24,7 +24,7 @@
   header{text-align:center}
   .b{font-weight:700;font-size:40px;letter-spacing:.34em;padding-left:.34em;line-height:1}
   .d{font-size:23px;letter-spacing:.2em;margin-top:6px}
-  h1{text-shadow:0 4px 30px rgba(30,18,10,.35);font-weight:800;font-size:92px;letter-spacing:-.05em;line-height:.9;margin-top:40px}
+  h1{text-shadow:0 4px 30px rgba(30,18,10,.35);font-weight:800;font-size:92px;letter-spacing:-.05em;line-height:.9;margin-top:34px}
   h1 span{color:var(--butter)}
   .sub{display:flex;justify-content:center;align-items:baseline;gap:18px;margin-top:20px}
   .sub b{font-weight:800;font-size:30px;letter-spacing:-.03em}
@@ -52,7 +52,12 @@
 
   footer{margin-top:30px;display:flex;justify-content:space-between;align-items:center;gap:30px}
   footer .fl{text-align:left} footer .fr{text-align:right}
-  .sub .dor{height:22px;align-self:center;margin-right:2px}
+  .dorlogo{display:block;height:84px;margin:0 auto;filter:drop-shadow(0 6px 24px rgba(20,10,4,.35))}
+  footer .fr{display:flex;align-items:center;gap:26px}
+  .bw{text-align:center;padding-right:26px;border-right:1px solid var(--line)}
+  .bb{font-weight:700;font-size:26px;letter-spacing:.34em;padding-left:.34em;line-height:1}
+  .bd{font-size:14px;letter-spacing:.2em;margin-top:4px}
+  .story .dorlogo{height:96px}
   .cta{display:inline-block;background:#FFE7AE;color:#2a1a10;font-weight:800;font-size:26px;letter-spacing:-.02em;padding:16px 34px;border-radius:99px;box-shadow:0 10px 30px rgba(20,10,4,.35)}
   .cta b{font-weight:900;letter-spacing:.06em}
   .cta2{font-size:14px;font-weight:600;letter-spacing:.06em;color:var(--mute);margin-top:12px}
@@ -72,10 +77,9 @@
   <div class="bg"></div><div class="shade"></div>
   <div class="ring"></div>
   <header>
-    <div class="b">BRIBÓN</div>
-    <div class="d">del puerto</div>
+    <img class="dorlogo" src="dor_logo.png" alt="DOR">
     <h1>Mese <span>disponibile</span></h1>
-    <div class="sub"><img class="dor" src="dor_logo.png" alt="DOR"><b>Bogdan DLP</b><i>LIVE CU FORMAȚIA · VIE 09 OCTUBRE · 23:00H</i></div>
+    <div class="sub"><b>Bogdan DLP</b><i>LIVE CU FORMAȚIA · VIE 09 OCTUBRE · 23:00H</i></div>
   </header>
 
   <div class="list">
@@ -111,9 +115,12 @@
       <div class="cta">Rezervă online pe <b>XCEED</b></div>
     </div>
     <div class="fr">
-      <div class="r">INFO &amp; RESERVAS</div>
-      <div class="t">679 743 114</div>
-      <div class="a">PENÍNSULA DE CONTRADIQUE, 04720<br>AGUADULCE (ALMERÍA)</div>
+      <div class="bw"><div class="bb">BRIBÓN</div><div class="bd">del puerto</div></div>
+      <div class="inf">
+        <div class="r">INFO &amp; RESERVAS</div>
+        <div class="t">679 743 114</div>
+        <div class="a">PENÍNSULA DE CONTRADIQUE, 04720<br>AGUADULCE (ALMERÍA)</div>
+      </div>
     </div>
   </footer>
   <div class="grain"></div>
