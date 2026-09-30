@@ -9,8 +9,8 @@ const { chromium } = require('playwright');
   const jobs = [
     { file: 'lista.html', hash: '', w: 1080, h: 1350, scale: 2, out: 'lista_mese_1080x1350.png' },
     { file: 'lista.html', hash: '#story', w: 1080, h: 1920, scale: 2, out: 'lista_mese_story_1080x1920.png' },
-    { file: 'lista.html', hash: '#tiktok', w: 1080, h: 1920, scale: 2, out: 'tiktok_2_lista_mese_1080x1920.png' },
-    { hash: '#vert,tiktok', w: 1080, h: 1920, scale: 2, out: 'tiktok_1_harta_mese_1080x1920.png' },
+    { file: 'tiktok.html', hash: '#harta', w: 1080, h: 1920, scale: 2, out: 'tiktok_1_harta_mese_1080x1920.png' },
+    { file: 'tiktok.html', hash: '#lista', w: 1080, h: 1920, scale: 2, out: 'tiktok_2_lista_mese_1080x1920.png' },
     { hash: '', w: 1536, h: 1024, scale: 1.25, out: 'harta_foto_planta_baja_1920x1280.png' },
     { hash: '#vert', w: 1080, h: 1350, scale: 2, out: 'harta_foto_planta_baja_1080x1350.png' },
     { hash: '#vert,story', w: 1080, h: 1920, scale: 2, out: 'harta_foto_planta_baja_story_1080x1920.png' },
