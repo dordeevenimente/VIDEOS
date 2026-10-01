@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Carduri video Bribón</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  /* Straturi transparente 1080×1920. Textul stă în zona sigură Reels/TikTok:
+     sus de la 230px, jos până la ~1240px, dreapta liber 150px. */
+  :root{--ink:#F3E4CE;--butter:#FFE7AE;--mute:#e6d3bb;--gold:#dca64b;--plat:#efe9e1;--vip:#e08a70;--bal:#e0a06a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:transparent}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+  .c{position:relative;width:1080px;height:1920px;overflow:hidden;display:none}
+  .on{display:block}
+  .shade{position:absolute;left:0;right:0;top:0;height:900px;background:linear-gradient(180deg,rgba(14,8,5,.78),rgba(14,8,5,.45) 45%,rgba(14,8,5,0))}
+  .blk{position:absolute;left:72px;top:250px;width:820px;text-shadow:0 4px 24px rgba(0,0,0,.55)}
+  .k{font-weight:800;font-size:30px;letter-spacing:.14em;color:var(--butter)}
+  .p{font-weight:800;font-size:190px;letter-spacing:-.06em;line-height:.9;margin-top:10px}
+  .d{font-weight:600;font-size:34px;letter-spacing:-.01em;margin-top:18px;color:var(--ink)}
+  .d2{font-weight:700;font-size:24px;letter-spacing:.12em;margin-top:12px;color:var(--mute)}
+  .bar{width:90px;height:6px;border-radius:3px;margin-bottom:22px}
+  /* hook */
+  .hook .blk{top:270px}
+  .hook h1{font-weight:800;font-size:132px;letter-spacing:-.055em;line-height:.9}
+  .hook h1 span{color:var(--butter)}
+  .hook .d2{margin-top:26px;color:var(--butter)}
+  /* venue */
+  .venue .blk{top:300px;width:936px;text-align:center}
+  .venue .bb{font-weight:700;font-size:96px;letter-spacing:.34em;padding-left:.34em;line-height:1}
+  .venue .bd{font-size:50px;letter-spacing:.22em;margin-top:10px}
+  .venue .d2{margin-top:30px;color:var(--butter);font-size:26px}
+  /* final */
+  .end .full{position:absolute;inset:0;background:radial-gradient(800px 900px at 50% 42%,rgba(30,18,10,.55),rgba(12,7,4,.88))}
+  .end .blk{top:240px;width:936px;text-align:center}
+  .end .dor{height:96px;display:block;margin:0 auto}
+  .end h2{font-weight:800;font-size:88px;letter-spacing:-.05em;line-height:.95;margin-top:30px}
+  .end h2 span{color:var(--butter)}
+  .end .cta{display:inline-block;margin-top:34px;background:var(--butter);color:#2a1a10;font-weight:800;font-size:42px;letter-spacing:-.02em;padding:24px 46px;border-radius:99px;text-shadow:none;box-shadow:0 14px 40px rgba(0,0,0,.45)}
+  .end .cta b{font-weight:900;letter-spacing:.05em}
+  .end .ph{font-weight:800;font-size:52px;letter-spacing:-.02em;margin-top:26px}
+  .end .ph small{display:block;font-size:22px;font-weight:700;letter-spacing:.2em;color:var(--mute);margin-bottom:6px}
+  .end .ev{font-weight:700;font-size:26px;letter-spacing:.12em;color:var(--butter);margin-top:30px;line-height:1.6}
+  .pk{margin:30px auto 0;width:780px;text-align:left}
+  .pk .r{display:flex;align-items:center;gap:16px;padding:15px 4px;border-bottom:1px solid rgba(243,228,206,.22)}
+  .pk .r i{width:18px;height:18px;border-radius:50%;flex:none}
+  .pk .r b{flex:1;font-weight:800;font-size:29px;letter-spacing:.01em}
+  .pk .r em{font-style:normal;font-weight:800;font-size:42px;letter-spacing:-.04em}
+  .pk .r.hero b{font-size:32px} .pk .r.hero em{font-size:48px}
+</style>
+</head>
+<body>
+
+<div class="c hook" id="hook"><div class="shade"></div><div class="blk">
+  <h1>Masa ta<br><span>te așteaptă.</span></h1>
+  <div class="d2">BOGDAN DLP · LIVE CU FORMAȚIA · VIE 09 OCT</div>
+</div></div>
+
+<div class="c venue" id="venue"><div class="shade"></div><div class="blk">
+  <div class="bb">BRIBÓN</div><div class="bd">del puerto</div>
+  <div class="d2">AGUADULCE · ALMERÍA</div>
+</div></div>
+
+<div class="c" id="gold"><div class="shade"></div><div class="blk">
+  <div class="bar" style="background:var(--gold)"></div>
+  <div class="k">STANDING TABLE GOLD</div>
+  <div class="p" style="color:var(--gold)">250€</div>
+  <div class="d">4 persoane · 1 sticlă · 4 bilete</div>
+</div></div>
+
+<div class="c" id="plat"><div class="shade"></div><div class="blk">
+  <div class="bar" style="background:var(--plat)"></div>
+  <div class="k">STANDING TABLE PLATINUM</div>
+  <div class="p" style="color:var(--plat)">400€</div>
+  <div class="d">Prima linie, în fața scenei</div>
+</div></div>
+
+<div class="c" id="vip"><div class="shade"></div><div class="blk">
+  <div class="bar" style="background:var(--vip)"></div>
+  <div class="k">VIP BALCONY SOFA</div>
+  <div class="p" style="color:var(--vip)">500€</div>
+  <div class="d">6 persoane · 2 sticle · vedere către scenă</div>
+</div></div>
+
+<div class="c" id="prive"><div class="shade"></div><div class="blk">
+  <div class="bar" style="background:var(--butter)"></div>
+  <div class="k">PLATINUM PRIVÉ</div>
+  <div class="p" style="color:var(--butter)">5.000€</div>
+  <div class="d">Sală privată · 20 persoane · 10 sticle</div>
+  <div class="d2">BAIE PRIVATĂ · TERASĂ PRIVATĂ</div>
+</div></div>
+
+<div class="c" id="bal"><div class="shade"></div><div class="blk">
+  <div class="bar" style="background:var(--bal)"></div>
+  <div class="k">BALCONY STANDING TABLE</div>
+  <div class="p" style="color:var(--bal)">250€</div>
+  <div class="d">La balcon, cu vedere către scenă</div>
+</div></div>
+
+<div class="c end" id="end"><div class="full"></div><div class="blk">
+  <img class="dor" src="dor_logo.png" alt="DOR">
+  <h2>Rezervă-ți <span>masa</span></h2>
+  <div class="pk">
+    <div class="r hero"><i style="background:var(--butter)"></i><b>PLATINUM PRIVÉ</b><em style="color:var(--butter)">5.000€</em></div>
+    <div class="r"><i style="background:var(--vip)"></i><b>VIP BALCONY SOFA</b><em style="color:var(--vip)">500€</em></div>
+    <div class="r"><i style="background:var(--plat)"></i><b>STANDING TABLE PLATINUM</b><em style="color:var(--plat)">400€</em></div>
+    <div class="r"><i style="background:var(--gold)"></i><b>STANDING TABLE GOLD</b><em style="color:var(--gold)">250€</em></div>
+    <div class="r"><i style="background:var(--bal)"></i><b>BALCONY STANDING TABLE</b><em style="color:var(--bal)">250€</em></div>
+  </div>
+  <div class="cta">Rezervă acum pe <b>XCEED</b></div>
+  <div class="ph"><small>INFO &amp; RESERVAS</small>679 743 114</div>
+</div></div>
+
+<script>
+  const id = location.hash.slice(1);
+  document.getElementById(id).classList.add('on');
+</script>
+</body>
+</html>
