@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Copertă video Bribón</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+  /* Copertă 1080×1920. Tot ce contează stă în pătratul central 1080×1080 (y 420–1500),
+     ca să se vadă și în grila Instagram (1:1 / 4:5) și pe TikTok. */
+  :root{--ink:#F3E4CE;--butter:#FFE7AE;--gold:#dca64b;--plat:#efe9e1;--vip:#e08a70;--bal:#e0a06a}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;background:#0d0814}
+  .t{position:relative;width:1080px;height:1920px;overflow:hidden}
+  .bg{position:absolute;inset:0;background:url(cand_7152_0.4.png) center 40%/cover;
+    filter:contrast(1.12) saturate(1.15) brightness(.95)}
+  .sh{position:absolute;inset:0;background:
+      radial-gradient(680px 620px at 50% 52%,rgba(10,6,14,.70),rgba(10,6,14,.30) 70%,rgba(10,6,14,0)),
+      linear-gradient(180deg,rgba(10,6,14,.55),rgba(10,6,14,0) 22%,rgba(10,6,14,0) 70%,rgba(10,6,14,.75))}
+  .glow{position:absolute;left:50%;top:600px;width:760px;height:760px;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(255,231,174,.22),rgba(255,231,174,0) 65%)}
+  .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-shadow:0 6px 30px rgba(0,0,0,.6)}
+  .dor{position:absolute;top:300px;left:50%;transform:translateX(-50%);height:72px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.6))}
+  .face{position:absolute;top:420px;left:50%;transform:translateX(-50%);width:300px;height:300px;border-radius:50%;
+    border:7px solid var(--butter);box-shadow:0 0 0 10px rgba(255,231,174,.18),0 20px 50px rgba(0,0,0,.6);overflow:hidden}
+  .face img{width:100%;height:100%;display:block}
+  .live{position:absolute;top:696px;left:50%;transform:translateX(-50%);background:#e2324a;color:#fff;font-weight:900;font-size:26px;
+    letter-spacing:.12em;padding:9px 22px 9px 18px;border-radius:99px;display:flex;align-items:center;gap:10px;text-shadow:none;
+    box-shadow:0 8px 24px rgba(0,0,0,.5);white-space:nowrap}
+  .live i{width:13px;height:13px;border-radius:50%;background:#fff}
+  h1{position:absolute;top:790px;width:100%;text-align:center;font-weight:900;font-size:178px;letter-spacing:-.06em;line-height:.86}
+  h1 span{display:block;color:var(--butter)}
+  .chips{position:absolute;top:1130px;width:100%;display:flex;justify-content:center;gap:12px}
+  .chip{font-weight:900;font-size:38px;letter-spacing:-.03em;padding:12px 20px;border-radius:16px;background:rgba(18,10,8,.78);
+    border:2px solid;text-shadow:none;backdrop-filter:blur(6px)}
+  .sub{position:absolute;top:1238px;width:100%;text-align:center;font-weight:800;font-size:30px;letter-spacing:.1em}
+  .sub b{color:var(--butter)}
+  .cta{position:absolute;top:1306px;left:50%;transform:translateX(-50%);background:var(--butter);color:#2a1a10;font-weight:900;
+    font-size:34px;letter-spacing:-.01em;padding:18px 36px;border-radius:99px;text-shadow:none;white-space:nowrap;box-shadow:0 14px 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<div class="t">
+  <div class="bg"></div><div class="sh"></div><div class="glow"></div>
+  <div class="in">
+    <img class="dor" src="dor_logo.png" alt="DOR">
+    <div class="face"><img src="fata.png" alt="Bogdan DLP"></div>
+    <div class="live"><i></i>BOGDAN DLP · LIVE</div>
+    <h1>Ce masă<span>alegi?</span></h1>
+    <div class="chips">
+      <div class="chip" style="color:var(--gold);border-color:var(--gold)">250€</div>
+      <div class="chip" style="color:var(--plat);border-color:var(--plat)">400€</div>
+      <div class="chip" style="color:var(--vip);border-color:var(--vip)">500€</div>
+      <div class="chip" style="color:var(--butter);border-color:var(--butter)">5.000€</div>
+    </div>
+    <div class="sub">VIE <b>09 OCT</b> · BRIBÓN DEL PUERTO</div>
+    <div class="cta">Locuri limitate · XCEED</div>
+  </div>
+</div>
+</body>
+</html>
