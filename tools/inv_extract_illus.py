@@ -1,9 +1,9 @@
 import numpy as np, cv2, sys
 from PIL import Image
 # inner-frame interior of panel 2 (x0,x1,ybottom) measured from each mockup
-BOX={1:(512,963,704),2:(507,983,731),3:(517,975,685),4:(526,967,711),5:(513,978,701)}
+BOX={1:(512,963,704),2:(507,983,731),3:(517,975,685),4:(526,967,711),5:(513,978,701),6:(509,983,731)}
 # row where the search for the illustration top starts (below the subtitle)
-START={5:345}
+START={5:345,6:350}
 ONLY=[int(a) for a in sys.argv[1:]] or list(BOX)
 sr=cv2.dnn_superres.DnnSuperResImpl_create(); sr.readModel('EDSR_x4.pb'); sr.setModel('edsr',4)
 for i in ONLY:

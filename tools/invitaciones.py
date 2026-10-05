@@ -33,6 +33,7 @@ GUESTS = [
     ("ALEXANDRINA GORDON", 3),
     ("ILIE VÍCTOR GORDON", 4),
     ("MIGUEL ÁNGEL LÓPEZ RIVAS", 5),
+    ("GABRIEL AMAT AYLLÓN", 6),
 ]
 
 # ---- colour (CMYK 0..1) ----------------------------------------------------
