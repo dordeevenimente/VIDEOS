@@ -1,10 +1,10 @@
 """Invitaciones DOR · BOGDAN DLP — PDFs listos para imprenta.
 
 Por invitado genera:
-  invitacion_100x150_<NOMBRE>.pdf   3 páginas (portada, ilustración, carta), 100 × 150 mm,
-                                    sangrado 3 mm + marcas de corte, TrimBox/BleedBox definidos
-  sobre_DL_220x110_<NOMBRE>.pdf     2 páginas (anverso con nombre, solapa con logo),
-                                    sin sangrado: se imprime sobre sobre ya fabricado
+  invitacion_A5_148x210_<NOMBRE>.pdf  3 páginas (portada, ilustración, carta), A5 148 × 210 mm,
+                                      sangrado 3 mm + marcas de corte, TrimBox/BleedBox definidos
+  sobre_C5_229x162_<NOMBRE>.pdf       2 páginas (anverso con nombre, solapa con logo),
+                                      sin sangrado: se imprime sobre sobre ya fabricado
 
 Todo en CMYK nativo (sin RGB), fuentes incrustadas, ilustración a >300 ppp.
 """
@@ -45,8 +45,10 @@ REG = CMYKColor(1, 1, 1, 1)         # registro, sólo para marcas de corte
 # ---- geometry ---------------------------------------------------------------
 BLEED = 3 * mm
 MARK_ZONE = 10 * mm                 # zona fuera del sangrado para las marcas
-CARD_W, CARD_H = 100 * mm, 150 * mm
-FRAME_OUT, FRAME_IN = 5.0 * mm, 6.3 * mm   # marco doble, a >= 5 mm del corte
+CARD_W, CARD_H = 148 * mm, 210 * mm       # A5
+# la maqueta se compuso sobre 100 × 150 mm; S la lleva a A5 conservando proporciones
+S = 210 / 150
+FRAME_OUT, FRAME_IN = 5.0 * S * mm, 6.3 * S * mm   # marco doble, a 7 mm del corte
 
 
 def font(name, file):
@@ -65,11 +67,12 @@ font("CG-SB", "CormorantGaramond-600.ttf")
 
 # ---- drawing helpers (coords: mm from top-left of trim box) ----------------
 class Page:
-    def __init__(self, c, w, h, ox, oy):
+    def __init__(self, c, w, h, ox, oy, s=1.0):
         self.c, self.w, self.h, self.ox, self.oy = c, w, h, ox, oy
+        self.s = s   # escala de diseño: posiciones, cuerpos y filetes
 
     def y(self, top_mm):
-        return self.oy + self.h - top_mm * mm
+        return self.oy + self.h - top_mm * self.s * mm
 
     def x(self, left_mm):
         return self.ox + left_mm * mm
@@ -77,6 +80,8 @@ class Page:
     def text(self, s, top_mm, fnt, size, color=INK, track=0.0, max_w_mm=None):
         """Centred text with optional tracking (em); baseline at top_mm."""
         c = self.c
+        size *= self.s
+        max_w_mm = max_w_mm and max_w_mm * self.s
         width = lambda sz: pdfmetrics.stringWidth(s, fnt, sz) + track * sz * (len(s) - 1)
         if max_w_mm:
             while width(size) > max_w_mm * mm:
@@ -92,8 +97,9 @@ class Page:
 
     def divider(self, top_mm, half_mm=22, gap_mm=2.6, d_mm=1.0):
         c, cx, y = self.c, self.ox + self.w / 2, self.y(top_mm)
+        half_mm, gap_mm, d_mm = half_mm * self.s, gap_mm * self.s, d_mm * self.s
         c.setStrokeColor(GOLD)
-        c.setLineWidth(0.5)
+        c.setLineWidth(0.5 * self.s)
         c.line(cx - half_mm * mm, y, cx - gap_mm * mm, y)
         c.line(cx + gap_mm * mm, y, cx + half_mm * mm, y)
         c.setFillColor(GOLD)
@@ -106,11 +112,12 @@ class Page:
         c = self.c
         c.setStrokeColor(GOLD)
         for inset, lw in ((out_mm, 0.9), (in_mm, 0.35)):
-            c.setLineWidth(lw)
+            c.setLineWidth(lw * self.s)
             c.rect(self.ox + inset, self.oy + inset, self.w - 2 * inset, self.h - 2 * inset)
 
     def logo(self, centre_top_mm, width_mm):
         d = LOGO
+        width_mm *= self.s
         s = width_mm * mm / LOGO_BOX[2]
         h = LOGO_BOX[3] * s
         self.c.saveState()
@@ -182,7 +189,7 @@ def card_page(c, draw, guest, illus, marks=True):
     c.setBleedBox((ox - BLEED, oy - BLEED, ox + CARD_W + BLEED, oy + CARD_H + BLEED))
     c.setFillColor(CREAM)
     c.rect(ox - BLEED, oy - BLEED, CARD_W + 2 * BLEED, CARD_H + 2 * BLEED, stroke=0, fill=1)
-    p = Page(c, CARD_W, CARD_H, ox, oy)
+    p = Page(c, CARD_W, CARD_H, ox, oy, S)
     draw(p, guest, illus)
     p.frame(FRAME_OUT, FRAME_IN)
     if marks:
@@ -206,14 +213,13 @@ def ilustracion(p, guest, illus):
     p.divider(53.5, half_mm=16)
     p.text("Una noche que nos acerca", 62, "CG-MI", 13)
     p.text("un poco más a casa.", 68, "CG-MI", 13)
-    inner = FRAME_IN + 0.35  # justo dentro del filete interior
+    inner = FRAME_IN + 0.35 * S  # justo dentro del filete interior
     w = CARD_W - 2 * inner
     iw, ih = illus.size
-    h = w * ih / iw
-    h = min(h, CARD_H - inner - 76 * mm)          # nunca sube por encima del texto
     c.saveState()
     clip = c.beginPath()
-    clip.rect(p.ox + inner, p.oy + inner, w, CARD_H - 2 * inner)
+    # nunca sube por encima del texto (76 mm de diseño desde arriba)
+    clip.rect(p.ox + inner, p.oy + inner, w, CARD_H - inner - 76 * S * mm)
     c.clipPath(clip, stroke=0, fill=0)
     c.drawInlineImage(illus, p.ox + inner, p.oy + inner, w, w * ih / iw)
     c.restoreState()
@@ -250,7 +256,7 @@ def carta(p, guest, illus):
     p.text("Equipo DOR", 138.6, "EB", 9)
 
 
-ENV_W, ENV_H = 220 * mm, 110 * mm
+ENV_W, ENV_H = 229 * mm, 162 * mm   # sobre C5, para tarjeta A5
 
 
 def sobre(c, guest):
@@ -260,13 +266,13 @@ def sobre(c, guest):
         c.setBleedBox((0, 0, ENV_W, ENV_H))
         p = Page(c, ENV_W, ENV_H, 0, 0)
         if side == "anverso":
-            p.frame(9 * mm, 10.3 * mm)
-            p.text(guest, 57, "CG-SB", 19, track=0.18, max_w_mm=150)
-            p.divider(65, half_mm=26)
+            p.frame(10 * mm, 11.5 * mm)
+            p.text(guest, 82, "CG-SB", 22, track=0.18, max_w_mm=170)
+            p.divider(92, half_mm=30)
         else:
-            # logo centrado sobre la solapa en pico (DL, solapa ~ 45 mm)
-            p.logo(20, 40)
-            p.divider(33, half_mm=13)
+            # logo centrado sobre la solapa en pico (C5, solapa ~ 60 mm)
+            p.logo(26, 52)
+            p.divider(43, half_mm=16)
         c.showPage()
 
 
@@ -300,22 +306,22 @@ def main():
         os.makedirs(d, exist_ok=True)
         illus = illustration_cmyk(idx)
         for marks, suffix in ((True, ""), (False, "_sin_marcas")):
-            c = canvas.Canvas(os.path.join(d, f"invitacion_100x150_{slug(guest)}{suffix}.pdf"),
+            c = canvas.Canvas(os.path.join(d, f"invitacion_A5_148x210_{slug(guest)}{suffix}.pdf"),
                               initialFontName="EB")
             c.setTitle(f"Invitación DOR · {guest}"); c.setAuthor("DOR")
             for draw in (portada, ilustracion, carta):
                 card_page(c, draw, guest, illus, marks)
             c.save()
             finalize(c._filename)
-        c = canvas.Canvas(os.path.join(d, f"sobre_DL_220x110_{slug(guest)}.pdf"), initialFontName="EB")
+        c = canvas.Canvas(os.path.join(d, f"sobre_C5_229x162_{slug(guest)}.pdf"), initialFontName="EB")
         c.setTitle(f"Sobre DOR · {guest}"); c.setAuthor("DOR")
         sobre(c, guest)
         c.save()
         finalize(c._filename)
         # prueba visual (no es para imprenta)
-        cards = preview(os.path.join(d, f"invitacion_100x150_{slug(guest)}_sin_marcas.pdf"),
+        cards = preview(os.path.join(d, f"invitacion_A5_148x210_{slug(guest)}_sin_marcas.pdf"),
                         os.path.join(d, "_c.png"), 120)
-        env = preview(os.path.join(d, f"sobre_DL_220x110_{slug(guest)}.pdf"), os.path.join(d, "_e.png"), 60)
+        env = preview(os.path.join(d, f"sobre_C5_229x162_{slug(guest)}.pdf"), os.path.join(d, "_e.png"), 60)
         ims = [Image.open(f).convert("RGB") for f in cards + env]
         gap = 30
         top_w = sum(i.width for i in ims[:3]) + gap * 4

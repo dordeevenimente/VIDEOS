@@ -74,10 +74,10 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 Alexandrina Gordon, Ilie Víctor Gordon, Miguel Ángel López Rivas). Specificațiile pentru tipografie (în spaniolă)
 sunt în `print/LEEME_IMPRENTA.txt`.
 
-- `invitacion_100x150_*.pdf` — 3 cartonașe 100 × 150 mm (copertă, ilustrație, scrisoare),
+- `invitacion_A5_148x210_*.pdf` — 3 cartonașe A5 148 × 210 mm (copertă, ilustrație, scrisoare),
   bleed 3 mm + semne de tăiere, TrimBox/BleedBox; varianta `_sin_marcas` fără semne.
-- `sobre_DL_220x110_*.pdf` — plic DL: față cu numele, clapă cu logo (fără bleed).
-- CMYK nativ, fonturi încorporate, logo vectorizat, ilustrație ~520 ppi.
+- `sobre_C5_229x162_*.pdf` — plic C5 (pentru A5): față cu numele, clapă cu logo (fără bleed).
+- CMYK nativ, fonturi încorporate, logo vectorizat, ilustrație 345–372 ppi.
 
 Reproducere: `python3 tools/inv_extract_illus.py` (decupaj + upscale EDSR ×4 din machete),
 apoi `python3 tools/invitaciones.py`. Dependențe: `reportlab`, `svglib`, `Pillow`, `numpy`,

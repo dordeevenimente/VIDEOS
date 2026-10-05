@@ -3,25 +3,25 @@ DOR · BOGDAN DLP — INVITACIONES PERSONALIZADAS (5 invitados)
 
 Una carpeta por invitado. Cada carpeta contiene:
 
-  invitacion_100x150_<NOMBRE>.pdf
-      3 páginas = 3 tarjetas independientes, formato final 100 × 150 mm (vertical)
+  invitacion_A5_148x210_<NOMBRE>.pdf
+      3 páginas = 3 tarjetas independientes, formato final A5 148 × 210 mm (vertical)
         pág. 1  portada (logo DOR)
         pág. 2  ilustración + cita
         pág. 3  carta personalizada con el nombre del invitado
       Impresión a 1 cara (4/0), cada tarjeta se corta por separado.
-      Sangrado 3 mm por cada lado (106 × 156 mm con sangrado) + marcas de corte.
+      Sangrado 3 mm por cada lado (154 × 216 mm con sangrado) + marcas de corte.
       TrimBox y BleedBox definidos en el PDF.
 
-  invitacion_100x150_<NOMBRE>_sin_marcas.pdf
-      Mismo contenido, página = 106 × 156 mm (formato + sangrado), sin marcas
+  invitacion_A5_148x210_<NOMBRE>_sin_marcas.pdf
+      Mismo contenido, página = 154 × 216 mm (formato + sangrado), sin marcas
       de corte — para imprentas online que lo piden así.
 
-  sobre_DL_220x110_<NOMBRE>.pdf
-      Sobre DL 220 × 110 mm, solapa en pico.
+  sobre_C5_229x162_<NOMBRE>.pdf
+      Sobre C5 229 × 162 mm (para tarjeta A5), solapa en pico.
         pág. 1  anverso: nombre del invitado con marco dorado
         pág. 2  dorso/solapa: logo DOR centrado sobre la solapa
       Sin sangrado ni fondo: se imprime sobre sobre ya fabricado
-      (recomendado: sobre marfil/crema). Todos los elementos a ≥ 9 mm del borde.
+      (recomendado: sobre marfil/crema). Todos los elementos a ≥ 10 mm del borde.
 
   PRUEBA_<NOMBRE>.jpg   — sólo prueba visual, NO es para imprimir.
 
@@ -35,8 +35,8 @@ Especificaciones técnicas
 - Tinta máxima < 160 %.
 - Fuentes incrustadas (EB Garamond, Cormorant Garamond — licencia OFL).
 - Logo DOR y todos los textos/filetes: vectoriales.
-- Ilustración: CMYK, ~520 ppp a tamaño final.
-- Grosor mínimo de línea: 0,35 pt. Margen de seguridad: el marco está a 5 mm del corte.
+- Ilustración: CMYK, 345–372 ppp a tamaño final.
+- Grosor mínimo de línea: 0,35 pt. Margen de seguridad: el marco está a 7 mm del corte.
 
 Papel recomendado: cartulina 300–350 g, acabado mate o verjurado blanco/marfil.
 Si se imprime sobre cartulina marfil, avisar: se puede suprimir el fondo crema.
