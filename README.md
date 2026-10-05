@@ -71,7 +71,7 @@ Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi I
 # Invitații personalizate — gata de tipar
 
 `print/<NN_NUME>/` — câte un folder per invitat (Daniel Salcedo, José Juan Rubí,
-Alexandrina Gordon, Ilie Víctor Gordon). Specificațiile pentru tipografie (în spaniolă)
+Alexandrina Gordon, Ilie Víctor Gordon, Miguel Ángel López Rivas). Specificațiile pentru tipografie (în spaniolă)
 sunt în `print/LEEME_IMPRENTA.txt`.
 
 - `invitacion_100x150_*.pdf` — 3 cartonașe 100 × 150 mm (copertă, ilustrație, scrisoare),
