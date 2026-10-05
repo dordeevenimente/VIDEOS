@@ -65,3 +65,20 @@ python3 tools/render.py        # grade + compoziție + export
 ```
 
 Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi Inter Display.
+
+---
+
+# Invitații personalizate — gata de tipar
+
+`print/<NN_NUME>/` — câte un folder per invitat (Daniel Salcedo, José Juan Rubí,
+Alexandrina Gordon, Ilie Víctor Gordon). Specificațiile pentru tipografie (în spaniolă)
+sunt în `print/LEEME_IMPRENTA.txt`.
+
+- `invitacion_100x150_*.pdf` — 3 cartonașe 100 × 150 mm (copertă, ilustrație, scrisoare),
+  bleed 3 mm + semne de tăiere, TrimBox/BleedBox; varianta `_sin_marcas` fără semne.
+- `sobre_DL_220x110_*.pdf` — plic DL: față cu numele, clapă cu logo (fără bleed).
+- CMYK nativ, fonturi încorporate, logo vectorizat, ilustrație ~520 ppi.
+
+Reproducere: `python3 tools/inv_extract_illus.py` (decupaj + upscale EDSR ×4 din machete),
+apoi `python3 tools/invitaciones.py`. Dependențe: `reportlab`, `svglib`, `Pillow`, `numpy`,
+`opencv-contrib-python-headless`, `ghostscript`, `poppler-utils`.

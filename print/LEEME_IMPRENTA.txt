@@ -1,0 +1,44 @@
+DOR · BOGDAN DLP — INVITACIONES PERSONALIZADAS (4 invitados)
+=============================================================
+
+Una carpeta por invitado. Cada carpeta contiene:
+
+  invitacion_100x150_<NOMBRE>.pdf
+      3 páginas = 3 tarjetas independientes, formato final 100 × 150 mm (vertical)
+        pág. 1  portada (logo DOR)
+        pág. 2  ilustración + cita
+        pág. 3  carta personalizada con el nombre del invitado
+      Impresión a 1 cara (4/0), cada tarjeta se corta por separado.
+      Sangrado 3 mm por cada lado (106 × 156 mm con sangrado) + marcas de corte.
+      TrimBox y BleedBox definidos en el PDF.
+
+  invitacion_100x150_<NOMBRE>_sin_marcas.pdf
+      Mismo contenido, página = 106 × 156 mm (formato + sangrado), sin marcas
+      de corte — para imprentas online que lo piden así.
+
+  sobre_DL_220x110_<NOMBRE>.pdf
+      Sobre DL 220 × 110 mm, solapa en pico.
+        pág. 1  anverso: nombre del invitado con marco dorado
+        pág. 2  dorso/solapa: logo DOR centrado sobre la solapa
+      Sin sangrado ni fondo: se imprime sobre sobre ya fabricado
+      (recomendado: sobre marfil/crema). Todos los elementos a ≥ 9 mm del borde.
+
+  PRUEBA_<NOMBRE>.jpg   — sólo prueba visual, NO es para imprimir.
+
+Especificaciones técnicas
+-------------------------
+- Color: CMYK nativo, sin RGB ni tintas planas.
+    Oro    C18 M38 Y90 K12
+    Fondo  C0  M2  Y8  K0   (marfil, a sangre)
+    Texto  K88 (sólo negro, sin riesgo de registro)
+    Marcas de corte en registro.
+- Tinta máxima < 160 %.
+- Fuentes incrustadas (EB Garamond, Cormorant Garamond — licencia OFL).
+- Logo DOR y todos los textos/filetes: vectoriales.
+- Ilustración: CMYK, ~520 ppp a tamaño final.
+- Grosor mínimo de línea: 0,35 pt. Margen de seguridad: el marco está a 5 mm del corte.
+
+Papel recomendado: cartulina 300–350 g, acabado mate o verjurado blanco/marfil.
+Si se imprime sobre cartulina marfil, avisar: se puede suprimir el fondo crema.
+Opcional: el oro (logo, filetes, BOGDAN DLP) se puede pasar a stamping/foil dorado;
+pedir el archivo de máscara de stamping si se elige esta opción.
