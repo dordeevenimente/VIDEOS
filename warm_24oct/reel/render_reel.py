@@ -3,7 +3,8 @@ from PIL import Image, ImageFilter
 src,out=sys.argv[1],sys.argv[2]
 STORY=len(sys.argv)>3 and sys.argv[3]=='story'
 W,H=(1080,1920) if STORY else (1080,1350)
-PRE='ovS_' if STORY else 'ov_'
+import os
+PRE=('ovS_' if STORY else 'ov_') if not os.environ.get('OVSET') else (os.environ['OVSET']+('S_' if STORY else '_'))
 ff=imageio_ffmpeg.get_ffmpeg_exe()
 rd=imageio_ffmpeg.read_frames(src); meta=next(rd)
 FPS=meta['fps']; D=meta['duration']; sw,sh=meta['size']
