@@ -65,3 +65,16 @@ python3 tools/render.py        # grade + compoziție + export
 ```
 
 Dependențe: `ffmpeg` (7.x, cu libx264), `Pillow`, `numpy`, familia de fonturi Inter Display.
+
+## Grafică statică — „Astăzi e Primul DOR”
+
+`out/primul_dor_bogdan_dlp_1080x1920.png` — story / status (9:16).
+`out/primul_dor_bogdan_dlp_1080x1350.png` — postare feed Instagram / Facebook (4:5).
+
+Fundal: un cadru din clipul live (`assets/poster_bg.jpg`), același logo DOR și aceeași
+familie Inter Display ca în reclamă. Prețurile sunt grupate într-un singur bloc, biletul
+online (35€ până la 22:00) evidențiat cu roșu ca acțiune principală.
+
+```sh
+NODE_PATH=$(npm root -g) node tools/render_poster.js   # tools/poster.html → out/*.png
+```

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --cream: #F8F5F1;
+    --muted: rgba(248, 245, 241, .62);
+    --red: #E3263F;
+    --ink: #0A0809;
+    --line: rgba(248, 245, 241, .16);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--ink); }
+  body { font-family: "Inter Display", "Inter", sans-serif; color: var(--cream); }
+
+  .poster { position: relative; width: 1080px; overflow: hidden; background: var(--ink); }
+  .story { height: 1920px; --photo-h: 1240px; --photo-y: 0px; --pad-top: 860px; --h1: 150px; --foot-b: 250px; }
+  .feed  { height: 1350px; --photo-h: 920px;  --photo-y: -250px; --pad-top: 560px; --h1: 132px; }
+
+  .photo {
+    position: absolute; inset: 0 0 auto 0; height: var(--photo-h);
+    background: url("../assets/poster_bg.jpg") center var(--photo-y) / 1080px auto no-repeat;
+  }
+  .photo::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,0) 16%, rgba(10,8,9,0) 52%, rgba(10,8,9,.85) 84%, var(--ink) 100%),
+      radial-gradient(120% 60% at 50% 100%, rgba(227,38,63,.22), transparent 70%);
+  }
+
+  .logo { position: absolute; top: 64px; left: 50%; transform: translateX(-50%); width: 196px; }
+
+  .content {
+    position: relative; padding: var(--pad-top) 84px 0;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+  }
+
+  .kicker {
+    font-weight: 600; font-size: 34px; letter-spacing: .32em; text-transform: uppercase;
+    color: var(--cream); padding-left: .32em;
+  }
+  h1 {
+    font-weight: 800; font-size: var(--h1); line-height: .92; letter-spacing: -.035em;
+    margin-top: 10px; display: flex; white-space: nowrap; align-items: center; gap: 22px;
+    text-shadow: 0 6px 40px rgba(0,0,0,.45);
+  }
+  h1 svg { width: calc(var(--h1) * .5); height: auto; flex: none; margin-top: .06em; }
+
+  .artist { margin-top: 34px; font-size: 30px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .artist b { color: var(--cream); font-weight: 700; }
+  .venue { margin-top: 12px; font-size: 38px; font-weight: 600; letter-spacing: -.005em; }
+  .venue span { color: var(--muted); font-weight: 500; }
+
+  .prices {
+    margin-top: 48px; width: 100%;
+    display: grid; grid-template-columns: 1.15fr 1fr 1fr;
+    border: 1.5px solid var(--line); border-radius: 26px; overflow: hidden;
+  }
+  .price { padding: 30px 18px 28px; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .price + .price { border-left: 1.5px solid var(--line); }
+  .price .lbl { font-size: 21px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .price .val { white-space: nowrap; font-size: 76px; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .price .val small { font-size: .42em; font-weight: 600; letter-spacing: 0; margin-right: 6px; color: var(--muted); }
+  .price .note { font-size: 21px; font-weight: 500; color: var(--muted); }
+  .price.hi { background: var(--red); }
+  .price.hi .lbl, .price.hi .note { color: rgba(255,255,255,.86); }
+
+  .start { margin-top: 34px; display: flex; align-items: center; gap: 18px; font-size: 32px; font-weight: 600; }
+  .start .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 7px rgba(227,38,63,.25); }
+  .start b { font-weight: 800; font-size: 40px; }
+
+  .cta { margin-top: 44px; font-size: 31px; line-height: 1.38; font-weight: 500; color: var(--muted); }
+  .cta strong { color: var(--cream); font-weight: 700; }
+
+  .footer {
+    position: absolute; left: 0; right: 0; bottom: var(--foot-b, 120px);
+    text-align: center; font-size: 34px; font-weight: 700; letter-spacing: -.01em;
+  }
+  .footer em { font-style: normal; color: var(--red); }
+
+  /* feed: mai compact */
+  .feed .content { padding-left: 64px; padding-right: 64px; }
+  .feed .artist { margin-top: 22px; font-size: 26px; }
+  .feed .venue { font-size: 32px; margin-top: 8px; }
+  .feed .prices { margin-top: 32px; }
+  .feed .price { padding: 22px 14px 20px; gap: 6px; }
+  .feed .price .val { font-size: 62px; }
+  .feed .start { margin-top: 24px; font-size: 28px; }
+  .feed .start b { font-size: 34px; }
+  .feed .cta { margin-top: 22px; font-size: 25px; }
+  .feed .footer { --foot-b: 46px; font-size: 28px; }
+  .feed .photo::after { background: linear-gradient(180deg, rgba(10,8,9,.55) 0%, rgba(10,8,9,0) 16%, rgba(10,8,9,0) 45%, rgba(10,8,9,.88) 80%, var(--ink) 100%); }
+  .feed .logo { top: 48px; width: 160px; }
+</style>
+</head>
+<body>
+<div class="poster" id="poster">
+  <div class="photo"></div>
+  <img class="logo" src="../assets/dor_logo.png" alt="DOR">
+
+  <div class="content">
+    <div class="kicker">Astăzi e</div>
+    <h1>PRIMUL DOR
+      <svg viewBox="0 0 24 22" aria-hidden="true"><path fill="#E3263F" d="M12 21.6 10.3 20C4.2 14.5 0 10.7 0 6.1 0 2.6 2.7 0 6.2 0c2 0 3.9.9 5.8 3C13.9.9 15.8 0 17.8 0 21.3 0 24 2.6 24 6.1c0 4.6-4.2 8.4-10.3 13.9L12 21.6Z"/></svg>
+    </h1>
+
+    <div class="artist">Live cu formația · <b>Bogdan DLP</b></div>
+    <div class="venue">Bribón del Puerto<span>, Aguadulce</span></div>
+
+    <div class="prices">
+      <div class="price hi"><span class="lbl">Online</span><span class="val">35€</span><span class="note">până la 22:00</span></div>
+      <div class="price"><span class="lbl">La intrare</span><span class="val">50€</span><span class="note">la ușă</span></div>
+      <div class="price"><span class="lbl">Mese</span><span class="val"><small>de la</small>250€</span><span class="note">rezervare</span></div>
+    </div>
+
+    <div class="start"><span class="dot"></span>Evenimentul începe la ora <b>23:00</b></div>
+
+    <p class="cta">Dacă știi că vii, ia-ți biletul online <strong>înainte de 22:00</strong>.<br>
+      Bilete și mese pe <strong>Xceed</strong> — link în bio.</p>
+  </div>
+
+  <div class="footer">Ți-a fost DOR? Astăzi ne vedem. <em>♥</em></div>
+</div>
+<script>
+  document.getElementById('poster').classList.add(new URLSearchParams(location.search).get('f') || 'story');
+</script>
+</body>
+</html>
