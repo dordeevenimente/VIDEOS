@@ -1,66 +1,71 @@
 <!doctype html>
 <html lang="ro"><head><meta charset="utf-8"><title>DOR · 9 octombrie</title>
 <style>
+@font-face{font-family:ID;font-weight:300;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Light.otf)}
 @font-face{font-family:ID;font-weight:400;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Regular.otf)}
 @font-face{font-family:ID;font-weight:500;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Medium.otf)}
-@font-face{font-family:ID;font-weight:600;src:url(/usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf)}
-@font-face{font-family:ID;font-weight:800;src:url(/usr/share/fonts/opentype/inter/InterDisplay-ExtraBold.otf)}
-@font-face{font-family:ID;font-weight:900;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Black.otf)}
-:root{--cream:#F8F5F1;--dim:rgba(248,245,241,.62);--line:rgba(248,245,241,.22);--accent:#FF4FA3}
+@font-face{font-family:ID;font-weight:700;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Bold.otf)}
+:root{--white:#FFFFFF;--sand:#F2E0C4;--sand-dim:rgba(242,224,196,.72);--line:rgba(242,224,196,.35);--brown:#3E3128}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{background:#0b0a0c}
-.c{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:ID;color:var(--cream)}
-.bg{position:absolute;inset:0;background:url(bg.jpg) center 20%/cover;filter:contrast(1.05) saturate(1.05)}
-.shade{position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(11,10,12,.85) 0%,rgba(11,10,12,0) 17%,rgba(11,10,12,0) 32%,rgba(11,10,12,.8) 46%,#0b0a0c 56%,#0b0a0c 100%)}
-.top{position:absolute;top:130px;left:0;right:0;text-align:center}
-.top img{width:230px;display:block;margin:0 auto 26px}
-.kick{font-weight:600;font-size:30px;letter-spacing:.28em;color:var(--cream)}
-.kick b{color:var(--accent);font-weight:800}
-.main{position:absolute;left:100px;right:100px;top:880px;text-align:center}
-.pre{font-weight:500;font-size:28px;letter-spacing:.32em;color:var(--dim);margin-bottom:14px}
-h1{font-weight:900;font-size:128px;line-height:.95;letter-spacing:-.025em;white-space:nowrap}
-.open{margin-top:26px;font-weight:500;font-size:32px;color:var(--dim)}
-.open b{color:var(--cream);font-weight:800;letter-spacing:.04em}
-.meta{margin:44px auto 0;display:flex;justify-content:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.meta>div{flex:1;padding:26px 0}
-.meta>div+div{border-left:1px solid var(--line)}
-.k{font-weight:500;font-size:22px;letter-spacing:.24em;color:var(--dim);margin-bottom:10px}
-.v{font-weight:800;font-size:46px;letter-spacing:-.01em}
-.v small{display:block;font-weight:500;font-size:26px;color:var(--dim);margin-top:6px;letter-spacing:0}
-.prices{margin-top:32px;display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:16px}
-.p{border:1px solid var(--line);border-radius:22px;padding:26px 10px 24px}
-.p.hi{background:var(--cream);color:#0b0a0c;border-color:var(--cream)}
-.p .k{margin-bottom:8px}.p.hi .k{color:rgba(11,10,12,.6)}
-.p .v{font-size:60px}
-.p .n{font-weight:500;font-size:22px;color:var(--dim);margin-top:6px}.p.hi .n{color:rgba(11,10,12,.65)}
-.cta{margin-top:36px;font-weight:600;font-size:30px}
-.cta b{font-weight:800}
-.tag{margin-top:18px;font-weight:800;font-size:40px;letter-spacing:.01em}
-.tag span{color:var(--accent)}
+html,body{background:var(--brown)}
+.c{position:relative;width:1080px;height:1920px;overflow:hidden;font-family:ID;color:var(--sand);text-align:center}
+/* warm blurred backdrop taken from the main poster */
+.bg{position:absolute;inset:0;background:radial-gradient(90% 55% at 50% 28%,#6E5948 0%,#4A3A2E 55%,#2B221B 100%)}
+.vig{position:absolute;inset:0;background:
+  radial-gradient(120% 70% at 50% 30%,rgba(62,49,40,0) 40%,rgba(40,31,25,.75) 100%),
+  linear-gradient(180deg,rgba(40,31,25,0) 45%,rgba(40,31,25,.55) 100%)}
+.ring{position:absolute;left:50%;top:330px;width:860px;height:860px;margin-left:-430px;border-radius:50%;border:2px solid rgba(242,224,196,.16)}
+.artist{position:absolute;left:0;top:240px;width:1080px;height:600px;background:url(artist.jpg) center/cover;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 62%,transparent 100%),linear-gradient(90deg,transparent 0%,#000 18%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;mask-composite:intersect}
+.grain{position:absolute;inset:0;opacity:.16;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.brand{position:absolute;top:130px;left:0;right:0}
+.brand .b{font-weight:500;font-size:62px;letter-spacing:.32em;margin-right:-.32em;line-height:1}
+.brand .s{font-weight:300;font-size:34px;letter-spacing:.2em;margin-right:-.2em;margin-top:6px}
+.main{position:absolute;left:90px;right:90px;top:800px}
+.kick{font-weight:500;font-size:28px;letter-spacing:.3em;margin-right:-.3em}
+h1{font-weight:700;font-size:164px;line-height:.95;letter-spacing:-.045em;color:var(--white);margin-top:18px;white-space:nowrap}
+.live{font-weight:700;font-size:32px;letter-spacing:.02em;margin-top:22px}
+.open{font-weight:400;font-size:30px;color:var(--sand-dim);margin-top:10px}
+.open b{font-weight:700;color:var(--sand)}
+.date{font-size:96px;line-height:1;margin-top:50px;letter-spacing:-.02em}
+.date span{font-weight:300}.date b{font-weight:700}
+.where{font-weight:500;font-size:30px;letter-spacing:.06em;margin-top:22px}
+.where i{font-style:normal;opacity:.5;padding:0 14px}
+.rule{width:120px;height:2px;background:var(--line);margin:38px auto 34px}
+.prices{display:flex;justify-content:center;gap:0}
+.prices>div{padding:0 40px}
+.prices>div+div{border-left:1px solid var(--line)}
+.prices .k{font-weight:500;font-size:22px;letter-spacing:.2em;margin-right:-.2em;color:var(--sand-dim)}
+.prices .v{font-weight:700;font-size:58px;color:var(--white);margin-top:6px;letter-spacing:-.02em}
+.prices .n{font-weight:400;font-size:22px;color:var(--sand-dim);margin-top:2px}
+.cta{font-weight:500;font-size:28px;margin-top:38px}
+.cta b{font-weight:700}
+.tag{font-weight:700;font-size:38px;color:var(--white);margin-top:16px;letter-spacing:-.01em}
+.logo{margin-top:40px}
+.logo img{width:130px}
 </style></head><body>
 <div class="c">
-  <div class="bg"></div><div class="shade"></div>
-  <div class="top">
-    <img src="../assets/dor_logo.png" alt="DOR">
-    <div class="kick">ASTĂZI E <b>PRIMUL DOR</b></div>
-  </div>
+  <div class="bg"></div><div class="vig"></div><div class="ring"></div>
+  <div class="artist"></div>
+  <div class="brand"><div class="b">BRIBÓN</div><div class="s">del puerto</div></div>
   <div class="main">
-    <div class="pre">LIVE CU FORMAȚIA</div>
-    <h1>BOGDAN DLP</h1>
-    <div class="open">În deschidere: <b>DEE JAY BEE</b></div>
-    <div class="meta">
-      <div><div class="k">AZI</div><div class="v">9 OCT<small>vineri</small></div></div>
-      <div><div class="k">START</div><div class="v">23:00<small>în seara asta</small></div></div>
-      <div><div class="k">LOCAȚIE</div><div class="v" style="font-size:38px;line-height:1.08">Bribón del Puerto<small>Aguadulce</small></div></div>
-    </div>
+    <div class="kick">ASTĂZI E PRIMUL DOR</div>
+    <h1>Bogdan DLP</h1>
+    <div class="live">LIVE CU FORMAȚIA</div>
+    <div class="open">În deschidere: <b>Dee Jay Bee</b></div>
+    <div class="date"><span>VIN</span> <b>9 OCTOMBRIE</b></div>
+    <div class="where">DE LA 23:00<i>·</i>AGUADULCE</div>
+    <div class="rule"></div>
     <div class="prices">
-      <div class="p hi"><div class="k">ONLINE</div><div class="v">35€</div><div class="n">până la 22:00</div></div>
-      <div class="p"><div class="k">LA INTRARE</div><div class="v">50€</div><div class="n">la ușă</div></div>
-      <div class="p"><div class="k">MESE DE LA</div><div class="v">250€</div><div class="n">rezervare online</div></div>
+      <div><div class="k">ONLINE</div><div class="v">35€</div><div class="n">până la 22:00</div></div>
+      <div><div class="k">LA INTRARE</div><div class="v">50€</div><div class="n">la ușă</div></div>
+      <div><div class="k">MESE DE LA</div><div class="v">250€</div><div class="n">rezervare online</div></div>
     </div>
     <div class="cta">Bilete și mese online pe <b>Xceed</b> — link în bio</div>
-    <div class="tag">Ți-a fost DOR? <span>Astăzi ne vedem.</span></div>
+    <div class="tag">Ți-a fost DOR? Astăzi ne vedem.</div>
+    <div class="logo"><img src="../assets/dor_logo.png" alt="DOR"></div>
   </div>
+  <div class="grain"></div>
 </div>
 </body></html>
