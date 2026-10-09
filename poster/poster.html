@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>Primul DOR · Bogdan DLP</title>
+<style>
+  :root {
+    --cream: #F8F5F1;
+    --muted: rgba(248, 245, 241, .62);
+    --line: rgba(248, 245, 241, .22);
+    --red: #E0343B;
+    --ink: #0B0908;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: var(--ink); }
+  body {
+    font-family: "Inter Display", "Inter", sans-serif;
+    color: var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+  .poster {
+    position: relative;
+    width: 1080px;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .feed  { height: 1350px; }
+  .story { height: 1920px; }
+
+  .photo {
+    position: absolute; inset: 0;
+    background: url("live.png") no-repeat;
+    filter: saturate(.9) contrast(1.06);
+  }
+  .feed  .photo { background-size: 1190px auto; background-position: -40px -250px; }
+  .story .photo { background-size: 1080px auto; background-position: 0 0; }
+
+  /* warm, dark grade + legibility gradient */
+  .shade {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(180deg, rgba(11,9,8,.72) 0%, rgba(11,9,8,0) 16%),
+      linear-gradient(180deg, rgba(11,9,8,0) 30%, rgba(11,9,8,.82) 52%, var(--ink) 74%),
+      radial-gradient(120% 70% at 50% 30%, rgba(0,0,0,0) 40%, rgba(0,0,0,.45) 100%);
+  }
+  .story .shade {
+    background:
+      linear-gradient(180deg, rgba(11,9,8,.7) 0%, rgba(11,9,8,0) 15%),
+      linear-gradient(180deg, rgba(11,9,8,0) 34%, rgba(11,9,8,.84) 52%, var(--ink) 70%),
+      radial-gradient(120% 60% at 50% 25%, rgba(0,0,0,0) 40%, rgba(0,0,0,.45) 100%);
+  }
+
+  .top {
+    position: absolute; left: 72px; right: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .feed  .top { top: 64px; }
+  .story .top { top: 180px; }
+  .top img { height: 44px; display: block; }
+  .tag {
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 700; font-size: 22px; letter-spacing: .26em;
+  }
+  .tag .dot {
+    width: 12px; height: 12px; border-radius: 50%; background: var(--red);
+    box-shadow: 0 0 0 6px rgba(224,52,59,.25);
+  }
+
+  .content { position: absolute; left: 72px; right: 72px; }
+  .feed  .content { bottom: 64px; }
+  .story .content { bottom: 300px; }
+
+  .kicker {
+    font-weight: 600; font-size: 26px; letter-spacing: .3em;
+    color: var(--muted); text-transform: uppercase;
+  }
+  .kicker b { color: var(--red); font-weight: 700; }
+  h1 {
+    margin-top: 14px;
+    font-weight: 900; font-size: 150px; line-height: .88;
+    letter-spacing: -.035em; text-transform: uppercase;
+  }
+  .sub {
+    margin-top: 22px;
+    font-weight: 500; font-size: 30px; letter-spacing: .02em; color: var(--muted);
+  }
+  .sub strong { color: var(--cream); font-weight: 700; }
+
+  .prices {
+    margin-top: 44px;
+    display: grid; grid-template-columns: 1.25fr 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .price { padding: 26px 0 24px 28px; border-left: 1px solid var(--line); }
+  .price:first-child { padding-left: 0; border-left: 0; }
+  .price .label {
+    font-weight: 700; font-size: 18px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .price .val {
+    margin-top: 8px;
+    font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -.03em;
+  }
+  .price .note { margin-top: 10px; font-size: 19px; font-weight: 500; color: var(--muted); }
+  .price.hl .label { color: var(--red); }
+  .price.hl .val { font-size: 84px; }
+  .price.hl .note { color: var(--cream); }
+
+  .info {
+    margin-top: 30px;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  }
+  .where { font-size: 24px; font-weight: 500; color: var(--muted); line-height: 1.4; }
+  .where strong { color: var(--cream); font-weight: 700; }
+  .cta {
+    flex: none;
+    background: var(--cream); color: var(--ink);
+    padding: 20px 28px; border-radius: 999px;
+    font-weight: 800; font-size: 22px; letter-spacing: .06em; text-transform: uppercase;
+  }
+  .cta span { font-weight: 600; opacity: .55; }
+</style>
+</head>
+<body>
+<div class="poster" id="poster">
+  <div class="photo"></div>
+  <div class="shade"></div>
+
+  <div class="top">
+    <img src="dor_logo.png" alt="DOR">
+    <div class="tag"><span class="dot"></span>ASTĂZI</div>
+  </div>
+
+  <div class="content">
+    <div class="kicker">Primul <b>DOR</b> · Live cu formația</div>
+    <h1>Bogdan<br>DLP</h1>
+    <div class="sub">Începem la <strong>23:00</strong> · Ți-a fost dor? Astăzi ne vedem.</div>
+
+    <div class="prices">
+      <div class="price hl">
+        <div class="label">Online</div>
+        <div class="val">35€</div>
+        <div class="note">până la ora 22:00</div>
+      </div>
+      <div class="price">
+        <div class="label">La intrare</div>
+        <div class="val">50€</div>
+        <div class="note">în seara evenimentului</div>
+      </div>
+      <div class="price">
+        <div class="label">Mese de la</div>
+        <div class="val">250€</div>
+        <div class="note">rezervare pe Xceed</div>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="where"><strong>Bribón del Puerto</strong><br>Aguadulce, Almería</div>
+      <div class="cta">Bilete pe Xceed <span>· link în bio</span></div>
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById('poster').classList.add(new URLSearchParams(location.search).get('f') || 'feed');
+</script>
+</body>
+</html>
