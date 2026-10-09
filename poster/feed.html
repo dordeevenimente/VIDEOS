@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><title>DOR · Feed 9 octombrie</title>
+<style>
+@font-face{font-family:ID;font-weight:300;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Light.otf)}
+@font-face{font-family:ID;font-weight:400;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Regular.otf)}
+@font-face{font-family:ID;font-weight:500;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Medium.otf)}
+@font-face{font-family:ID;font-weight:600;src:url(/usr/share/fonts/opentype/inter/InterDisplay-SemiBold.otf)}
+@font-face{font-family:ID;font-weight:700;src:url(/usr/share/fonts/opentype/inter/InterDisplay-Bold.otf)}
+:root{--white:#FFFFFF;--sand:#F2E0C4;--dim:rgba(242,224,196,.7);--line:rgba(242,224,196,.32);--deep:#2A1F19}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:var(--deep)}
+.c{position:relative;width:1080px;height:1350px;overflow:hidden;font-family:ID;color:var(--sand);text-align:center;
+  background:radial-gradient(80% 60% at 50% 55%,#4B3A2E 0%,#33271F 60%,#221913 100%)}
+.photo{position:absolute;left:0;top:0;width:1080px;height:800px;background:url(portrait.jpg) center top/cover;
+  -webkit-mask-image:linear-gradient(180deg,#000 82%,transparent 100%)}
+.shade{position:absolute;left:0;right:0;top:420px;height:500px;
+  background:linear-gradient(180deg,rgba(42,31,25,0) 0%,rgba(42,31,25,.28) 55%,rgba(42,31,25,0) 100%)}
+.grain{position:absolute;inset:0;opacity:.18;mix-blend-mode:overlay;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.main{position:absolute;left:60px;right:60px;top:560px;display:flex;flex-direction:column;align-items:center}
+.kick{font-weight:600;font-size:24px;letter-spacing:.34em;margin-right:-.34em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+h1{font-weight:700;font-size:176px;line-height:.9;letter-spacing:-.05em;color:var(--white);margin-top:20px;white-space:nowrap;
+  text-shadow:0 6px 40px rgba(20,12,8,.35)}
+.live{margin-top:20px;font-weight:700;font-size:28px;letter-spacing:.06em}
+.live span{font-weight:400;color:var(--dim);letter-spacing:0;padding-left:6px}
+.live i{font-style:normal;opacity:.45;padding:0 16px}
+.date{margin-top:36px;font-size:92px;line-height:1;letter-spacing:-.03em;color:var(--sand)}
+.date span{font-weight:300}.date b{font-weight:700}
+.where{margin-top:20px;font-weight:600;font-size:26px;letter-spacing:.08em}
+.where i{font-style:normal;opacity:.45;padding:0 18px}
+.prices{margin-top:30px;display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.prices>div{padding:16px 34px}
+.prices>div+div{border-left:1px solid var(--line)}
+.prices .k{font-weight:500;font-size:19px;letter-spacing:.2em;margin-right:-.2em;color:var(--dim)}
+.prices .v{font-weight:700;font-size:44px;color:var(--white);letter-spacing:-.02em;margin-top:4px}
+.prices .v small{font-weight:400;font-size:20px;color:var(--dim);letter-spacing:0;margin-left:8px}
+.cta{margin-top:22px;font-weight:500;font-size:24px;color:var(--dim)}
+.cta b{color:var(--sand);font-weight:700}
+.logos{position:absolute;left:0;right:0;bottom:36px;display:flex;justify-content:center;align-items:center;gap:48px}
+.logos .dor{height:40px}.logos .hav{height:70px}
+</style></head><body>
+<div class="c">
+  <div class="photo"></div><div class="shade"></div>
+  <div class="main">
+    <div class="kick">ASTĂZI E PRIMUL DOR</div>
+    <h1>Bogdan DLP</h1>
+    <div class="live">LIVE CU FORMAȚIA<i>·</i><span>în deschidere</span> DEE JAY BEE</div>
+    <div class="date"><span>VIN</span> <b>09 OCTOMBRIE</b></div>
+    <div class="where">DE LA 23:00<i>|</i>BRIBÓN DEL PUERTO · AGUADULCE</div>
+    <div class="prices">
+      <div><div class="k">ONLINE</div><div class="v">35€<small>până la 22:00</small></div></div>
+      <div><div class="k">LA INTRARE</div><div class="v">50€</div></div>
+      <div><div class="k">MESE</div><div class="v"><small style="margin:0 8px 0 0">de la</small>250€</div></div>
+    </div>
+    <div class="cta">Bilete și mese online pe <b>Xceed</b> — link în bio</div>
+  </div>
+  <div class="logos"><img class="dor" src="../assets/dor_logo.png" alt="DOR"><img class="hav" src="havana.png" alt="Havana Club"></div>
+  <div class="grain"></div>
+</div>
+</body></html>
