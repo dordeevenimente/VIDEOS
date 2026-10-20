@@ -9,7 +9,7 @@
     --ink: #0b0b0b;
     --paper: #f3efe7;
     --red: #b3202a;
-    --dim: rgba(243, 239, 231, .5);
+    --dim: rgba(243, 239, 231, .72);
     --rule: rgba(243, 239, 231, .22);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,46 +25,51 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
-  .frame { position: absolute; inset: 64px; display: flex; flex-direction: column; }
+  /* Meta safe area: everything essential sits in the centre 1:1 band
+     (y 135–1215) with extra margin, so a square crop never cuts copy or logos */
+  .frame { position: absolute; inset: 150px 96px; display: flex; flex-direction: column; }
 
   /* header: logo lockup */
-  .head { display: flex; align-items: center; justify-content: space-between; height: 128px; }
-  .head .cat { height: 128px; }
-  .head .lf  { height: 92px; }
+  .head { display: flex; align-items: center; justify-content: space-between; height: 96px; margin-bottom: 18px; }
+  .head .cat { height: 96px; }
+  .head .lf  { height: 70px; }
 
   .rule { height: 1px; background: var(--rule); }
 
   /* CATCAPE wordmark */
   .word {
-    display: inline-block; margin-top: 40px;
+    display: inline-block; margin-top: 26px;
     font: 400 272px/.86 Anton, sans-serif; letter-spacing: -2px; text-transform: uppercase;
     white-space: nowrap;
   }
   .collab {
-    margin-top: 22px; display: flex; align-items: center; gap: 18px;
-    font: 700 30px/1 Inter; letter-spacing: .32em; text-transform: uppercase;
+    margin-top: 18px; display: flex; align-items: center; gap: 16px;
+    font: 700 27px/1 Inter; letter-spacing: .3em; text-transform: uppercase;
   }
   .collab::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
 
   /* date */
-  .date { margin-top: 104px; display: flex; align-items: flex-end; gap: 30px; }
-  .date .day { font: 400 400px/.74 Anton; color: var(--red); letter-spacing: -6px; }
-  .date .rest { flex: 1; display: flex; flex-direction: column; gap: 18px; padding-bottom: 2px; }
+  .date { margin-top: 62px; display: flex; align-items: flex-end; gap: 26px; }
+  .date .day { font: 400 322px/.74 Anton; color: var(--red); letter-spacing: -6px; }
+  .date .rest { flex: 1; display: flex; flex-direction: column; gap: 14px; padding-bottom: 2px; }
   .date .month, .date .year { font: 400 124px/.8 Anton; letter-spacing: 1px; white-space: nowrap; }
   .date .month span, .date .year span { display: inline-block; }
   .date .yrow { display: flex; align-items: flex-end; justify-content: space-between; }
   .date .year { color: transparent; -webkit-text-stroke: 2px var(--paper); }
-  .star { width: 54px; height: 54px; margin-bottom: 8px; }
+  .star { width: 44px; height: 44px; margin-bottom: 6px; }
 
   /* bottom copy */
   .copy { margin-top: auto; }
-  .tag { font: 800 54px/1.04 Inter; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
+  .tag { font: 800 46px/1.04 Inter; letter-spacing: -.015em; text-transform: uppercase; text-wrap: balance; }
   .meta {
-    margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--rule);
-    display: flex; flex-direction: column; gap: 14px;
-    font: 600 22px/1 Inter; letter-spacing: .16em; text-transform: uppercase;
+    margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--rule);
+    display: flex; flex-direction: column; gap: 12px;
+    font: 600 21px/1 Inter; letter-spacing: .14em; text-transform: uppercase;
   }
   .meta .soon { color: var(--dim); }
+  /* review overlay only (#guides): 1:1 crop band + side margins */
+  .guides::after { content: ""; position: absolute; left: 96px; right: 96px; top: 135px; bottom: 135px;
+    outline: 2px dashed #0f0; box-shadow: 0 0 0 400px rgba(0,255,0,.12); pointer-events: none; }
 </style>
 </head>
 <body>
@@ -110,10 +115,11 @@
       box.style.fontSize = (s * target / el.getBoundingClientRect().width) + 'px';
     }
     document.fonts.ready.then(() => {
-      fit(document.getElementById('word'), 952);
+      fit(document.getElementById('word'), 888);
       const m = document.getElementById('month');
       fit(m, m.parentElement.getBoundingClientRect().width, m.parentElement);
       document.querySelector('.year').style.fontSize = m.parentElement.style.fontSize;
+      if (location.hash === '#guides') document.body.classList.add('guides');
       document.body.dataset.ready = '1';
     });
   </script>
