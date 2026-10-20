@@ -2,7 +2,7 @@
 
 Logos are the supplied white-on-black files: only the black ground is made transparent
 (alpha = brightness), scaled uniformly, never redrawn or recoloured.
-All essential content stays inside a centred safe area (x 80–1000, y 70–1250).
+Every element is centre-aligned inside a 120 px safe margin (x 120–960, y 120–1230).
 
 env: SRC (assets/source), FONT_DIR (barlow-condensed-latin-800, montserrat-latin-300/500/600 woff),
      OUT (png path)
@@ -15,9 +15,10 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 W, H = 1080, 1350
 SRC, FONT_DIR = os.environ["SRC"], os.environ["FONT_DIR"]
 
-WHITE = (244, 240, 234)
-SOFT = (214, 206, 198)
-RED = (212, 44, 32)
+WHITE = (242, 237, 228)
+SOFT = (200, 196, 186)
+RED = (200, 50, 42)
+GROUND = (11, 26, 20)  # deep evergreen, almost black
 
 # exact copy — do not modify
 ORGS = "CATCAPE × LA FÁBRICA PREMIUM"  # carried by the two logos and the ×
@@ -37,16 +38,11 @@ def font(face, size):
 
 
 def background():
-    """The supplied 3D render, cropped to 4:5 around the form; the type zone is deepened."""
-    im = Image.open(os.path.join(SRC, "background_3d.jpg")).convert("RGB")
-    cw = im.width
-    ch = round(cw * H / W)
-    top = 190
-    im = im.crop((0, top, cw, top + ch)).resize((W, H), Image.LANCZOS)
-    a = np.asarray(im, np.float32)
+    """Flat deep-evergreen ground with a faint vertical falloff and film grain."""
     y = np.linspace(0, 1, H, dtype=np.float32)[:, None, None]
-    a *= 1 - 0.45 * np.clip((y - 0.68) / 0.22, 0, 1)  # quieter behind the date block
-    a += np.random.default_rng(4).normal(0, 3.0, (H, W, 1)).astype(np.float32)  # fine grain
+    xx = np.linspace(-1, 1, W, dtype=np.float32)[None, :, None]
+    a = np.array(GROUND, np.float32)[None, None, :] * (1.12 - 0.3 * y) * (1 - 0.18 * xx ** 2)
+    a = a + np.random.default_rng(4).normal(0, 3.4, (H, W, 1)).astype(np.float32)
     return Image.fromarray(np.clip(a, 0, 255).astype(np.uint8)).convert("RGBA")
 
 
@@ -89,40 +85,29 @@ def fit(s, face, max_w, start):
 
 def main():
     canvas = background()
-
-    # soft dark halo behind the logo block so the white marks sit cleanly on the render
-    halo = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(halo).ellipse((250, 40, 830, 640), fill=120)
-    halo = halo.filter(ImageFilter.GaussianBlur(80))
-    canvas = Image.composite(Image.new("RGBA", (W, H), (2, 2, 30, 255)), canvas, halo)
-
-    cat = logo("catcape_logo_source.jpg", (74, 500, 822, 1262), 360)
-    canvas.alpha_composite(cat, ((W - cat.width) // 2, 72))
     d = ImageDraw.Draw(canvas)
-    text(d, "×", "light", 40, 474, fill=SOFT)
-    fab = logo("lafabrica_logo_source.jpg", (232, 717, 668, 942), 210)
-    canvas.alpha_composite(fab, ((W - fab.width) // 2, 500))
 
-    # venue photo as a framed print with a soft shadow
-    ph = venue_photo(410)
-    px, py = (W - ph.width) // 2, 636
-    shadow = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(shadow).rectangle((px - 6, py + 10, px + ph.width + 6, py + ph.height + 18), fill=170)
-    shadow = shadow.filter(ImageFilter.GaussianBlur(18))
-    canvas = Image.composite(Image.new("RGBA", (W, H), (0, 0, 12, 255)), canvas, shadow)
+    cat = logo("catcape_logo_source.jpg", (74, 500, 822, 1262), 314)
+    canvas.alpha_composite(cat, ((W - cat.width) // 2, 120))
+    text(d, "×", "light", 38, 472, fill=SOFT)
+    fab = logo("lafabrica_logo_source.jpg", (232, 717, 668, 942), 190)
+    canvas.alpha_composite(fab, ((W - fab.width) // 2, 496))
+
+    # venue photo as a framed print
+    ph = venue_photo(400)
+    px, py = (W - ph.width) // 2, 628
     d = ImageDraw.Draw(canvas)
-    d.rectangle((px - 5, py - 5, px + ph.width + 4, py + ph.height + 4), fill=WHITE)
+    d.rectangle((px - 6, py - 6, px + ph.width + 5, py + ph.height + 5), fill=WHITE)
     canvas.paste(ph, (px, py))
 
     d = ImageDraw.Draw(canvas)
-    ds = fit(DATE, "cond", 900, 170)
-    text(d, DATE, "cond", ds, 1016)
-    text(d, TAGLINE, "semi", fit(TAGLINE, "semi", 860, 32), 1104)
-    text(d, INFO, "medium", 22, 1148, fill=SOFT, tracking=0.14)
-    d.rectangle((W / 2 - 30, 1188, W / 2 + 30, 1190), fill=RED)
-    text(d, SOON, "medium", 19, 1226, fill=SOFT, tracking=0.2)
+    text(d, DATE, "cond", fit(DATE, "cond", 840, 170), 994)
+    text(d, TAGLINE, "semi", fit(TAGLINE, "semi", 840, 30), 1090)
+    text(d, INFO, "medium", fit(INFO, "medium", 840, 21), 1129, fill=SOFT, tracking=0.12)
+    d.rectangle((W / 2 - 28, 1163, W / 2 + 28, 1165), fill=RED)
+    text(d, SOON, "medium", 18, 1202, fill=SOFT, tracking=0.2)
 
-    canvas.convert("RGB").save(os.environ["OUT"], quality=95)
+    canvas.convert("RGB").save(os.environ["OUT"])
 
 
 if __name__ == "__main__":
