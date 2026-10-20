@@ -27,7 +27,9 @@ SP=(ENDT-T0)/len(order)
 scenes=[(k,T0+i*SP) for i,k in enumerate(order)]
 VIS=min(SP,6.5)                  # each card shows once; long clips get clean footage between cards
 yy=np.linspace(0,1,H)[:,None,None].astype(np.float32)
-grad=1-0.5*np.exp(-((yy-0.5)/0.2)**2)               # soft band behind the centred text
+import os as _o
+GY=float(_o.environ.get('GRADY','0.5'))
+grad=1-0.5*np.exp(-((yy-GY)/0.2)**2)               # soft band behind the centred text
 gtop=1-0.35*np.clip(((0.2 if STORY else 0.16)-yy)/0.16,0,1)             # soft top for the WARM logo
 base_mask=(grad*gtop).astype(np.float32)
 up=sw<700
