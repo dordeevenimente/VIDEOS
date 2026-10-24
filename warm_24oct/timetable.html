@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="fonts_poppins.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{overflow:hidden;background:#200606}
+body{font-family:'Poppins',sans-serif;color:#fff;text-transform:uppercase}
+#bg{position:absolute;inset:0;background-size:cover;background-position:center}
+#bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 62% 50% at 50% 54%,rgba(14,2,2,.72),rgba(14,2,2,.35) 70%,rgba(14,2,2,.2))}
+.wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.sh{text-shadow:0 2px 16px rgba(30,4,0,.6),0 1px 3px rgba(30,4,0,.4)}
+img.sh{filter:drop-shadow(0 2px 14px rgba(30,4,0,.55))}
+.warm{width:190px}
+.kick{font-weight:500;font-size:18px;letter-spacing:.5em;padding-left:.5em;opacity:.85}
+.title{font-weight:800;font-size:76px;letter-spacing:.02em;line-height:1;margin-top:8px}
+.list{display:flex;flex-direction:column;align-items:center;width:760px}
+.slot{display:flex;flex-direction:column;align-items:center;width:100%}
+.time{font-weight:600;font-size:28px;letter-spacing:.14em;padding-left:.14em}
+.time em{font-style:normal;opacity:.55;margin:0 14px}
+.rule{width:100%;height:1px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.55),rgba(255,255,255,0))}
+.sg{font-weight:500;font-size:15px;letter-spacing:.4em;padding-left:.4em;margin-top:10px}
+.foot{display:flex;flex-direction:column;align-items:center;line-height:1}
+.foot b{font-weight:600;font-size:30px;letter-spacing:.2em;padding-left:.2em}
+.foot i{font-style:normal;font-weight:400;font-size:22px;text-transform:none;margin-top:4px}
+.foot .d{font-weight:600;font-size:20px;letter-spacing:.14em;margin-top:18px;opacity:.9}
+.foot .d em{font-style:normal;opacity:.55;margin:0 10px}
+</style></head><body>
+<div id="bg"></div>
+<div class="wrap" id="w">
+ <img class="warm sh" src="logos/warm_white.png">
+ <div class="head"><div class="kick sh">Hoy · Sáb 24 Octubre</div><div class="title sh">Timetable</div></div>
+ <div class="list">
+  <div class="slot"><div class="time sh">23:00<em>—</em>01:00</div><img class="lg sh" id="l1" src="logos/salvi_white.png"></div>
+  <div class="rule"></div>
+  <div class="slot"><div class="time sh">01:00<em>—</em>04:00</div><img class="lg sh" id="l2" src="logos/just2_white.png"><div class="sg sh">Solid Grooves</div></div>
+  <div class="rule"></div>
+  <div class="slot"><div class="time sh">04:00<em>—</em>End</div><img class="lg sh" id="l3" src="logos/dani_white.png"></div>
+ </div>
+ <div class="foot sh"><b>BRIBÓN</b><i>del puerto</i><div class="d">Aguadulce<em>·</em>Almería</div></div>
+</div>
+<script>
+const story=new URLSearchParams(location.search).get('f')==='story';
+const W=1080,H=story?1920:1350;
+document.body.style.width=W+'px';document.body.style.height=H+'px';
+document.getElementById('bg').style.backgroundImage=`url(${story?'bg_swirl_story.jpg':'bg_swirl.jpg'})`;
+const w=document.getElementById('w'),k=story?1:0.78;
+w.style.padding=story?'250px 90px 330px':'74px 90px 70px';
+w.style.justifyContent='space-between';
+document.querySelector('.warm').style.width=(story?190:160)+'px';
+document.querySelector('.title').style.fontSize=(story?76:62)+'px';
+const g=story?44:30;
+document.querySelectorAll('.slot').forEach(s=>{s.style.padding=`${g}px 0`});
+document.querySelectorAll('.time').forEach(t=>{t.style.marginBottom=(story?20:14)+'px';t.style.fontSize=(story?28:24)+'px'});
+document.getElementById('l1').style.width=(560*k)+'px';
+document.getElementById('l2').style.height=(118*k)+'px';
+document.getElementById('l3').style.height=(220*k)+'px';
+</script>
+</body></html>
